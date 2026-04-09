@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préférences de cookies | Chetoutou</title>
+    <meta name="description"
+        content="Gérez vos préférences en matière de cookies sur Chetoutou. Choisissez les cookies que vous souhaitez autoriser pour personnaliser votre expérience d'achat.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .legal-page {
+            background-color: var(--beige-light);
+            padding: 8rem 0;
+        }
+
+        .cookie-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .cookie-header h1 {
+            font-family: var(--font-playfair);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .cookie-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .cookie-controls {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .cookie-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .cookie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cookie-info {
+            flex: 1;
+        }
+
+        .cookie-info h3 {
+            font-family: var(--font-playfair);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cookie-info p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .cookie-features {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .cookie-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cookie-features li::before {
+            content: "•";
+            color: var(--black);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #eee;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--black);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px var(--black);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        input:disabled+.slider {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .save-bar {
+            position: sticky;
+            bottom: 2rem;
+            background: #fff;
+            padding: 1.5rem 3rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 5rem;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .cookie-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .cookie-card {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="shop-page">
+    <div class="announcement-bar">
+        - 10 % avec le code TOUTOU10
+    </div>
+    <header class="navbar scrolled">
+        <div class="container navbar-content">
+            <div class="mobile-left">
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <button class="icon-btn mobile-search-btn" aria-label="Rechercher">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                </button>
+            </div>
+
+            <a href="index.html" class="logo">Chetoutou</a>
+
+                        <nav class="nav-links" id="nav-menu">
+                <div class="mobile-menu-header">
+                    <button class="menu-close-btn" id="menu-close-btn" aria-label="Fermer le menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Sorties -->
+                <div class="nav-item has-megamenu">
+                    <a href="promenade.html" class="nav-link">Promenade <svg width="10" height="6" viewBox="0 0 10 6"
+                            fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></a>
+                    <div class="megamenu">
+                        <div class="container">
+                            <div class="megamenu-visual-grid">
+                                <!-- Colliers -->
+                                <a href="colliers-classiques.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
+                                             alt="Colliers Classiques"></div>
+                                    <span>Colliers Classiques</span>
+                                </a>
+                                <a href="colliers-personnalises.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
+                                             alt="Colliers Personnalisés"></div>
+                                    <span>Colliers Personnalisés</span>
+                                </a>
+                                <a href="colliers-anti-fugue.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
+                                             alt="Colliers Anti-Fugue"></div>
+                                    <span>Colliers Anti-Fugue</span>
+                                </a>
+                                <a href="colliers-etrangleurs.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
+                                             alt="Colliers Étrangleurs"></div>
+                                    <span>Colliers Étrangleurs</span>
+                                </a>
+                                <a href="colliers-cuir.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
+                                             alt="Colliers Cuir"></div>
+                                    <span>Colliers Cuir</span>
+                                </a>
+
+                                <!-- Harnais -->
+                                <a href="harnais-personnalises.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
+                                             alt="Harnais Personnalisés"></div>
+                                    <span>Harnais Personnalisés</span>
+                                </a>
+                                <a href="harnais-anti-traction.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
+                                             alt="Harnais Anti-Traction"></div>
+                                    <span>Harnais Anti-Traction</span>
+                                </a>
+                                <a href="harnais-canicross.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
+                                             alt="Harnais Canicross"></div>
+                                    <span>Harnais Canicross</span>
+                                </a>
+
+                                <!-- Laisses -->
+                                <a href="longes.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png" alt="Longes">
+                                    </div>
+                                    <span>Longes</span>
+                                </a>
+                                <a href="laisses-classiques.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png"
+                                             alt="Laisses Classiques"></div>
+                                    <span>Laisses Classiques</span>
+                                </a>
+                                <a href="laisses-enrouleur.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png"
+                                             alt="Laisses Enrouleur"></div>
+                                    <span>Laisses Enrouleur</span>
+                                </a>
+                                <a href="medailles.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_id_tag_premium_1775537721480.png"
+                                             alt="Médailles"></div>
+                                    <span>Médailles</span>
+                                </a>
+                                <a href="museliere.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_muzzle_premium_1775537807415.png"
+                                             alt="Muselière"></div>
+                                    <span>Muselière</span>
+                                </a>
+                                <a href="sac-a-crottes.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_waste_bag_holder_premium_1775537881838.png"
+                                             alt="Sac à Crottes"></div>
+                                    <span>Sac à Crottes</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Couchage -->
+                <div class="nav-item has-megamenu">
+                    <a href="couchage.html" class="nav-link">Couchage <svg width="10" height="6" viewBox="0 0 10 6"
+                            fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></a>
+                    <div class="megamenu">
+                        <div class="container">
+                            <div class="megamenu-visual-grid">
+                                <a href="panier-chien.html" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
+                                             alt="Panier pour Chien"></div>
+                                    <span>Panier pour Chien</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
+                                             alt="Canapé pour Chien"></div>
+                                    <span>Canapé pour Chien</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
+                                             alt="Panier Chien Voiture"></div>
+                                    <span>Panier Chien Voiture</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_blanket_premium_1775538439218.png"
+                                             alt="Couverture pour Chien"></div>
+                                    <span>Couverture pour Chien</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jouets -->
+                <div class="nav-item has-megamenu">
+                    <a href="jouets.html" class="nav-link">Jouets <svg width="10" height="6" viewBox="0 0 10 6"
+                            fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></a>
+                    <div class="megamenu">
+                        <div class="container">
+                            <div class="megamenu-visual-grid">
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
+                                             alt="Tapis de Fouille"></div>
+                                    <span>Tapis de Fouille</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png" alt="Balles">
+                                    </div>
+                                    <span>Balles</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
+                                             alt="Peluches"></div>
+                                    <span>Peluches</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
+                                             alt="Jeux d'Occupation Chien"></div>
+                                    <span>Jeux d'Occupation Chien</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hygiène et Soins -->
+                <div class="nav-item has-megamenu">
+                    <a href="index.html#hygiene" class="nav-link">Hygiène & Soins <svg width="10" height="6"
+                            viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></a>
+                    <div class="megamenu">
+                        <div class="container">
+                            <div class="megamenu-visual-grid">
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
+                                             alt="Gamelle Anti-Glouton"></div>
+                                    <span>Gamelle Anti-Glouton</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
+                                             alt="Gamelles"></div>
+                                    <span>Gamelles</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
+                                             alt="Tapis de Léchage"></div>
+                                    <span>Tapis de Léchage</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
+                                             alt="Brosses"></div>
+                                    <span>Brosses</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
+                                             alt="Boîte à Croquettes"></div>
+                                    <span>Boîte à Croquettes</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item has-megamenu">
+                    <a href="index.html#accessoires" class="nav-link">Accessoires <svg width="10" height="6"
+                            viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></a>
+                    <div class="megamenu">
+                        <div class="container">
+                            <div class="megamenu-visual-grid">
+                                <a href="produit-impermeable.html" class="megamenu-card">
+                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
+                                             alt="Imperméable"></div>
+                                    <span>Imperméable</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
+                                             alt="Manteaux"></div>
+                                    <span>Manteaux</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
+                                             alt="Pull et sweat"></div>
+                                    <span>Pull et sweat</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
+                                             alt="T-shirt et Polo"></div>
+                                    <span>T-shirt et Polo</span>
+                                </a>
+                                <a href="#" class="megamenu-card">
+                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
+                                             alt="Bottine"></div>
+                                    <span>Bottine</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="nav-actions">
+                <button class="icon-btn search-btn" aria-label="Rechercher">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                </button>
+                <button class="icon-btn profile-btn" aria-label="Compte">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+                    </svg>
+                </button>
+                <button id="cart-btn" class="icon-btn cart-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="legal-page">
+        <div class="container narrow">
+            <div class="cookie-header">
+                <h1>Préférences de cookies</h1>
+                <p>Gérez vos préférences en toute simplicité pour une expérience sur-mesure.</p>
+            </div>
+
+            <div class="cookie-controls">
+                <button class="btn btn-black">Accepter tous les cookies</button>
+                <button class="btn btn-outline">Refuser tous les cookies</button>
+            </div>
+
+            <div class="cookie-list">
+                <!-- Essentiels -->
+                <div class="cookie-card">
+                    <div class="cookie-info">
+                        <h3>🔒 Cookies essentiels</h3>
+                        <p>Indispensables au bon fonctionnement du site. Ils permettent notamment la sécurisation de
+                            votre navigation et la gestion de vos achats.</p>
+                        <ul class="cookie-features">
+                            <li>La connexion à votre compte</li>
+                            <li>L’ajout de produits au panier</li>
+                            <li>La sécurisation de votre navigation</li>
+                        </ul>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Personnalisation -->
+                <div class="cookie-card">
+                    <div class="cookie-info">
+                        <h3>🎯 Cookies de personnalisation</h3>
+                        <p>Ils enregistrent vos préférences et interactions afin d’adapter le contenu à vos habitudes et
+                            d’améliorer votre expérience lors de vos prochaines visites.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Analyse -->
+                <div class="cookie-card">
+                    <div class="cookie-info">
+                        <h3>📊 Cookies d’analyse</h3>
+                        <p>Ils nous aident à comprendre comment vous utilisez notre site pour l’améliorer
+                            continuellement (pages consultées, parcours utilisateur).</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Publicité -->
+                <div class="cookie-card">
+                    <div class="cookie-info">
+                        <h3>📣 Cookies publicitaires</h3>
+                        <p>Ils nous permettent de vous proposer des offres pertinentes et des publicités adaptées à vos
+                            centres d’intérêt sur notre site et d’autres plateformes.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="save-bar">
+                <button class="btn btn-black">Enregistrer mes préférences</button>
+            </div>
+
+            <div style="margin-top: 5rem; text-align: center; color: #666;">
+                <p>ChezToutou respecte votre vie privée. Vous gardez le contrôle à tout moment.</p>
+            </div>
+        </div>
+    </main>
+
+        <footer class="footer">
+        <button id="back-to-top" class="back-to-top" aria-label="Retour en haut">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+        <div class="container footer-grid">
+            <!-- Brand Info Column -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="footer-logo">Chetoutou</a>
+                <div class="brand-desc">
+                    <p>Chetoutou, c'est le rendez-vous des passionnés de leurs compagnons à quatre pattes : un vaste
+                        catalogue de modèles intemporels, élégants et reconnus, sélectionnés avec soin.</p>
+                </div>
+                <div class="brand-contact">
+                    <p>contact@cheztoutou.com</p>
+                    <p>0783066021</p>
+                </div>
+            </div>
+
+            <!-- Main Menu Column -->
+            <div class="footer-col">
+                <h4>Menu principal</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#promenade">Promenade</a></li>
+                    <li><a href="couchage.html">Couchage</a></li>
+                    <li><a href="jouets.html">Jouets</a></li>
+                    <li><a href="#">Accessoires</a></li>
+                </ul>
+            </div>
+
+            <!-- Information Column -->
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <ul class="footer-links">
+                    <li><a href="guide-tailles.html">Guide de tailles</a></li>
+                    <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
+                    <li><a href="politique-remboursement.html">Politique de remboursement</a></li>
+                    <li><a href="conditions-utilisation.html">Conditions d'utilisation</a></li>
+                    <li><a href="coordonnees.html">Coordonnées</a></li>
+                    <li><a href="politique-expedition.html">Politique d'expédition</a></li>
+                    <li><a href="preferences-cookies.html">Préférences en matière de cookies</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Column -->
+            <div class="footer-col">
+                <h4>Cercle Privé</h4>
+                <p class="footer-newsletter-text">Rejoignez-nous et bénéficiez de -10% sur votre première commande.</p>
+                <div class="footer-newsletter">
+                    <form class="footer-newsletter-form">
+                        <div class="input-group">
+                            <input type="email" placeholder="Adresse email" aria-label="Votre adresse email">
+                            <button type="submit" class="submit-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Pinterest">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 20l4-9"></path><path d="M10.7 14c.4.1 1.2.1 1.5-.2.6-.5.4-1.7-.1-2.2-.7-.8-2-.3-2.1.8-.1.7.3 1.2.7 1.6z"></path><path d="M12 11c1-1 2.5-.5 3 1s-.5 4-2 4.5c-1.2.3-2.5-.2-3-1.5"></path></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar: Payments & Copyright -->
+        <div class="footer-bottom">
+            <div class="container bottom-flex">
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" class="pm-card">
+                    <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" class="pm-card">
+                    <img src="https://img.icons8.com/color/48/maestro.png" alt="Maestro" class="pm-card">
+                    <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" class="pm-card pm-apple">
+                    <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" class="pm-card">
+                    <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" class="pm-card">
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2026 Chetoutou</p>
+                </div>
+
+            </div>
+        </div>
+        <div id="search-overlay" class="search-overlay">
+            <button id="close-search" class="close-search" aria-label="Fermer la recherche">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="search-container">
+                <div class="search-bar-glass">
+                    <div class="search-icon-inside">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </div>
+                    <input type="text" id="search-input" placeholder="Recherche..." autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div id="cart-drawer" class="cart-drawer">
+            <div class="cart-header">
+                <h3>Vérifiez votre panier</h3>
+                <button id="close-cart" class="close-cart-btn" aria-label="Fermer le panier">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="cart-body">
+                <div class="cart-empty-state">
+                    <div class="empty-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <path d="M3 6h18"></path>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                    </div>
+                    <h4>Votre panier est vide</h4>
+                    <p>Remplissez votre panier avec des articles incroyables</p>
+                    <a href="index.html#collections" class="btn-black btn-full">Acheter maintenant</a>
+                </div>
+                <div class="cart-items-container" style="display: none;"></div>
+            </div>
+        </div>
+        <div id="cart-overlay" class="cart-overlay"></div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
