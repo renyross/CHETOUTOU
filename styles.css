@@ -5687,6 +5687,9 @@ h4,
 /* --- Brand Color Identity Updates --- */
 /* Matching specific section titles to the announcement bar color (#334e5c) */
 .carousel-section-header .section-title,
+h1,
+.seo-page-section h1,
+.section-title,
 .story-content h2,
 .faq-section h2.section-title,
 .newsletter-content-side h2 {
