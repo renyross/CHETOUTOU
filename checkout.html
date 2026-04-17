@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement | Chetoutou</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/plasticine/100/dog.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    </style>
+</head>
+<body class="checkout-page">
+    <!-- Processing Overlay -->
+    <div id="checkout-processing" class="checkout-overlay">
+        <div class="spinner"></div>
+        <h2 id="processing-text">Traitement du paiement en cours...</h2>
+        <p>Veuillez ne pas actualiser la page.</p>
+    </div>
+
+    <!-- Success Overlay -->
+    <div id="checkout-success" class="checkout-overlay">
+        <div class="success-icon">✓</div>
+        <h2 class="success-title">Merci pour votre commande !</h2>
+        <p class="success-text">
+            Votre commande <span class="order-number" id="final-order-id">#CT-XXXXXX</span> est confirmée.<br>
+            Un e-mail de confirmation vient de vous être envoyé.
+        </p>
+        <a href="index.html" class="btn-confirmation">Retour à la boutique</a>
+    </div>
+
+    <!-- Shop Pay Login Overlay -->
+    <div id="shoppay-login-overlay" class="shoppay-login-overlay">
+        <div class="shoppay-logo-group">
+            <div class="shoppay-circle circle-shop">
+                <svg viewBox="0 0 100 24" height="24" fill="white" style="display: block; margin: auto;">
+                    <path d="M5.84 9.07a1.13 1.13 0 11.01 2.26 1.13 1.13 0 01-.01-2.26zm-1.75 3c-.41-.44-.65-1-.65-1.65 0-1.3 1.05-2.35 2.35-2.35s2.35 1.05 2.35 2.35-1.05 2.35-2.35 2.35c-.65 0-1.21-.24-1.65-.65l-.05-.05zm.36-5.26c-.84 0-1.53.33-2.06.94l-1.34-.82C1.79 5.75 3.03 5.02 4.45 5.02c2.28 0 4.14 1.86 4.14 4.14 0 .5-.09 1-.26 1.46l-1.57-.6c.11-.27.17-.56.17-.86 0-1.73-1.41-3.14-3.14-3.14zM12.47 15.68h-1.85V3.97h1.85v11.71zm5.7-8.38l-1.55 3.97h-2.15l.13-.34c.48-1.2 1.4-2.14 2.6-2.14h.97zm.75 3.97V11.3h-1.72v-3.41c0-1.3-.41-2.45-1.22-3.32-.82-.87-1.87-1.3-3.14-1.3h-3.87v11.71h1.85v-3.5h2.18c1.3 0 2.34-.43 3.14-1.3.82-.87 1.22-1.98 1.22-3.32l-.12-.34c.48 1.2 1.4 2.14 2.6 2.14h1.08zm-9.04 0l-1.55 3.97H11.3V3.97h1.85v10.3c.48-1.2 1.4-2.14 2.6-2.14h1.16zm-1.85-.34h-4.32V7.4h4.32v8.28zm0-9.5h-4.32V3.97H14.9v3.43z"></path>
+                </svg>
+            </div>
+            <div class="shoppay-dots">...</div>
+            <div class="shoppay-circle circle-boutique">
+                <span style="font-size: 0.8rem;">CT</span>
+            </div>
+        </div>
+        
+        <div class="shoppay-content">
+            <h1 class="shoppay-title">Se connecter à Shop</h1>
+            <p class="shoppay-subtitle">Pour continuer vers <strong>Boutique Chetoutou</strong></p>
+            
+            <form id="shoppay-login-form">
+                <div class="shoppay-form-group">
+                    <input type="email" class="shoppay-input" placeholder="Saisissez votre adresse e-mail" required>
+                </div>
+                <button type="submit" class="shoppay-btn-primary">Continuer</button>
+            </form>
+            
+            <div class="shoppay-passkey">
+                <span style="font-size: 1.2rem;">🔐</span>
+                Utiliser une clé d'accès
+            </div>
+            
+            <div class="shoppay-footer">
+                En continuant, vous acceptez les <a href="#">conditions</a> et la <a href="#">politique de confidentialité</a> de Shop, ainsi que le partage de vos e-mail, nom, avatar et email avec Boutique Chetoutou. Consultez ses <a href="#">conditions</a> et sa <a href="#">politique de confidentialité</a>.
+            </div>
+            
+            <div class="shoppay-lang-selector">
+                Français <span style="font-size: 0.7rem; margin-left: 5px;">▼</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PayPal Login Overlay -->
+    <div id="paypal-login-overlay" class="paypal-login-overlay">
+        <div class="paypal-logo-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="paypal-logo-img">
+        </div>
+        <div class="paypal-content">
+            <h1 class="paypal-title">Payer avec PayPal</h1>
+            <form id="paypal-login-form">
+                <input type="email" class="paypal-input" placeholder="E-mail ou numéro de mobile" required>
+                <div style="text-align: left; margin-bottom: 1.5rem;">
+                    <a href="#" style="color: #0070ba; text-decoration: none; font-size: 0.9rem; font-weight: 700;">E-mail oublié ?</a>
+                </div>
+                <button type="submit" class="paypal-btn-primary">Suivant</button>
+            </form>
+            <div style="margin-top: 2rem;">
+                <button style="width: 100%; padding: 1rem; background: #fff; border: 1px solid #ccc; border-radius: 4px; font-weight: 700; color: #444; cursor: pointer;">Ouvrir un compte</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Pay Overlay -->
+    <div id="gpay-login-overlay" class="gpay-login-overlay">
+        <div class="gpay-login-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Pay_Logo_%282020%29.svg" alt="Google Pay" class="gpay-logo-img">
+            <h1 class="gpay-title">Payer avec Google Pay</h1>
+            <p class="gpay-subtitle">Boutique Chetoutou demande l'accès à votre mode de paiement.</p>
+            
+            <div class="gpay-user-card">
+                <div class="gpay-avatar">J</div>
+                <div class="gpay-user-info">
+                    <div class="gpay-user-name">Jean Dupont</div>
+                    <div class="gpay-user-email">jean.dupont@gmail.com</div>
+                </div>
+            </div>
+
+            <form id="gpay-login-form">
+                <button type="submit" class="gpay-btn-primary">Payer</button>
+            </form>
+            
+            <div style="margin-top: 1.5rem;">
+                <a href="#" style="color: #1a73e8; text-decoration: none; font-size: 0.85rem; font-weight: 500;">Modifier le mode de paiement</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkout-container">
+        <!-- Part 1: Forms (Left) -->
+        <main class="checkout-left">
+            <a href="index.html" class="checkout-logo">CHETOUTOU</a>
+
+            <!-- Express Checkout -->
+            <div class="express-checkout">
+                <h4>Paiement express</h4>
+                <div class="express-btns">
+                    <button class="btn-express btn-shoppay" style="background: #5a31f4; border: none; cursor: pointer;">
+                        <svg viewBox="0 0 100 24" height="20" fill="white" style="display: block; margin: auto;">
+                            <path d="M5.84 9.07a1.13 1.13 0 11.01 2.26 1.13 1.13 0 01-.01-2.26zm-1.75 3c-.41-.44-.65-1-.65-1.65 0-1.3 1.05-2.35 2.35-2.35s2.35 1.05 2.35 2.35-1.05 2.35-2.35 2.35c-.65 0-1.21-.24-1.65-.65l-.05-.05zm.36-5.26c-.84 0-1.53.33-2.06.94l-1.34-.82C1.79 5.75 3.03 5.02 4.45 5.02c2.28 0 4.14 1.86 4.14 4.14 0 .5-.09 1-.26 1.46l-1.57-.6c.11-.27.17-.56.17-.86 0-1.73-1.41-3.14-3.14-3.14zM12.47 15.68h-1.85V3.97h1.85v11.71zm5.7-8.38l-1.55 3.97h-2.15l.13-.34c.48-1.2 1.4-2.14 2.6-2.14h.97zm.75 3.97V11.3h-1.72v-3.41c0-1.3-.41-2.45-1.22-3.32-.82-.87-1.87-1.3-3.14-1.3h-3.87v11.71h1.85v-3.5h2.18c1.3 0 2.34-.43 3.14-1.3.82-.87 1.22-1.98 1.22-3.32l-.12-.34c.48 1.2 1.4 2.14 2.6 2.14h1.08zm-9.04 0l-1.55 3.97H11.3V3.97h1.85v10.3c.48-1.2 1.4-2.14 2.6-2.14h1.16zm-1.85-.34h-4.32V7.4h4.32v8.28zm0-9.5h-4.32V3.97H14.9v3.43z"></path>
+                        </svg>
+                    </button>
+                    <button class="btn-express btn-paypal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                    </button>
+                    <button class="btn-express btn-gpay">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Pay_Logo_%282020%29.svg" alt="Google Pay">
+                    </button>
+                </div>
+            </div>
+
+            <div class="checkout-divider">OU</div>
+
+            <form id="checkout-form">
+                <!-- Contact Section -->
+                <div class="checkout-section">
+                    <div class="checkout-section-header">
+                        <h2>Contact</h2>
+                        <a href="#" class="login-link">Se connecter</a>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="checkout-input" placeholder="E-mail" id="contact-email" required>
+                    </div>
+                    <label class="checkout-checkbox">
+                        <input type="checkbox" checked>
+                        Envoyez-moi des nouvelles et des offres par e-mail
+                    </label>
+                </div>
+
+                <!-- Livraison Section -->
+                <div class="checkout-section">
+                    <h2>Livraison</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <select class="checkout-input">
+                                <option>Bulgarie</option>
+                                <option selected>France</option>
+                                <option>Belgique</option>
+                                <option>Suisse</option>
+                                <option>Canada</option>
+                            </select>
+                            <span class="checkout-label-float">Pays/Région</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="checkout-input" placeholder="Prénom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="checkout-input" placeholder="Nom" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" class="checkout-input" placeholder="Adresse" id="ship-addr" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" class="checkout-input" placeholder="Appartement, suite, etc. (optionnel)">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="checkout-input" placeholder="Code postal" id="ship-zip" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="checkout-input" placeholder="Ville" id="ship-city" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" class="checkout-input" placeholder="Téléphone">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mode Expédition -->
+                <div class="checkout-section">
+                    <h2>Mode d'expédition</h2>
+                    <div id="shipping-methods-wrapper">
+                        <div id="shipping-placeholder" style="background: #f4f4f4; padding: 1.5rem; border-radius: 5px; color: #666; font-size: 0.9rem;">
+                            Saisissez votre adresse d'expédition pour voir les modes d'expédition disponibles.
+                        </div>
+                        <div id="shipping-options" class="shipping-methods-box" style="display: none;">
+                            <label class="shipping-method-row active">
+                                <div class="shipping-method-info">
+                                    <input type="radio" name="shipping_choice" value="4.90" checked>
+                                    <div class="shipping-method-text">
+                                        <span class="shipping-method-name">Livraison avec suivi</span>
+                                    </div>
+                                </div>
+                                <span class="shipping-method-price">4,90 €</span>
+                            </label>
+                            <label class="shipping-method-row">
+                                <div class="shipping-method-info">
+                                    <input type="radio" name="shipping_choice" value="9.90">
+                                    <div class="shipping-method-text">
+                                        <span class="shipping-method-name">Livraison Premium (Assurance Perte, Casse, Vol)</span>
+                                    </div>
+                                </div>
+                                <span class="shipping-method-price">9,90 €</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paiement Section -->
+                <div class="checkout-section">
+                    <h2>Paiement</h2>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Toutes les transactions sont sécurisées et chiffrées.</p>
+                    
+                    <div class="payment-box">
+                        <!-- Option 1: Credit Card -->
+                        <div class="payment-method active">
+                            <div class="payment-method-header">
+                                <label class="payment-radio">
+                                    <input type="radio" name="payment" checked>
+                                    Carte de crédit
+                                </label>
+                                <div class="payment-icons">
+                                    <img src="https://img.icons8.com/color/32/visa.png" alt="Visa">
+                                    <img src="https://img.icons8.com/color/32/mastercard.png" alt="Mastercard">
+                                </div>
+                            </div>
+                            <div class="payment-content">
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <input type="text" class="checkout-input" placeholder="Numéro de carte">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="checkout-input" placeholder="Date d'expiration (MM/AA)">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="checkout-input" placeholder="Code de sécurité">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <input type="text" class="checkout-input" placeholder="Nom sur la carte">
+                                    </div>
+                                </div>
+                                <label class="checkout-checkbox">
+                                    <input type="checkbox" checked>
+                                    Utiliser l'adresse d'expédition comme adresse de facturation
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Option 2: PayPal -->
+                        <div class="payment-method">
+                            <div class="payment-method-header">
+                                <label class="payment-radio">
+                                    <input type="radio" name="payment">
+                                    PayPal
+                                </label>
+                                <img src="https://img.icons8.com/color/32/paypal.png" alt="PayPal">
+                            </div>
+                        </div>
+
+                        <!-- Option 3: Crypto -->
+                        <div class="payment-method">
+                            <div class="payment-method-header">
+                                <label class="payment-radio">
+                                    <input type="radio" name="payment">
+                                    Crypto (USDC)
+                                </label>
+                                <img src="https://img.icons8.com/color/32/ethereum.png" alt="Eth">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <label class="checkout-checkbox">
+                        <input type="checkbox">
+                        Sauvegardez mes données pour effectuer des paiements rapidement
+                    </label>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input type="text" class="checkout-input" placeholder="Téléphone mobile (facultatif)">
+                    </div>
+                </div>
+
+                <p style="font-size: 0.75rem; color: #777; line-height: 1.4; margin-bottom: 2rem;">
+                    En fournissant votre numéro de téléphone, vous acceptez de créer un compte Shop soumis aux 
+                    <a href="#">Conditions</a> et à la <a href="#">Politique de confidentialité</a> de Shop.
+                </p>
+
+                <button type="submit" class="btn-checkout-pay">Payer maintenant</button>
+            </form>
+
+            <!-- Bottom Links -->
+            <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; display: flex; flex-wrap: wrap; gap: 15px;">
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Politique de remboursement</a>
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Expédition</a>
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Politique de confidentialité</a>
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Conditions d'utilisation</a>
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Contact</a>
+                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Cookies</a>
+            </footer>
+        </main>
+
+        <!-- Part 2: Order Summary (Right) -->
+        <aside class="checkout-right">
+            <div class="summary-sticky">
+                <div id="checkout-items-list" class="summary-items">
+                    <!-- Dynamic Items -->
+                </div>
+
+                <div class="summary-promo">
+                    <input type="text" class="checkout-input" placeholder="Code de réduction">
+                    <button class="btn-promo-valider">Valider</button>
+                </div>
+
+                <div class="summary-totals">
+                    <div class="summary-line">
+                        <span>Sous-total • <span id="summary-count">0</span> articles</span>
+                        <span id="summary-subtotal">0,00 €</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Réduction sur la commande</span>
+                        <span id="summary-discount" style="color: #666;">- 0,00 €</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Expédition</span>
+                        <span id="summary-shipping-cost" style="font-size: 0.8rem;">Saisir une adresse d'expédition</span>
+                    </div>
+                    <div class="summary-total-row">
+                        <span>Total</span>
+                        <div style="text-align: right;">
+                            <span class="total-price" id="summary-total">0,00 €</span>
+                            <small style="display: block; color: #666; font-size: 0.7rem;">EUR</small>
+                        </div>
+                    </div>
+                    <div id="summary-savings" class="savings-label" style="display: none;">
+                        ÉCONOMIES TOTALES 0,00 €
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Script to populate summary from LocalStorage -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemsContainer = document.getElementById('checkout-items-list');
+            const subtotalEl = document.getElementById('summary-subtotal');
+            const totalEl = document.getElementById('summary-total');
+            const countEl = document.getElementById('summary-count');
+            const savingsEl = document.getElementById('summary-savings');
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p style="text-align: center; color: #999;">Votre panier est vide.</p>';
+                return;
+            }
+
+            // Populate items
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <div class="summary-img-wrapper">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="summary-qty-bubble">${item.quantity}</div>
+                    </div>
+                    <div class="summary-details">
+                        <span class="summary-name">${item.name}</span>
+                        <span class="summary-variant">${item.variant || ''}</span>
+                    </div>
+                    <div class="summary-price">${(item.price * item.quantity).toFixed(2).replace('.', ',')} €</div>
+                </div>
+            `).join('');
+
+            // Calculate totals
+            let appliedDiscount = parseFloat(localStorage.getItem('appliedDiscount')) || 0;
+            let appliedFreeShipping = localStorage.getItem('appliedFreeShipping') === 'true';
+            let currentShipping = 0;
+            
+            const updateTotals = () => {
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                const discount = subtotal * appliedDiscount;
+                
+                // Shipping logic with free shipping promo
+                let actualShipping = currentShipping;
+                let isFreeShippingActive = false;
+
+                if (appliedFreeShipping && subtotal >= 60) {
+                    actualShipping = 0;
+                    isFreeShippingActive = true;
+                }
+
+                const finalTotal = subtotal - discount + actualShipping;
+
+                countEl.textContent = totalCount;
+                subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
+                totalEl.textContent = finalTotal.toFixed(2).replace('.', ',') + ' €';
+                
+                document.getElementById('summary-discount').textContent = `- ${discount.toFixed(2).replace('.', ',')} €`;
+                
+                // Update Shipping summary
+                const shipSummaryEl = document.getElementById('summary-shipping-cost');
+                if (isFreeShippingActive) {
+                    shipSummaryEl.innerHTML = `<span style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 5px;">${currentShipping.toFixed(2).replace('.', ',')} €</span> <span style="color: var(--sage); font-weight: 700;">GRATUIT</span>`;
+                } else if (currentShipping === 0 && document.getElementById('shipping-options').style.display === 'block') {
+                    shipSummaryEl.textContent = 'GRATUIT'; // For standard free shipping methods if any
+                } else if (currentShipping > 0) {
+                    shipSummaryEl.textContent = currentShipping.toFixed(2).replace('.', ',') + ' €';
+                }
+
+                if (discount > 0) {
+                    savingsEl.style.display = 'block';
+                    savingsEl.textContent = `ÉCONOMIES TOTALES ${discount.toFixed(2).replace('.', ',')} €`;
+                } else if (isFreeShippingActive) {
+                    savingsEl.style.display = 'block';
+                    savingsEl.textContent = `ÉCONOMIES TOTALES`;
+                } else {
+                    savingsEl.style.display = 'none';
+                }
+            };
+
+            updateTotals();
+
+            // Reveal Shipping Methods
+            const addrInput = document.getElementById('ship-addr');
+            const zipInput = document.getElementById('ship-zip');
+            const cityInput = document.getElementById('ship-city');
+            const shippingPlaceholder = document.getElementById('shipping-placeholder');
+            const shippingOptions = document.getElementById('shipping-options');
+
+            const checkReveal = () => {
+                if (addrInput.value.length > 5 && zipInput.value.length >= 4 && cityInput.value.length > 2) {
+                    shippingPlaceholder.style.display = 'none';
+                    shippingOptions.style.display = 'block'; // box uses flex internally usually but here block is fine
+                    updateTotals();
+                }
+            };
+
+            [addrInput, zipInput, cityInput].forEach(input => {
+                input.addEventListener('input', checkReveal);
+            });
+
+            // Shipping Method Selection
+            const shipRadios = document.querySelectorAll('input[name="shipping_choice"]');
+            const shipRows = document.querySelectorAll('.shipping-method-row');
+
+            shipRadios.forEach((radio, idx) => {
+                radio.addEventListener('change', () => {
+                    currentShipping = parseFloat(radio.value);
+                    shipRows.forEach(r => r.classList.remove('active'));
+                    shipRows[idx].classList.add('active');
+                    updateTotals();
+                });
+            });
+
+            // Promo Code Logic in Checkout
+            const promoInput = document.querySelector('.summary-promo input');
+            const promoBtn = document.querySelector('.btn-promo-valider');
+
+            if (promoBtn && promoInput) {
+                promoBtn.addEventListener('click', () => {
+                    const code = promoInput.value.trim().toUpperCase();
+                    if (code === 'TOUTOU10') {
+                        appliedDiscount = 0;
+                        appliedFreeShipping = true;
+                    } else if (code === 'ELYSIUM20') {
+                        appliedDiscount = 0.20;
+                        appliedFreeShipping = false;
+                    } else {
+                        alert('Code invalide');
+                        return;
+                    }
+                    localStorage.setItem('appliedDiscount', appliedDiscount.toString());
+                    localStorage.setItem('appliedFreeShipping', appliedFreeShipping.toString());
+                    updateTotals();
+                    promoInput.value = '';
+                });
+            }
+
+            // Payment method toggle logic
+            const payMethods = document.querySelectorAll('.payment-method');
+            payMethods.forEach(method => {
+                method.addEventListener('click', () => {
+                    payMethods.forEach(m => m.classList.remove('active'));
+                    method.classList.add('active');
+                    method.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+
+            // Overlays
+            const processingOverlay = document.getElementById('checkout-processing');
+            const successOverlay = document.getElementById('checkout-success');
+            const processingText = document.getElementById('processing-text');
+
+            const showSuccessScreen = () => {
+                const orderId = `CT-${Math.floor(100000 + Math.random() * 900000)}`;
+                document.getElementById('final-order-id').textContent = `#${orderId}`;
+                processingOverlay.classList.remove('active');
+                successOverlay.classList.add('active');
+                localStorage.removeItem('cart');
+                localStorage.removeItem('appliedDiscount');
+            };
+
+            const simulatePayment = (methodName) => {
+                processingText.textContent = `Paiement via ${methodName} en cours...`;
+                processingOverlay.classList.add('active');
+                setTimeout(() => {
+                    showSuccessScreen();
+                }, 3000);
+            };
+
+            // Express Overlays
+            const shoppayLoginOverlay = document.getElementById('shoppay-login-overlay');
+            const paypalLoginOverlay = document.getElementById('paypal-login-overlay');
+            const gpayLoginOverlay = document.getElementById('gpay-login-overlay');
+            
+            const shoppayLoginForm = document.getElementById('shoppay-login-form');
+            const paypalLoginForm = document.getElementById('paypal-login-form');
+            const gpayLoginForm = document.getElementById('gpay-login-form');
+
+            // Button Triggers
+            document.querySelector('.btn-shoppay').addEventListener('click', (e) => {
+                e.preventDefault();
+                shoppayLoginOverlay.classList.add('active');
+            });
+
+            document.querySelector('.btn-paypal').addEventListener('click', (e) => {
+                e.preventDefault();
+                paypalLoginOverlay.classList.add('active');
+            });
+
+            document.querySelector('.btn-gpay').addEventListener('click', (e) => {
+                e.preventDefault();
+                gpayLoginOverlay.classList.add('active');
+            });
+
+            // Submission Logic
+            shoppayLoginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                shoppayLoginOverlay.classList.remove('active');
+                simulatePayment('Shop Pay');
+            });
+
+            paypalLoginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                paypalLoginOverlay.classList.remove('active');
+                simulatePayment('PayPal');
+            });
+
+            gpayLoginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                gpayLoginOverlay.classList.remove('active');
+                simulatePayment('Google Pay');
+            });
+
+            // Login Link
+            document.querySelector('.login-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('La fonction de connexion sera bientôt disponible !');
+            });
+
+            // Footer Links
+            document.querySelectorAll('footer a').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert(`Chargement de : ${a.textContent}...`);
+                });
+            });
+
+            // Standard Form Submission
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Final validation check
+                const email = document.getElementById('contact-email').value;
+                if (!email.includes('@')) {
+                    alert('Veuillez saisir une adresse e-mail valide.');
+                    return;
+                }
+
+                simulatePayment('Carte de crédit');
+            });
+        });
+    </script>
+</body>
+</html>

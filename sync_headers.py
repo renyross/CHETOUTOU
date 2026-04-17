@@ -4,8 +4,8 @@ import re
 def get_header_from_index():
     with open('index.html', 'r', encoding='utf-8') as f:
         content = f.read()
-        # Find header block
-        match = re.search(r'(<header class="navbar".*?</header>)', content, re.DOTALL)
+        # Find announcement bar + header block
+        match = re.search(r'(<div class="announcement-bar".*?</header>)', content, re.DOTALL)
         if match:
             return match.group(1)
     return None
@@ -13,7 +13,7 @@ def get_header_from_index():
 def sync_headers():
     header_content = get_header_from_index()
     if not header_content:
-        print("Could not find header in index.html")
+        print("Could not find announcement-bar + header in index.html")
         return
 
     # Header for non-homepage pages should have 'scrolled' class
@@ -24,8 +24,8 @@ def sync_headers():
             with open(filename, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Replace header block
-            new_content = re.sub(r'<header class="navbar.*?">.*?</header>', subpage_header, content, flags=re.DOTALL)
+            # Replace announcement bar + header block
+            new_content = re.sub(r'<div class="announcement-bar".*?</header>', subpage_header, content, flags=re.DOTALL)
             
             if new_content != content:
                 with open(filename, 'w', encoding='utf-8') as f:

@@ -9,11 +9,7 @@
         content="Affrontez les éléments avec l'imperméable StormGuard. Protection 100% étanche, coupe-vent et visibilité accrue pour votre chien. Qualité professionnelle.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
+    
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
@@ -21,301 +17,288 @@
 
 <body class="shop-page">
     <div class="announcement-bar">
-        - 10 % avec le code TOUTOU10
+        <div class="announcement-slider">
+            <div class="announcement-item">Remise étudiante de 15% 🎓</div>
+            <div class="announcement-item">-10% sur votre première commande ✉️</div>
+            <!-- Seamless Loop -->
+            <div class="announcement-item">Remise étudiante de 15% 🎓</div>
+        </div>
     </div>
     <header class="navbar scrolled">
         <div class="container navbar-content">
-            <div class="mobile-left">
+            <!-- Left Nav & Logo -->
+            <div class="nav-left">
+                <a href="index.html" class="logo">Chetoutou</a>
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
-                <button class="icon-btn mobile-search-btn" aria-label="Rechercher">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
-                </button>
             </div>
 
-            <a href="index.html" class="logo">Chetoutou</a>
-
-                        <nav class="nav-links" id="nav-menu">
+            <nav class="nav-links" id="nav-menu">
                 <div class="mobile-menu-header">
-                    <button class="menu-close-btn" id="menu-close-btn" aria-label="Fermer le menu">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        <button class="menu-close-btn" id="menu-close-btn" aria-label="Fermer le menu">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Promenade -->
+                    <div class="nav-item has-megamenu">
+                        <a href="promenade.html" class="nav-link">Promenade <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Colliers</h3>
+                                        <ul>
+                                            <li><a href="collier-chien.html">Collier Chien</a></li>
+                                            <li><a href="collier-personnalise-chien.html">Collier Personnalisé</a></li>
+                                            <li><a href="collier-cuir-chien.html">Collier en Cuir</a></li>
+                                            <li><a href="collier-lumineux-chien.html">Collier Lumineux</a></li>
+                                            <li><a href="collier-gps-chien.html">Collier GPS Chien</a></li>
+                                            <li><a href="collier-anti-fugue-chien.html">Collier Anti-Fugue</a></li>
+                                            <li><a href="collier-dressage-chien.html">Collier de Dressage</a></li>
+                                            <li><a href="collier-electrique-chien.html">Collier Électrique</a></li>
+                                            <li><a href="collier-anti-aboiement-chien.html">Collier Anti-Aboiement</a></li>
+                                            <li><a href="collier-anti-puce-chien.html">Collier Anti-Puce</a></li>
+                                            <li><a href="collier-etrangleur-chien.html">Collier Étrangleur</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Harnais</h3>
+                                        <ul>
+                                            <li><a href="harnais-chien.html">Harnais Chien</a></li>
+                                            <li><a href="harnais-anti-traction-chien.html">Harnais Anti-Traction</a></li>
+                                            <li><a href="harnais-petit-chien.html">Harnais Petit Chien</a></li>
+                                            <li><a href="harnais-chien-voiture.html">Harnais Voiture</a></li>
+                                            <li><a href="harnais-chien-course.html">Harnais de Course</a></li>
+                                            <li><a href="harnais-traction-chien.html">Harnais Traction</a></li>
+                                            <li><a href="harnais-chien-y.html">Harnais en Y</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Laisse & longe</h3>
+                                        <ul>
+                                            <li><a href="laisse-chien.html">Laisse Chien</a></li>
+                                            <li><a href="double-laisse-chien.html">Double Laisse</a></li>
+                                            <li><a href="laisse-enrouleur-chien.html">Laisse Enrouleur</a></li>
+                                            <li><a href="laisse-main-libre-chien.html">Laisse Mains Libres</a></li>
+                                            <li><a href="laisse-corde-chien.html">Laisse en Corde</a></li>
+                                            <li><a href="laisse-lasso-chien.html">Laisse Lasso</a></li>
+                                            <li><a href="laisse-longe-chien.html">Longe</a></li>
+                                            <li><a href="laisse-chien-velo.html">Laisse Vélo</a></li>
+                                            <li><a href="laisse-chien-course.html">Laisse de Course</a></li>
+                                            <li><a href="longue-laisse-chien.html">Longue Laisse</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Voyage & Transport</h3>
+                                        <ul>
+                                            <li><a href="sac-chien.html">Sac Chien</a></li>
+                                            <li><a href="sac-transport-chien.html">Sac de Transport</a></li>
+                                            <li><a href="sac-a-dos-chien.html">Sac à Dos</a></li>
+                                            <li><a href="panier-voiture-chien.html">Panier Voiture</a></li>
+                                            <li><a href="panier-velo-chien.html">Panier Vélo</a></li>
+                                            <li><a href="museliere.html">Muselière</a></li>
+                                            <li><a href="accessoires.html">Médailles & Sécurité</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Couchage -->
+                    <div class="nav-item has-megamenu">
+                        <a href="couchage.html" class="nav-link">Couchage <svg width="10" height="6" viewBox="0 0 10 6"
+                                fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Paniers</h3>
+                                        <ul>
+                                            <li><a href="panier-chien.html">Panier Chien</a></li>
+                                            <li><a href="panier-orthopedique-chien.html">Panier Orthopédique Chien</a></li>
+                                            <li><a href="panier-dehoussable-chien.html">Panier Déhoussable Chien</a></li>
+                                            <li><a href="panier-plastique-chien.html">Panier Plastique Chien</a></li>
+                                            <li><a href="panier-osier-chien.html">Panier Osier Chien</a></li>
+                                            <li><a href="panier-petit-chien.html">Panier Petit Chien</a></li>
+                                            <li><a href="panier-grand-chien.html">Panier Grand Chien</a></li>
+                                            <li><a href="panier-xxl-chien.html">Panier XXL</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Lits & Canapés</h3>
+                                        <ul>
+                                            <li><a href="lit-chien.html">Lit Chien</a></li>
+                                            <li><a href="lit-xxl-chien.html">Lit XXL</a></li>
+                                            <li><a href="lit-sureleve-chien.html">Lit Surélevé</a></li>
+                                            <li><a href="canape-chien.html">Canapé Luxe Chien</a></li>
+                                            <li><a href="couverture-chien.html">Couvertures Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Coussins & Tapis</h3>
+                                        <ul>
+                                            <li><a href="coussin-chien.html">Coussin Chien</a></li>
+                                            <li><a href="tapis-xxl-chien.html">Tapis XXL Chien</a></li>
+                                            <li><a href="tapis-absorbant-chien.html">Tapis Absorbant Chien</a></li>
+                                            <li><a href="tapis-rafraichissant-chien.html">Tapis Rafraîchissant Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jouets -->
+                    <div class="nav-item has-megamenu">
+                        <a href="jouets.html" class="nav-link">Jouets <svg width="10" height="6" viewBox="0 0 10 6"
+                                fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Occupation</h3>
+                                        <ul>
+                                            <li><a href="jouet-interactif-chien.html">Jouet interactif Chien</a></li>
+                                            <li><a href="tapis-fouille.html">Tapis de fouille Chien</a></li>
+                                            <li><a href="jouets-indestructibles.html">Jouets indestructibles Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Peluches</h3>
+                                        <ul>
+                                            <li><a href="peluches-chien.html">Peluches pour chien</a></li>
+                                            <li><a href="doudou-chien.html">Doudou chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Balles & Lancer</h3>
+                                        <ul>
+                                            <li><a href="balles-chien.html">Balles pour chien</a></li>
+                                            <li><a href="frisbee-chien.html">Frisbee chien</a></li>
+                                            <li><a href="lanceur-balle-chien.html">Lanceur de balle Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hygiène -->
+                    <div class="nav-item has-megamenu">
+                        <a href="hygiene.html" class="nav-link">Hygiène <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Gamelles</h3>
+                                        <ul>
+                                            <li><a href="hygiene.html">Gamelle Chien</a></li>
+                                            <li><a href="gamelle-anti-glouton.html">Gamelle Anti-Glouton Chien</a></li>
+                                            <li><a href="gamelle-surelevee-chien.html">Gamelle Surélevée Chien</a></li>
+                                            <li><a href="gamelle-ceramique-chien.html">Gamelle Céramique Chien</a></li>
+                                            <li><a href="gamelle-personnalisee-chien.html">Gamelle Personnalisée Chien</a></li>
+                                            <li><a href="tapis-gamelle-chien.html">Tapis de Gamelle Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Alimentation</h3>
+                                        <ul>
+                                            <li><a href="tapis-lechage.html">Tapis de Léchage Chien</a></li>
+                                            <li><a href="boite-croquettes.html">Boîte à Croquettes Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Soin & Hygiène</h3>
+                                        <ul>
+                                            <li><a href="brosses.html">Brosses & Peignes Chien</a></li>
+                                            <li><a href="sac-a-crottes.html">Sac à Crottes Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accessoires -->
+                    <div class="nav-item has-megamenu">
+                        <a href="accessoires.html" class="nav-link">Accessoires <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Vêtements</h3>
+                                        <ul>
+                                            <li><a href="impermeables.html">Imperméable Chien</a></li>
+                                            <li><a href="manteaux.html">Manteaux Chien</a></li>
+                                            <li><a href="bottine-chien.html">Bottines Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog (Mobile Only) -->
+                    <div class="nav-item mobile-only-nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </div>
+                </nav>
+
+
+            <!-- Right Actions -->
+            <div class="nav-right">
+                <div class="nav-actions">
+                    <button class="icon-btn search-btn" id="search-toggle-btn" aria-label="Recherche">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
                         </svg>
                     </button>
+                    <a href="coordonnees.html" class="icon-btn profile-btn" aria-label="Compte">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </a>
+                    <button id="cart-btn" class="icon-btn cart-toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                            <path d="M3 6h18" />
+                            <path d="M16 10a4 4 0 0 1-8 0" />
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </button>
                 </div>
-                <!-- Sorties -->
-                <div class="nav-item has-megamenu">
-                    <a href="promenade.html" class="nav-link">Promenade <svg width="10" height="6" viewBox="0 0 10 6"
-                            fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></a>
-                    <div class="megamenu">
-                        <div class="container">
-                            <div class="megamenu-visual-grid">
-                                <!-- Colliers -->
-                                <a href="colliers-classiques.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
-                                             alt="Colliers Classiques"></div>
-                                    <span>Colliers Classiques</span>
-                                </a>
-                                <a href="colliers-personnalises.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
-                                             alt="Colliers Personnalisés"></div>
-                                    <span>Colliers Personnalisés</span>
-                                </a>
-                                <a href="colliers-anti-fugue.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
-                                             alt="Colliers Anti-Fugue"></div>
-                                    <span>Colliers Anti-Fugue</span>
-                                </a>
-                                <a href="colliers-etrangleurs.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
-                                             alt="Colliers Étrangleurs"></div>
-                                    <span>Colliers Étrangleurs</span>
-                                </a>
-                                <a href="colliers-cuir.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_collar_classic_1775487825692.png"
-                                             alt="Colliers Cuir"></div>
-                                    <span>Colliers Cuir</span>
-                                </a>
-
-                                <!-- Harnais -->
-                                <a href="harnais-personnalises.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
-                                             alt="Harnais Personnalisés"></div>
-                                    <span>Harnais Personnalisés</span>
-                                </a>
-                                <a href="harnais-anti-traction.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
-                                             alt="Harnais Anti-Traction"></div>
-                                    <span>Harnais Anti-Traction</span>
-                                </a>
-                                <a href="harnais-canicross.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_harness_premium_1775487844838.png"
-                                             alt="Harnais Canicross"></div>
-                                    <span>Harnais Canicross</span>
-                                </a>
-
-                                <!-- Laisses -->
-                                <a href="longes.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png" alt="Longes">
-                                    </div>
-                                    <span>Longes</span>
-                                </a>
-                                <a href="laisses-classiques.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png"
-                                             alt="Laisses Classiques"></div>
-                                    <span>Laisses Classiques</span>
-                                </a>
-                                <a href="laisses-enrouleur.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_leash_elegant_1775487863541.png"
-                                             alt="Laisses Enrouleur"></div>
-                                    <span>Laisses Enrouleur</span>
-                                </a>
-                                <a href="medailles.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_id_tag_premium_1775537721480.png"
-                                             alt="Médailles"></div>
-                                    <span>Médailles</span>
-                                </a>
-                                <a href="museliere.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_muzzle_premium_1775537807415.png"
-                                             alt="Muselière"></div>
-                                    <span>Muselière</span>
-                                </a>
-                                <a href="sac-a-crottes.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_waste_bag_holder_premium_1775537881838.png"
-                                             alt="Sac à Crottes"></div>
-                                    <span>Sac à Crottes</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Couchage -->
-                <div class="nav-item has-megamenu">
-                    <a href="couchage.html" class="nav-link">Couchage <svg width="10" height="6" viewBox="0 0 10 6"
-                            fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></a>
-                    <div class="megamenu">
-                        <div class="container">
-                            <div class="megamenu-visual-grid">
-                                <a href="panier-chien.html" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
-                                             alt="Panier pour Chien"></div>
-                                    <span>Panier pour Chien</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
-                                             alt="Canapé pour Chien"></div>
-                                    <span>Canapé pour Chien</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_bed_premium_1775489579429.png"
-                                             alt="Panier Chien Voiture"></div>
-                                    <span>Panier Chien Voiture</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_blanket_premium_1775538439218.png"
-                                             alt="Couverture pour Chien"></div>
-                                    <span>Couverture pour Chien</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Jouets -->
-                <div class="nav-item has-megamenu">
-                    <a href="jouets.html" class="nav-link">Jouets <svg width="10" height="6" viewBox="0 0 10 6"
-                            fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></a>
-                    <div class="megamenu">
-                        <div class="container">
-                            <div class="megamenu-visual-grid">
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
-                                             alt="Tapis de Fouille"></div>
-                                    <span>Tapis de Fouille</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png" alt="Balles">
-                                    </div>
-                                    <span>Balles</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
-                                             alt="Peluches"></div>
-                                    <span>Peluches</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_toys_premium_1775489913031.png"
-                                             alt="Jeux d'Occupation Chien"></div>
-                                    <span>Jeux d'Occupation Chien</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hygiène et Soins -->
-                <div class="nav-item has-megamenu">
-                    <a href="index.html#hygiene" class="nav-link">Hygiène & Soins <svg width="10" height="6"
-                            viewBox="0 0 10 6" fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></a>
-                    <div class="megamenu">
-                        <div class="container">
-                            <div class="megamenu-visual-grid">
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
-                                             alt="Gamelle Anti-Glouton"></div>
-                                    <span>Gamelle Anti-Glouton</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
-                                             alt="Gamelles"></div>
-                                    <span>Gamelles</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
-                                             alt="Tapis de Léchage"></div>
-                                    <span>Tapis de Léchage</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
-                                             alt="Brosses"></div>
-                                    <span>Brosses</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="dog_hygiene_premium_set_1775490826943.png"
-                                             alt="Boîte à Croquettes"></div>
-                                    <span>Boîte à Croquettes</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nav-item has-megamenu">
-                    <a href="index.html#accessoires" class="nav-link">Accessoires <svg width="10" height="6"
-                            viewBox="0 0 10 6" fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></a>
-                    <div class="megamenu">
-                        <div class="container">
-                            <div class="megamenu-visual-grid">
-                                <a href="produit-impermeable.html" class="megamenu-card">
-                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                             alt="Imperméable"></div>
-                                    <span>Imperméable</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                             alt="Manteaux"></div>
-                                    <span>Manteaux</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                             alt="Pull et sweat"></div>
-                                    <span>Pull et sweat</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                             alt="T-shirt et Polo"></div>
-                                    <span>T-shirt et Polo</span>
-                                </a>
-                                <a href="#" class="megamenu-card">
-                                    <div class="card-image"><img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                             alt="Bottine"></div>
-                                    <span>Bottine</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <div class="nav-actions">
-                <button class="icon-btn search-btn" aria-label="Rechercher">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
-                </button>
-                <button class="icon-btn profile-btn" aria-label="Compte">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <circle cx="12" cy="10" r="3" />
-                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
-                    </svg>
-                </button>
-                <button id="cart-btn" class="icon-btn cart-toggle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                        <path d="M3 6h18" />
-                        <path d="M16 10a4 4 0 0 1-8 0" />
-                    </svg>
-                    <span class="cart-count">0</span>
-                </button>
             </div>
         </div>
     </header>
@@ -331,228 +314,222 @@
                 <!-- Gallery -->
                 <div class="gallery-column">
                     <div class="product-gallery">
+                        <div class="thumbnails-wrapper">
+                            <div class="thumbnails-viewport">
+                                <div class="thumbnails-row">
+                                    <div class="gallery-item active video-thumbnail">
+                                        <div class="play-icon-overlay">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                        <img src="incontournable_imper_premium_yellow_1775493418425.png" alt="StormGuard Main View">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="pawluxe_hero_lifestyle_1775474451027.png" alt="StormGuard Detail 1">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="dog_accessories_premium_collection_1775492773834.png" alt="StormGuard Detail 2">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="dog_harness_premium_1775487844838.png" alt="StormGuard Detail 3">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="dog_collar_classic_1775487825692.png" alt="StormGuard Detail 4">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="dog_leash_elegant_1775487863541.png" alt="StormGuard Detail 5">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="dog_hygiene_premium_set_1775490826943.png" alt="StormGuard Detail 6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="gallery-item main-image">
-                            <img src="incontournable_imper_premium_yellow_1775493418425.png"
-                                alt="StormGuard Main View">
+                            <button class="main-arrow prev" aria-label="Image précédente">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <img src="incontournable_imper_premium_yellow_1775493418425.png" alt="StormGuard Main View">
+                            <button class="main-arrow next" aria-label="Image suivante">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
                         </div>
-                            <div class="thumbnails-row">
-                        <div class="gallery-item">
-                            <img src="pawluxe_hero_lifestyle_1775474451027.png"
-                                alt="StormGuard Detail 1">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="dog_accessories_premium_collection_1775492773834.png"
-                                alt="StormGuard Detail 2">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="dog_harness_premium_1775487844838.png"
-                                alt="StormGuard Detail 3">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="dog_collar_classic_1775487825692.png"
-                                alt="StormGuard Detail 4">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="dog_leash_elegant_1775487863541.png"
-                                alt="StormGuard Detail 5">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="dog_hygiene_premium_set_1775490826943.png"
-                                alt="StormGuard Detail 6">
-                        </div>
-                        </div>
-
+                        <div class="gallery-pagination"></div>
                     </div>
-                        <div class="gallery-pagination">
-                            <span class="gallery-dot active"></span>
-                            <span class="gallery-dot"></span>
-                            <span class="gallery-dot"></span>
-                            <span class="gallery-dot"></span>
-                            <span class="gallery-dot"></span>
-                            <span class="gallery-dot"></span>
-                        </div>
-                    </div>
+                </div> <!-- Closing gallery-column -->
 
-                    <!-- Info sticky -->
                     <div class="product-info-column">
                         <div class="product-info-sticky">
-
-
-                            <div class="product-info-header">
-                                <div class="promo-banner-pdp">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
-                                    </svg>
-                                    <span><strong>- 10 %</strong> avec le code <strong>TOUTOU10</strong> jusqu'au
-                                        01/05</span>
+                            <!-- New Rating Header -->
+                            <div class="product-rating-premium">
+                                <div class="rating-left">
+                                    <span class="rating-score">4.2</span>
+                                    <div class="stars-solid">
+                                        ★★★★☆
+                                    </div>
+                                    <a href="#reviews" class="review-link">4.2 sur 5 étoiles basé sur 1 avis</a>
                                 </div>
 
-                            </div>
- 
-                            <h1 class="product-title">Imperméable Haute&nbsp;Performance "StormGuard"</h1>
- 
-                            <div class="product-rating">
-                                <div class="stars">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbd08">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbd08">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbd08">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbd08">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbd08">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                                <div class="verified-badge">
+                                    <span>Vérifié</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg>
                                 </div>
-                                <span class="review-count">1 avis</span>
                             </div>
 
-                             <div class="product-price-large">89,00 €</div>
+                            <h1 class="product-title">Imperméable Haute Performance<br>"StormGuard"</h1>
 
-                            <!-- Color selection -->
-                            <div class="variant-selector">
-                                <span class="variant-label">Couleur :</span>
-                                <div class="color-swatches">
-                                    <button class="swatch-btn active" title="Noir Carbone"
-                                        style="background-color: #222;"></button>
-                                    <button class="swatch-btn" title="Orange Néon"
-                                        style="background-color: #ff6b1a;"></button>
-                                    <button class="swatch-btn" title="Bleu Abyss"
-                                        style="background-color: #1a4a75;"></button>
+                            <div class="price-shipping-box">
+                                <div class="product-price-main">89,00€</div>
+                            </div>
+
+                            <!-- Accordions moved up -->
+                            <div class="pdp-accordion-v3">
+                                <div class="accordion-item">
+                                    <button class="accordion-header-v3">
+                                        Description
+                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="accordion-content-v3">
+                                        <p>L'imperméable StormGuard est le summum de la protection pour vos sorties par gros temps. <strong>Alliant un design technique de pointe à une membrane respirante de haute performance</strong>, il garantit une étanchéité 100% totale tout en permettant une évacuation optimale de l'humidité corporelle.</p>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <button class="accordion-header-v3">
+                                        Caractéristiques
+                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="accordion-content-v3">
+                                        <div class="specs-list">
+                                            <div class="spec-row"><span>Matière</span> <span>Nylon Ripstop 3 couches</span></div>
+                                            <div class="spec-row"><span>Étanchéité</span> <span>10.000 mm</span></div>
+                                            <div class="spec-row"><span>Respirabilité</span> <span>8.000 g/m²</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stock Status -->
+                            <div class="stock-status-v2">
+                                <span class="status-dot"></span>
+                                <span class="status-text">En stock</span>
+                            </div>
+
+
+                            <!-- Color selection with improved visuals -->
+                            <div class="variant-selector-v2">
+                                <span class="variant-label">Couleur : <span class="selected-val">Noir Carbone</span></span>
+                                <div class="color-previews">
+                                    <button class="preview-btn active" title="Noir Carbone">
+                                        <img src="incontournable_imper_premium_yellow_1775493418425.png" alt="Noir Carbone">
+                                    </button>
+                                    <button class="preview-btn" title="Noir">
+                                        <img src="incontournable_imper_premium_yellow_1775493418425.png" alt="Noir" style="filter: grayscale(1);">
+                                    </button>
+                                    <button class="preview-btn" title="Orange">
+                                        <img src="incontournable_imper_premium_yellow_1775493418425.png" alt="Orange" style="filter: hue-rotate(45deg);">
+                                    </button>
                                 </div>
                             </div>
 
                             <!-- Size selection -->
-                            <div class="variant-selector">
+                            <div class="variant-selector-v2">
                                 <span class="variant-label">Taille :</span>
-                                <div class="size-grid">
-                                    <button class="size-btn">S</button>
-                                    <button class="size-btn active">M</button>
-                                    <button class="size-btn">L</button>
-                                    <button class="size-btn">XL</button>
+                                <div class="size-grid-v2">
+                                    <button class="size-btn-v2">S</button>
+                                    <button class="size-btn-v2 active">M</button>
+                                    <button class="size-btn-v2">L</button>
+                                    <button class="size-btn-v2">XL</button>
                                 </div>
                             </div>
 
                             <!-- Purchase Box -->
-                            <div class="purchase-box-v2">
-                                <div class="quantity-selector-v3">
-                                    <input type="text" value="1" readonly id="qty-input">
-                                    <div class="qty-controls">
-                                        <button class="qty-trigger minus">
-                                            <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
-                                                <path d="M0 1H12" stroke="currentColor" stroke-width="1.5" />
-                                            </svg>
-                                        </button>
-                                        <button class="qty-trigger plus">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                <path d="M6 0V12M0 6H12" stroke="currentColor" stroke-width="1.5" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                            <div class="quantity-label">Quantité</div>
+                            <div class="purchase-box-v3">
+                                <div class="quantity-selector-v4">
+                                    <button class="qty-btn minus">
+                                        <svg width="12" height="2" viewBox="0 0 12 2" fill="none"><path d="M0 1H12" stroke="currentColor" stroke-width="1.5"/></svg>
+                                    </button>
+                                    <input type="text" value="1" readonly id="qty-input-v4">
+                                    <button class="qty-btn plus">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 0V12M0 6H12" stroke="currentColor" stroke-width="1.5"/></svg>
+                                    </button>
                                 </div>
-                                <button class="btn-primary add-to-cart-v2 add-to-cart">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white"
-                                        stroke-width="2" style="margin-right: 10px;">
-                                        <path
-                                            d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3 6h18M16 10a4 4 0 0 1-8 0" />
-                                    </svg>
+                                <button class="btn-add-to-cart-yellow add-to-cart">
                                     Ajouter au panier
                                 </button>
                             </div>
 
-                            <!-- Accordion -->
-                            <div class="pdp-accordion-v2">
-                                <div class="accordion-item">
+                            <!-- Payment Trust Box -->
+                            <div class="payment-trust-box-v2" style="border: none; padding: 1.5rem 0 0.5rem;">
+                                <div class="payment-icons-v2">
+                                    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" class="pm-card">
+                                    <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" class="pm-card">
+                                    <img src="https://img.icons8.com/color/48/maestro.png" alt="Maestro" class="pm-card">
+                                    <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" class="pm-card pm-apple">
+                                    <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" class="pm-card">
+                                    <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" class="pm-card">
+                                </div>
+                            </div>
 
-                                    <button class="accordion-header">
-                                        Description
-                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
-                                                stroke-linecap="round" />
-                                        </svg>
-                                    </button>
-                                    <div class="accordion-content">
-                                        <p>L'imperméable StormGuard est le summum de la protection pour vos sorties par
-                                            gros temps. <strong>Alliant un design technique de pointe à une membrane
-                                                respirante de haute performance, il garantit une étanchéité 100%
-                                                totale</strong> tout en permettant une évacuation optimale de
-                                            l'humidité corporelle. Sa coupe ergonomique a été pensée pour ne jamais
-                                            entraver le mouvement naturel de votre chien, même en plein galop.</p>
-                                    </div>
+                            <div class="pdp-reassurance-bar">
+                                <div class="reassurance-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    <span>Envoi sous 24/48h</span>
                                 </div>
+                                <div class="reassurance-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <span>Paiement 100% Sécurisé</span>
+                                </div>
+                                <div class="reassurance-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <span>Satisfait ou Remboursé</span>
+                                </div>
+                            </div>
+
+                            <!-- Additional Info Accordions -->
+                            <div class="pdp-accordion-v3 more-info-accordions">
                                 <div class="accordion-item">
-                                    <button class="accordion-header">
-                                        Caractéristiques
-                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
-                                                stroke-linecap="round" />
-                                        </svg>
-                                    </button>
-                                    <div class="accordion-content">
-                                        <div class="specs-list">
-                                            <div class="spec-row"><span>Matière</span> <span>Nylon Ripstop 3
-                                                    couches</span></div>
-                                            <div class="spec-row"><span>Étanchéité</span> <span>10.000 mm</span></div>
-                                            <div class="spec-row"><span>Respirabilité</span> <span>8.000 g/m²</span>
-                                            </div>
-                                            <div class="spec-row"><span>Visibilité</span> <span>Bandes 3M™
-                                                    Scotchlite™</span></div>
-                                            <div class="spec-row"><span>Poids</span> <span>210g (Taille M)</span></div>
+                                    <button class="accordion-header-v3">
+                                        <div class="header-content-with-icon">
+                                            <svg class="header-leading-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>
+                                            </svg>
+                                            Livraison & Retour
                                         </div>
+                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="accordion-content-v3">
+                                        <p>Livraison sous 8 à 15 jours ouvrés après expédition (préparation sous 24-48h). Pour toute demande de retour, contactez-nous à <strong>contact@cheztoutou.com</strong>. Les articles doivent être non utilisés, dans leur emballage d'origine. Frais de retour à la charge du client.</p>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <button class="accordion-header">
-                                        Livraison et retour
+                                    <button class="accordion-header-v3">
+                                        <div class="header-content-with-icon">
+                                            <svg class="header-leading-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/>
+                                            </svg>
+                                            En savoir plus sur nos produits (FAQ)
+                                        </div>
                                         <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
-                                                stroke-linecap="round" />
+                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                         </svg>
                                     </button>
-                                    <div class="accordion-content">
-                                        <p>Chaque commande fait l'objet d'une préparation minutieuse dans nos ateliers
-                                            et est expédiée sous <strong>24 à 48 heures</strong> (hors week-ends et
-                                            jours fériés). La livraison s'effectue ensuite dans un délai de <strong>8 à
-                                                15 jours ouvrés</strong>, selon votre localisation géographique et le
-                                            mode d'acheminement sélectionné.</p>
-                                        <p><strong>Retour :</strong> Vous bénéficiez d'un délai de <strong>30 jours à
-                                                compter de la réception</strong> pour nous retourner votre acquisition.
-                                        </p>
+                                    <div class="accordion-content-v3">
+                                        <p>Besoin d'un conseil sur la taille ou l'entretien ? Notre équipe d'experts est à votre disposition à <strong>contact@cheztoutou.com</strong> pour vous accompagner et garantir le bien-être de votre compagnon.</p>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-header">
-                                        Guide d'entretien
-                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
-                                                stroke-linecap="round" />
-                                        </svg>
-                                    </button>
-                                    <div class="accordion-content">
-                                        <p>Lavable en machine à 30°C (cycle délicat). Ne pas utiliser d'adoucissant pour
-                                            préserver la membrane étanche. Séchage à l'air libre uniquement. Ne pas
-                                            repasser.</p>
-                                    </div>
-                                </div>
-                                <div class="bottom-promo-box">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                                    </svg>
-                                    <span>Paiement 100% sécurisé</span>
                                 </div>
                             </div>
                         </div>
@@ -571,7 +548,7 @@
                     </div>
                     <div class="highlight-text">
                         <span class="highlight-label">Protection Intempérie</span>
-                        <h2>Protection Totale contre les Intempéries</h2>
+                        <h2>Protection Totale contre les&nbsp;Intempéries</h2>
                         <p>Découvrez une membrane technique triple couche qui allie parfaitement imperméabilité et
                             respirabilité. Sa résistance de <strong>10.000mm de colonne d'eau</strong> assure une
                             protection sans faille même sous les averses les plus intenses, tout en évitant l'effet de
@@ -580,7 +557,7 @@
                 </div>
             </div>
 
-            <div class="highlight-row">
+            <div class="highlight-row" style="margin-top: 2rem;">
                 <div class="container grid-2 reverse">
                     <div class="highlight-image">
                         <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=1000"
@@ -615,92 +592,43 @@
                             <div class="recommendations-grid" id="rec-grid">
                                 <!-- Product 1 -->
                                 <div class="rec-card">
-                                    <a href="harnais-personnalises.html" class="rec-link">
+                                    <a href="harnais-confort-anti-traction.html" class="rec-link">
                                         <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1544634076-a196a1f1d38a?auto=format&fit=crop&q=80&w=400"
-                                                alt="Harnais">
+                                            <img src="harnais_anti_traction_main_1775840455761.png" alt="Harnais SteadyWalk">
                                         </div>
-                                        <h3>Harnais Ergonomique Multi-Point</h3>
-                                        <div class="rec-price">69,90€</div>
+                                        <h3>Harnais "SteadyWalk" Anti-Traction</h3>
+                                        <div class="rec-price">49,00 €</div>
                                     </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #111;"></span>
-                                        <span class="color-dot" style="background: #e74c3c;"></span>
-                                    </div>
                                 </div>
-                                <!-- Product 2 -->
+                                <!-- Product 2 (Replacement for self) -->
                                 <div class="rec-card">
-                                    <a href="colliers-classiques.html" class="rec-link">
+                                    <a href="collier-chien.html" class="rec-link">
                                         <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1591768575198-88dac53fbd0a?auto=format&fit=crop&q=80&w=400"
-                                                alt="Collier">
+                                            <img src="https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=400" alt="Collier Cuir Heritage">
                                         </div>
-                                        <h3>Collier de Luxe en Cuir Italien</h3>
-                                        <div class="rec-price">69,90€</div>
+                                        <h3>Collier Cuir Pleine Fleur "Heritage"</h3>
+                                        <div class="rec-price">125,00 €</div>
                                     </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #a0522d;"></span>
-                                        <span class="color-dot" style="background: #111;"></span>
-                                    </div>
                                 </div>
                                 <!-- Product 3 -->
                                 <div class="rec-card">
-                                    <a href="laisses-classiques.html" class="rec-link">
+                                    <a href="harnais-anti-traction.html" class="rec-link">
                                         <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1541888941255-081d746dbdba?auto=format&fit=crop&q=80&w=400"
-                                                alt="Laisse">
+                                            <img src="dog_harness_premium_1775487844838.png" alt="Harnais">
                                         </div>
-                                        <h3>Laisse de Luxe Haute Résistance</h3>
-                                        <div class="rec-price">99,90€</div>
+                                        <h3>Harnais Anti-Traction Expert</h3>
+                                        <div class="rec-price">75,00 €</div>
                                     </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #00847b;"></span>
-                                        <span class="color-dot" style="background: #f1c40f;"></span>
-                                    </div>
                                 </div>
                                 <!-- Product 4 -->
                                 <div class="rec-card">
-                                    <a href="harnais-canicross.html" class="rec-link">
+                                    <a href="laisses-classiques.html" class="rec-link">
                                         <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1601758174114-e711c0cabb0e?auto=format&fit=crop&q=80&w=400"
-                                                alt="Canicross">
+                                            <img src="dog_leash_elegant_1775487863541.png" alt="Laisses">
                                         </div>
-                                        <h3>Harnais Canicross Pro-Fit</h3>
-                                        <div class="rec-price">79,90€</div>
+                                        <h3>Laisse Cuir Assortie</h3>
+                                        <div class="rec-price">45,00 €</div>
                                     </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #111;"></span>
-                                        <span class="color-dot" style="background: #3498db;"></span>
-                                    </div>
-                                </div>
-                                <!-- Product 5 (New) -->
-                                <div class="rec-card">
-                                    <a href="laisses-enrouleur.html" class="rec-link">
-                                        <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1597633425046-08f5110420b5?auto=format&fit=crop&q=80&w=400"
-                                                alt="Laisse Enrouleur">
-                                        </div>
-                                        <h3>Laisse Enrouleur Vision de Nuit</h3>
-                                        <div class="rec-price">49,90€</div>
-                                    </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #111;"></span>
-                                        <span class="color-dot" style="background: #f1c40f;"></span>
-                                    </div>
-                                </div>
-                                <!-- Product 6 (New) -->
-                                <div class="rec-card">
-                                    <a href="museliere.html" class="rec-link">
-                                        <div class="rec-img-box">
-                                            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=400"
-                                                alt="Muselière">
-                                        </div>
-                                        <h3>Muselière Grand Confort Pro</h3>
-                                        <div class="rec-price">34,90€</div>
-                                    </a>
-                                    <div class="rec-colors">
-                                        <span class="color-dot" style="background: #111;"></span>
-                                    </div>
                                 </div>
                             </div>
 
@@ -714,173 +642,254 @@
                 </section>
 
             <!-- Reviews Section -->
-            <section class="pdp-reviews-section">
+            <!-- Redesigned Reviews Section (Reference Style) -->
+            <section class="pdp-reviews-section" id="reviews">
                 <div class="container">
                     <h2 class="section-title-center">Avis Clients</h2>
-                    <div class="reviews-summary-v3">
-                        <div class="summary-header-v3">
-                            <div class="rating-stars-v3">
-                                <span class="stars-teal">★★★★★</span>
-                                <span class="score-v3">5.00 sur 5</span>
+                    
+                    <!-- Dashboard Header -->
+                    <div class="reviews-dashboard">
+                        <div class="dashboard-score">
+                            <div class="score-large">4.6</div>
+                            <div class="score-stars">★★★★★</div>
+                            <div class="score-count">Basé sur 13 avis</div>
+                        </div>
+                        
+                        <div class="dashboard-bars">
+                            <div class="bar-row-v4">
+                                <div class="bar-stars-v4">5 <span class="dot"></span> ★★★★★</div>
+                                <div class="bar-bg-v4"><div class="bar-fill-v4" style="width: 85%;"></div></div>
+                                <div class="bar-num-v4">11</div>
                             </div>
-                            <div class="based-on-v3">
-                                Basé sur 13 avis <span class="verified-box-v3">
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="4">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </span>
+                            <div class="bar-row-v4">
+                                <div class="bar-stars-v4">4 <span class="dot"></span> ★★★★☆</div>
+                                <div class="bar-bg-v4"><div class="bar-fill-v4" style="width: 15%;"></div></div>
+                                <div class="bar-num-v4">2</div>
+                            </div>
+                            <div class="bar-row-v4">
+                                <div class="bar-stars-v4">3 <span class="dot"></span> ★★★☆☆</div>
+                                <div class="bar-bg-v4"><div class="bar-fill-v4" style="width: 0%;"></div></div>
+                                <div class="bar-num-v4">0</div>
+                            </div>
+                            <div class="bar-row-v4">
+                                <div class="bar-stars-v4">2 <span class="dot"></span> ★★☆☆☆</div>
+                                <div class="bar-bg-v4"><div class="bar-fill-v4" style="width: 0%;"></div></div>
+                                <div class="bar-num-v4">0</div>
+                            </div>
+                            <div class="bar-row-v4">
+                                <div class="bar-stars-v4">1 <span class="dot"></span> ★☆☆☆☆</div>
+                                <div class="bar-bg-v4"><div class="bar-fill-v4" style="width: 0%;"></div></div>
+                                <div class="bar-num-v4">0</div>
                             </div>
                         </div>
-
-                        <div class="summary-bars-v3">
-                            <div class="bar-row-v3">
-                                <span class="bar-stars-v3">★★★★★</span>
-                                <div class="bar-bg-v3">
-                                    <div class="bar-fill-v3" style="width: 100%"></div>
-                                </div>
-                                <span class="bar-count-v3">13</span>
-                            </div>
-                            <div class="bar-row-v3">
-                                <span class="bar-stars-v3">★★★★☆</span>
-                                <div class="bar-bg-v3">
-                                    <div class="bar-fill-v3" style="width: 0%"></div>
-                                </div>
-                                <span class="bar-count-v3">0</span>
-                            </div>
-                            <div class="bar-row-v3">
-                                <span class="bar-stars-v3">★★★☆☆</span>
-                                <div class="bar-bg-v3">
-                                    <div class="bar-fill-v3" style="width: 0%"></div>
-                                </div>
-                                <span class="bar-count-v3">0</span>
-                            </div>
-                            <div class="bar-row-v3">
-                                <span class="bar-stars-v3">★★☆☆☆</span>
-                                <div class="bar-bg-v3">
-                                    <div class="bar-fill-v3" style="width: 0%"></div>
-                                </div>
-                                <span class="bar-count-v3">0</span>
-                            </div>
-                            <div class="bar-row-v3">
-                                <span class="bar-stars-v3">★☆☆☆☆</span>
-                                <div class="bar-bg-v3">
-                                    <div class="bar-fill-v3" style="width: 0%"></div>
-                                </div>
-                                <span class="bar-count-v3">0</span>
-                            </div>
-                        </div>
-
-                        <div class="summary-action-v3">
-                            <button class="btn-write-review-v3 btn-write-review">Écrire un avis</button>
+                        
+                        <div class="dashboard-action">
+                            <button class="btn-black-caps btn-write-review">Rédiger un avis</button>
                         </div>
                     </div>
 
-                    <div class="reviews-filter-v3" id="filter-dropdown-wrapper">
-                        <button class="filter-trigger-v3" id="filter-trigger">
-                            <span id="current-filter">Plus utiles</span>
-                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </button>
-                        <div class="filter-dropdown-v3" id="filter-dropdown">
-                            <div class="filter-option-v3" data-value="Plus récents">Plus récents</div>
-                            <div class="filter-option-v3" data-value="Meilleures notes">Meilleures notes</div>
-                            <div class="filter-option-v3" data-value="Notes les plus basses">Notes les plus basses</div>
-                            <div class="filter-option-v3" data-value="Uniquement les photos">Uniquement les photos</div>
-                            <div class="filter-option-v3" data-value="Photos en premier">Photos en premier</div>
-                            <div class="filter-option-v3" data-value="Vidéos en premier">Vidéos en premier</div>
-                            <div class="filter-option-v3 active" data-value="Plus utiles">
-                                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Plus utiles
-                            </div>
+                    <!-- Sentiment Summary (Customers Say) -->
+                    <div class="reviews-sentiment-v4">
+                        <div class="sentiment-header">
+                            <h3>Les clients disent</h3>
+                            <p>Synthèse de nos avis clients par notre équipe.</p>
+                        </div>
+                        <div class="sentiment-tags">
+                            <button class="tag-pill active">taille</button>
+                            <button class="tag-pill">matière</button>
+                            <button class="tag-pill">confort</button>
+                            <button class="tag-pill">livraison</button>
+                            <button class="tag-pill">qualité</button>
+                            <button class="tag-pill">couleur</button>
+                            <button class="tag-pill">imperméabilité</button>
                         </div>
                     </div>
 
-                    <div class="user-media-v3">
-                        <h3 class="media-title-v3">Photos & vidéos clients</h3>
-                        <div class="media-grid-v3">
-                            <div class="media-item-v3">
-                                <img src="https://images.unsplash.com/photo-1534351450181-ea9f78427fe8?auto=format&fit=crop&q=80&w=400"
-                                    alt="Photo naturelle client 1">
+                    <!-- Filters & Search -->
+                    <div class="reviews-controls-v4">
+                        <div class="controls-left">
+                            <div class="search-box-v4">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                <input type="text" placeholder="Chercher dans les avis...">
                             </div>
-                            <div class="media-item-v3">
-                                <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=400"
-                                    alt="Photo naturelle client 2">
-                            </div>
-                            <div class="media-item-v3">
-                                <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=400"
-                                    alt="Photo naturelle client 3">
-                            </div>
-                            <div class="media-item-v3">
-                                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=400"
-                                    alt="Photo naturelle client 4">
-                            </div>
+                            <select class="filter-select-v4">
+                                <option>Plus récents</option>
+                                <option>Meilleures notes</option>
+                                <option>Plus utiles</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="reviews-list-v3">
+
+
+                    <!-- Individual Review List -->
+                    <div class="reviews-list-v4">
                         <!-- Review 1 -->
-                        <div class="review-item-v3">
-                            <div class="review-stars-v3">★★★★★</div>
-                            <div class="review-header-v3">
-                                <span class="user-name-v3">MARCELLIN JOUHAUD</span>
-                                <span class="badge-verified-v3">Vérifié</span>
+                        <article class="review-entry-v4">
+                            <aside class="review-user-sidebar">
+                                <div class="user-profile-v4">
+                                    <div class="user-avatar-v4">MJ</div>
+                                    <div class="user-name-v4">MARCELLIN JOUHAUD</div>
+                                    <div class="verified-buyer-v4">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        Acheteur vérifié
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="review-body-content">
+                                <div class="review-meta-top">
+                                    <div class="review-stars-v4">★★★★★</div>
+                                    <time class="review-date-v4">08/04/24</time>
+                                </div>
+                                <h4 class="review-headline-v4">J'adore mon nouveau manteau !</h4>
+                                <p class="review-text-v4">Je suis ravi de cet imperméable, la coupe est parfaite pour mon Golden Retriever. La qualité de la membrane technique est impressionnante sous la pluie battante. Mon chien reste bien au sec et la visibilité est excellente grâce aux bandes réfléchissantes.</p>
+                                <footer class="review-actions-v4">
+                                    <div class="helpful-voting-v4">
+                                        <span>Est-ce vous avez-trouvé utile ?</span>
+                                        <button class="btn-vote-v4">Oui (7)</button>
+                                        <button class="btn-vote-v4">Non (0)</button>
+                                    </div>
+                                    <button class="btn-vote-v4">Signaler</button>
+                                </footer>
                             </div>
-                            <div class="review-text-v3">Je suis ravi de cet imperméable, la coupe est parfaite pour mon Golden Retriever. La qualité de la membrane technique est impressionnante sous la pluie battante.</div>
-                        </div>
+                        </article>
 
                         <!-- Review 2 -->
-                        <div class="review-item-v3">
-                            <div class="review-stars-v3">★★★★☆</div>
-                            <div class="review-header-v3">
-                                <span class="user-name-v3">Joël Laporte</span>
+                        <article class="review-entry-v4">
+                            <aside class="review-user-sidebar">
+                                <div class="user-profile-v4">
+                                    <div class="user-avatar-v4">JL</div>
+                                    <div class="user-name-v4">Joël Laporte</div>
+                                </div>
+                            </aside>
+                            <div class="review-body-content">
+                                <div class="review-meta-top">
+                                    <div class="review-stars-v4">★★★★☆</div>
+                                    <time class="review-date-v4">05/04/24</time>
+                                </div>
+                                <h4 class="review-headline-v4">Top !</h4>
+                                <p class="review-text-v4">Parfait bonne qualité fait son effet à voir dans le temps si l'étanchéité reste aussi performante après plusieurs lavages. Le réglage au niveau du cou est très pratique.</p>
+                                <footer class="review-actions-v4">
+                                    <div class="helpful-voting-v4">
+                                        <span>Est-ce vous avez-trouvé utile ?</span>
+                                        <button class="btn-vote-v4">Oui (3)</button>
+                                        <button class="btn-vote-v4">Non (0)</button>
+                                    </div>
+                                    <button class="btn-vote-v4">Signaler</button>
+                                </footer>
                             </div>
-                            <div class="review-text-v3">Parfait bonne qualité fait son effet à voir dans le temps si l'étanchéité reste aussi performante après plusieurs lavages.</div>
-                        </div>
+                        </article>
 
                         <!-- Review 3 -->
-                        <div class="review-item-v3">
-                            <div class="review-stars-v3">★★★★★</div>
-                            <div class="review-header-v3">
-                                <span class="user-name-v3">Sophie M.</span>
-                                <span class="badge-verified-v3">Vérifié</span>
+                        <article class="review-entry-v4">
+                            <aside class="review-user-sidebar">
+                                <div class="user-profile-v4">
+                                    <div class="user-avatar-v4">SM</div>
+                                    <div class="user-name-v4">Sophie M.</div>
+                                    <div class="verified-buyer-v4">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        Acheteur vérifié
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="review-body-content">
+                                <div class="review-meta-top">
+                                    <div class="review-stars-v4">★★★★★</div>
+                                    <time class="review-date-v4">02/04/24</time>
+                                </div>
+                                <h4 class="review-headline-v4">Excellente structure et tissu de qualité</h4>
+                                <p class="review-text-v4">Design très élégant et technique à la fois. Mon chien est protégé du vent et de l'humidité sans aucune gêne pour courir. Le tissu est léger mais semble extrêmement résistant.</p>
+                                <footer class="review-actions-v4">
+                                    <div class="helpful-voting-v4">
+                                        <span>Est-ce vous avez-trouvé utile ?</span>
+                                        <button class="btn-vote-v4">Oui (1)</button>
+                                        <button class="btn-vote-v4">Non (0)</button>
+                                    </div>
+                                    <button class="btn-vote-v4">Signaler</button>
+                                </footer>
                             </div>
-                            <div class="review-text-v3">Design très élégant et technique à la fois. Mon chien est protégé du vent et de l'humidité sans aucune gêne pour courir.</div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+                </div>
+
+                        <!-- Technical FAQ Section -->
+        <section class="pdp-faq-section">
+            <div class="container">
+                <div class="faq-layout">
+                    <div class="help-card">
+                        <h3>Besoin d'aide ?</h3>
+                        <p>Nos experts sont là pour vous conseiller sur la taille et l'entretien.</p>
+                        <a href="mailto:contact@cheztoutou.com" class="btn-outline-pdp">Contactez-nous</a>
+                    </div>
+                    <div class="faq-content">
+                        <h2>Questions Fréquentes</h2>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    Comment choisir la bonne taille ?
+                                    <span class="faq-icon">+</span>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Pour un ajustement parfait, nous recommandons une mesure précise en deux étapes. Tout d'abord, mesurez la partie la plus large de la cage thoracique (le poitrail), généralement juste derrière les pattes avant. Ensuite, mesurez la longueur du dos, de la base du cou jusqu'à la naissance de la queue. <strong>Consigne d'expert :</strong> Si votre compagnon se situe entre deux tailles, optez toujours pour la taille supérieure. Cela garantit une liberté de mouvement totale au niveau des épaules et permet l'ajout éventuel d'une couche thermique légère en dessous pour les climats extrêmes.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    L'imperméable est-il adapté aux fortes pluies ?
+                                    <span class="faq-icon">+</span>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Conçu pour affronter les conditions les plus rudes, le StormGuard exploite une membrane technique de pointe certifiée avec un <strong>indice d'étanchéité de 10.000mm</strong>. Cette technologie bloque non seulement les pluies torrentielles et la neige fondue, mais les coutures sont également thermo-soudées pour empêcher toute infiltration aux points critiques. Contrairement aux imperméables standards, notre membrane reste hautement respirante (8.000g/m²), évacuant la chaleur corporelle pour éviter que votre chien ne surchauffe pendant l'effort.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    Comment entretenir la membrane technique ?
+                                    <span class="faq-icon">+</span>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Pour préserver l'intégrité de la membrane StormGuard sur le long terme, privilégiez un lavage à 30°C sur cycle délicat. <strong>Crucial :</strong> Utilisez une lessive liquide douce et bannissez impérativement l'adoucissant ainsi que le sèche-linge, car ils altèrent les propriétés techniques du tissu. Laissez sécher à l'air libre. Tous les 5 à 10 lavages, nous conseillons d'appliquer un spray imperméabilisant pour réactiver le traitement déperlant durable (DWR) extérieur, assurant que l'eau continue de perler sur le tissu sans l'imprégner.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-        <!-- Unified Newsletter Section (Pro Architectural) -->
+        <!-- Unified Newsletter Section (Premium Minimal) -->
         <section class="unified-newsletter">
             <div class="container">
-                <div class="newsletter-grid">
-                    <div class="newsletter-content-side">
-                        <h2>Économisez 10% sur votre première commande</h2>
-                        <p>Rejoignez le cercle Chetoutou pour bénéficier d'une remise exclusive et recevoir nos sélections éditoriales en avant-première.</p>
+                <div class="newsletter-inner">
+                    <div class="newsletter-header">
+                        <h2>Rejoignez-nous</h2>
+                        <p>et bénéficiez de -10% sur votre première commande.</p>
                     </div>
-                    <div class="newsletter-form-side">
-                        <span class="newsletter-label">Inscription Newsletter</span>
-                        <form class="pro-newsletter-form">
-                            <input type="email" placeholder="votre@email.com" required>
-                            <button type="submit" class="pro-submit-btn" aria-label="S'inscrire">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
-                            </button>
-                        </form>
-                    </div>
+                    <form class="newsletter-form-minimal">
+                        <div class="input-group-underline">
+                            <input type="email" placeholder="Entrez votre adresse e-mail" required>
+                        </div>
+                        <div class="checkbox-group-minimal">
+                            <input type="checkbox" id="newsletter-consent" required>
+                            <label for="newsletter-consent">J’ai plus de 16 ans et j’ai lu et j’accepte la <a href="conditions-utilisation.html">Termes et conditions générales</a> et <a href="politique-confidentialite.html">Politique de confidentialité</a></label>
+                        </div>
+                        <button type="submit" class="btn-newsletter-black">Inscrivez-vous</button>
+                    </form>
+                    <p class="newsletter-legal-text">
+                        Ce site est protégé par reCAPTCHA et les <a href="politique-confidentialite.html">Politique de confidentialité</a> et <a href="conditions-utilisation.html">Conditions de service</a> s'appliquent.
+                    </p>
                 </div>
             </div>
         </section>
     </main>
 
-        <footer class="footer">
+                        <footer class="footer">
         <button id="back-to-top" class="back-to-top" aria-label="Retour en haut">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -918,6 +927,7 @@
             <div class="footer-col">
                 <h4>Informations</h4>
                 <ul class="footer-links">
+                    <li><a href="faq.html">FAQ / Centre d'aide</a></li>
                     <li><a href="guide-tailles.html">Guide de tailles</a></li>
                     <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
                     <li><a href="politique-remboursement.html">Politique de remboursement</a></li>
@@ -945,24 +955,28 @@
                         </div>
                     </form>
                 </div>
-                <div class="footer-socials">
-                    <a href="#" class="social-link" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Pinterest">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 20l4-9"></path><path d="M10.7 14c.4.1 1.2.1 1.5-.2.6-.5.4-1.7-.1-2.2-.7-.8-2-.3-2.1.8-.1.7.3 1.2.7 1.6z"></path><path d="M12 11c1-1 2.5-.5 3 1s-.5 4-2 4.5c-1.2.3-2.5-.2-3-1.5"></path></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="TikTok">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-                        </svg>
-                    </a>
+                <div class="footer-socials-container">
+                    <h4>Nous suivre</h4>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4.162 4.162 0 110-8.324 4.162 4.162 0 010 8.324zM18.406 4.331a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="X">
+                            <svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505a3.017 3.017 0 00-2.122 2.136C0 8.055 0 12 0 12s0 3.945.501 5.814a3.017 3.017 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.945 24 12 24 12s0-3.945-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Pinterest">
+                            <svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.965 1.406-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.259 7.929-7.259 4.164 0 7.398 2.967 7.398 6.93 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.607 0 11.985-5.365 11.985-11.987C24.02 5.367 18.633 0 12.017 0z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1005,28 +1019,56 @@
         </div>
         <div id="cart-drawer" class="cart-drawer">
             <div class="cart-header">
-                <h3>Vérifiez votre panier</h3>
+                <h3>Panier</h3>
                 <button id="close-cart" class="close-cart-btn" aria-label="Fermer le panier">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
             </div>
             <div class="cart-body">
+                <!-- Items list (Dynamic) -->
+                <div class="cart-items-container">
+                    <!-- JS will inject items here -->
+                </div>
+
+                <!-- Empty state -->
                 <div class="cart-empty-state">
                     <div class="empty-icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                             <path d="M3 6h18"></path>
                             <path d="M16 10a4 4 0 0 1-8 0"></path>
                         </svg>
                     </div>
                     <h4>Votre panier est vide</h4>
-                    <p>Remplissez votre panier avec des articles incroyables</p>
-                    <a href="index.html#collections" class="btn-black btn-full">Acheter maintenant</a>
+                    <p>Découvrez nos collections pour gâter votre compagnon.</p>
                 </div>
-                <div class="cart-items-container" style="display: none;"></div>
+
+
+                <!-- Promo Code -->
+                <div class="cart-promo-v3">
+                    <input type="text" placeholder="Code de réduction">
+                    <button class="btn-promo-apply">Appliquer</button>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="cart-footer-v3">
+                <div class="cart-total-row">
+                    <span class="total-label">Total estimé</span>
+                    <span id="cart-total-amount">0,00 €</span>
+                </div>
+                <a href="checkout.html" class="btn-checkout-v3" style="text-decoration: none; display: block; text-align: center; line-height: 1;">Commander</a>
+                <div class="cart-trust-badges">
+                    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/maestro.png" alt="Maestro">
+                    <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay">
+                    <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay">
+                    <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal">
+                </div>
             </div>
         </div>
         <div id="cart-overlay" class="cart-overlay"></div>
@@ -1154,6 +1196,27 @@
                 window.addEventListener('resize', updateArrows);
                 updateArrows();
             }
+
+            // FAQ Accordion Logic
+            const faqQuestions = document.querySelectorAll('.pdp-faq-section .faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const isOpen = item.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    document.querySelectorAll('.pdp-faq-section .faq-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-icon').textContent = '+';
+                    });
+
+                    // Toggle current item
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        question.querySelector('.faq-icon').textContent = '−';
+                    }
+                });
+            });
         });
     </script>
     <script src="main.js"></script>
