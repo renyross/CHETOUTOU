@@ -8,7 +8,228 @@
     <link rel="icon" type="image/png" href="https://img.icons8.com/plasticine/100/dog.png">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body.checkout-page {
+            background: linear-gradient(to right, #ffffff 56%, #fafafa 56%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #333;
+        }
+        .checkout-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .checkout-left {
+            flex: 1.15;
+            padding: 3rem 4rem 3rem 1rem;
+            background: #ffffff;
+            box-sizing: border-box;
+        }
+        .checkout-right {
+            flex: 0.85;
+            background: #fafafa;
+            padding: 3rem 1rem 3rem 4rem;
+            border-left: 1px solid #e1e1e1;
+            position: relative;
+            box-sizing: border-box;
+        }
+        /* Mobile Accordion Toggle */
+        .mobile-summary-toggle {
+            display: none;
+            background: #fafafa;
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .mobile-summary-toggle-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #197bbd;
+            font-weight: 500;
+        }
+        .mobile-summary-toggle-content:hover {
+            color: #145d90;
+        }
+        .mobile-total-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        /* Breadcrumbs */
+        .checkout-breadcrumbs {
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+        }
+        .breadcrumb-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #737373;
+        }
+        .breadcrumb-item a {
+            color: #197bbd;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb-item a:hover {
+            color: #145d90;
+        }
+        .breadcrumb-item:not(:last-child)::after {
+            content: ">";
+            margin-left: 8px;
+            color: #737373;
+            font-size: 0.7rem;
+        }
+        .breadcrumb-item.active {
+            color: #333;
+            font-weight: 600;
+        }
+        /* Refine original elements */
+        .checkout-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #111;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center !important;
+            line-height: 1.05;
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+        .logo-sub {
+            font-size: 0.45rem !important;
+            font-weight: 500 !important;
+            text-transform: none !important;
+            letter-spacing: 0.02em !important;
+            color: #666 !important;
+            margin-top: 4px !important;
+            display: block !important;
+            white-space: nowrap !important;
+        }
+        .checkout-input {
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            padding: 0.75rem 0.9rem;
+            background-color: #fff;
+            color: #333;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+        .checkout-input:focus {
+            border-color: #197bbd !important;
+            box-shadow: 0 0 0 1px #197bbd !important;
+        }
+        .express-checkout {
+            background: #fff;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .express-checkout h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #737373;
+            font-weight: 500;
+        }
+        .btn-express {
+            border-radius: 5px;
+            height: 44px;
+        }
+        .btn-promo-valider {
+            background: #e1e1e1;
+            color: #333;
+            border: 1px solid #d9d9d9;
+            padding: 0 1.25rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-promo-valider:hover {
+            background: #d4d4d4;
+        }
+        .checkout-footer-simple {
+            border-top: 1px solid #e1e1e1;
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.7rem;
+            color: #737373;
+        }
+        .checkout-footer-simple a {
+            color: #737373;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .checkout-footer-simple a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        .btn-checkout-pay {
+            background: #000;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 1.1rem;
+            transition: background-color 0.2s;
+        }
+        .btn-checkout-pay:hover {
+            background: #222;
+        }
+        @media (max-width: 900px) {
+            body.checkout-page {
+                background: #ffffff;
+            }
+            .checkout-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .checkout-left {
+                flex: none;
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .checkout-right {
+                flex: none;
+                width: 100%;
+                padding: 1.5rem;
+                border-left: none;
+                border-bottom: 1px solid #e1e1e1;
+                background: #fafafa;
+                display: none;
+                box-sizing: border-box;
+            }
+            .checkout-right.active {
+                display: block;
+                animation: slideDown 0.3s ease-out forwards;
+            }
+            .checkout-footer-simple {
+                margin-top: 2rem;
+            }
+        }
     </style>
 </head>
 <body class="checkout-page">
@@ -18,7 +239,6 @@
         <h2 id="processing-text">Traitement du paiement en cours...</h2>
         <p>Veuillez ne pas actualiser la page.</p>
     </div>
-
     <!-- Success Overlay -->
     <div id="checkout-success" class="checkout-overlay">
         <div class="success-icon">✓</div>
@@ -29,7 +249,6 @@
         </p>
         <a href="index.html" class="btn-confirmation">Retour à la boutique</a>
     </div>
-
     <!-- Shop Pay Login Overlay -->
     <div id="shoppay-login-overlay" class="shoppay-login-overlay">
         <div class="shoppay-logo-group">
@@ -43,33 +262,27 @@
                 <span style="font-size: 0.8rem;">CT</span>
             </div>
         </div>
-        
         <div class="shoppay-content">
             <h1 class="shoppay-title">Se connecter à Shop</h1>
             <p class="shoppay-subtitle">Pour continuer vers <strong>Boutique Chetoutou</strong></p>
-            
             <form id="shoppay-login-form">
                 <div class="shoppay-form-group">
                     <input type="email" class="shoppay-input" placeholder="Saisissez votre adresse e-mail" required>
                 </div>
                 <button type="submit" class="shoppay-btn-primary">Continuer</button>
             </form>
-            
             <div class="shoppay-passkey">
                 <span style="font-size: 1.2rem;">🔐</span>
                 Utiliser une clé d'accès
             </div>
-            
             <div class="shoppay-footer">
                 En continuant, vous acceptez les <a href="#">conditions</a> et la <a href="#">politique de confidentialité</a> de Shop, ainsi que le partage de vos e-mail, nom, avatar et email avec Boutique Chetoutou. Consultez ses <a href="#">conditions</a> et sa <a href="#">politique de confidentialité</a>.
             </div>
-            
             <div class="shoppay-lang-selector">
                 Français <span style="font-size: 0.7rem; margin-left: 5px;">▼</span>
             </div>
         </div>
     </div>
-
     <!-- PayPal Login Overlay -->
     <div id="paypal-login-overlay" class="paypal-login-overlay">
         <div class="paypal-logo-header">
@@ -89,14 +302,12 @@
             </div>
         </div>
     </div>
-
     <!-- Google Pay Overlay -->
     <div id="gpay-login-overlay" class="gpay-login-overlay">
         <div class="gpay-login-box">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Pay_Logo_%282020%29.svg" alt="Google Pay" class="gpay-logo-img">
             <h1 class="gpay-title">Payer avec Google Pay</h1>
             <p class="gpay-subtitle">Boutique Chetoutou demande l'accès à votre mode de paiement.</p>
-            
             <div class="gpay-user-card">
                 <div class="gpay-avatar">J</div>
                 <div class="gpay-user-info">
@@ -104,21 +315,47 @@
                     <div class="gpay-user-email">jean.dupont@gmail.com</div>
                 </div>
             </div>
-
             <form id="gpay-login-form">
                 <button type="submit" class="gpay-btn-primary">Payer</button>
             </form>
-            
             <div style="margin-top: 1.5rem;">
                 <a href="#" style="color: #1a73e8; text-decoration: none; font-size: 0.85rem; font-weight: 500;">Modifier le mode de paiement</a>
             </div>
         </div>
     </div>
 
+    <!-- Mobile Accordion Toggle -->
+    <div class="mobile-summary-toggle" id="mobile-summary-toggle">
+        <div class="mobile-summary-toggle-content">
+            <span class="toggle-icon-text">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px; vertical-align: middle; display: inline-block;">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span id="toggle-label-text">Afficher le résumé de la commande</span>
+                <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 6px; vertical-align: middle; transition: transform 0.3s ease; display: inline-block;">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </span>
+            <span class="mobile-total-price" id="mobile-total-price">0,00 €</span>
+        </div>
+    </div>
+
     <div class="checkout-container">
         <!-- Part 1: Forms (Left) -->
         <main class="checkout-left">
-            <a href="index.html" class="checkout-logo">CHETOUTOU</a>
+            <a href="index.html" class="logo">Chetoutou<br><span class="logo-sub">Passionné depuis 2020</span></a>
+            
+            <!-- Breadcrumbs -->
+            <nav class="checkout-breadcrumbs" aria-label="Fil d'Ariane">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="index.html">Panier</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Informations</li>
+                    <li class="breadcrumb-item">Expédition</li>
+                    <li class="breadcrumb-item">Paiement</li>
+                </ol>
+            </nav>
 
             <!-- Express Checkout -->
             <div class="express-checkout">
@@ -137,9 +374,7 @@
                     </button>
                 </div>
             </div>
-
             <div class="checkout-divider">OU</div>
-
             <form id="checkout-form">
                 <!-- Contact Section -->
                 <div class="checkout-section">
@@ -155,7 +390,6 @@
                         Envoyez-moi des nouvelles et des offres par e-mail
                     </label>
                 </div>
-
                 <!-- Livraison Section -->
                 <div class="checkout-section">
                     <h2>Livraison</h2>
@@ -193,10 +427,29 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Mode Expédition -->
                 <div class="checkout-section">
                     <h2>Mode d'expédition</h2>
+                    <div id="shipping-subtext" style="display: none; flex-direction: column; margin-top: -0.5rem; margin-bottom: 1rem;">
+                        <div id="shipping-subtext-trigger" style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #555; cursor: pointer; user-select: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                                <rect x="1" y="3" width="15" height="13"></rect>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                            </svg>
+                            <span>Votre commande arrivera en 2 envois</span>
+                            <svg id="shipping-subtext-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px; transition: transform 0.2s;">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div id="shipping-subtext-details" style="display: none; margin-top: 0.5rem; padding: 0.75rem 1rem; background: #fafafa; border: 1px solid #e5e5e5; border-radius: 6px; font-size: 0.75rem; color: #666; line-height: 1.4;">
+                            <div style="margin-bottom: 0.4rem; font-weight: 500; color: #333;">📦 Colis 1 — Expédié sous 24h :</div>
+                            <div style="margin-left: 1rem; margin-bottom: 0.6rem;">Colliers, laisses et accessoires légers.</div>
+                            <div style="margin-bottom: 0.4rem; font-weight: 500; color: #333;">📦 Colis 2 — Expédié sous 48h :</div>
+                            <div style="margin-left: 1rem;">Couchages, paniers et articles volumineux.</div>
+                        </div>
+                    </div>
                     <div id="shipping-methods-wrapper">
                         <div id="shipping-placeholder" style="background: #f4f4f4; padding: 1.5rem; border-radius: 5px; color: #666; font-size: 0.9rem;">
                             Saisissez votre adresse d'expédition pour voir les modes d'expédition disponibles.
@@ -223,12 +476,10 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Paiement Section -->
                 <div class="checkout-section">
                     <h2>Paiement</h2>
                     <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Toutes les transactions sont sécurisées et chiffrées.</p>
-                    
                     <div class="payment-box">
                         <!-- Option 1: Credit Card -->
                         <div class="payment-method active">
@@ -263,7 +514,6 @@
                                 </label>
                             </div>
                         </div>
-
                         <!-- Option 2: PayPal -->
                         <div class="payment-method">
                             <div class="payment-method-header">
@@ -274,7 +524,6 @@
                                 <img src="https://img.icons8.com/color/32/paypal.png" alt="PayPal">
                             </div>
                         </div>
-
                         <!-- Option 3: Crypto -->
                         <div class="payment-method">
                             <div class="payment-method-header">
@@ -287,7 +536,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="checkout-section">
                     <label class="checkout-checkbox">
                         <input type="checkbox">
@@ -297,38 +545,32 @@
                         <input type="text" class="checkout-input" placeholder="Téléphone mobile (facultatif)">
                     </div>
                 </div>
-
                 <p style="font-size: 0.75rem; color: #777; line-height: 1.4; margin-bottom: 2rem;">
                     En fournissant votre numéro de téléphone, vous acceptez de créer un compte Shop soumis aux 
                     <a href="#">Conditions</a> et à la <a href="#">Politique de confidentialité</a> de Shop.
                 </p>
-
                 <button type="submit" class="btn-checkout-pay">Payer maintenant</button>
             </form>
 
-            <!-- Bottom Links -->
-            <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; display: flex; flex-wrap: wrap; gap: 15px;">
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Politique de remboursement</a>
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Expédition</a>
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Politique de confidentialité</a>
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Conditions d'utilisation</a>
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Contact</a>
-                <a href="#" style="font-size: 0.75rem; color: #111; text-decoration: none;">Cookies</a>
+            <!-- Bottom Links (Policy Links Footer) -->
+            <footer class="checkout-footer-simple">
+                <a href="#">Politique de remboursement</a>
+                <a href="#">Politique d'expédition</a>
+                <a href="#">Politique de confidentialité</a>
+                <a href="#">Conditions d'utilisation</a>
             </footer>
         </main>
-
+        
         <!-- Part 2: Order Summary (Right) -->
         <aside class="checkout-right">
             <div class="summary-sticky">
                 <div id="checkout-items-list" class="summary-items">
                     <!-- Dynamic Items -->
                 </div>
-
                 <div class="summary-promo">
                     <input type="text" class="checkout-input" placeholder="Code de réduction">
                     <button class="btn-promo-valider">Valider</button>
                 </div>
-
                 <div class="summary-totals">
                     <div class="summary-line">
                         <span>Sous-total • <span id="summary-count">0</span> articles</span>
@@ -366,12 +608,30 @@
             const totalEl = document.getElementById('summary-total');
             const countEl = document.getElementById('summary-count');
             const savingsEl = document.getElementById('summary-savings');
+            
+            // Mobile toggle functionality
+            const toggleBtn = document.getElementById('mobile-summary-toggle');
+            const summaryAside = document.querySelector('.checkout-right');
+            const chevron = toggleBtn ? toggleBtn.querySelector('.chevron-icon') : null;
+            const toggleLabel = document.getElementById('toggle-label-text');
+
+            if (toggleBtn && summaryAside) {
+                toggleBtn.addEventListener('click', () => {
+                    const isActive = summaryAside.classList.toggle('active');
+                    if (isActive) {
+                        if (chevron) chevron.style.transform = 'rotate(180deg)';
+                        if (toggleLabel) toggleLabel.textContent = 'Masquer le résumé de la commande';
+                    } else {
+                        if (chevron) chevron.style.transform = 'rotate(0deg)';
+                        if (toggleLabel) toggleLabel.textContent = 'Afficher le résumé de la commande';
+                    }
+                });
+            }
 
             if (cart.length === 0) {
                 itemsContainer.innerHTML = '<p style="text-align: center; color: #999;">Votre panier est vide.</p>';
                 return;
             }
-
             // Populate items
             itemsContainer.innerHTML = cart.map(item => `
                 <div class="summary-item">
@@ -386,44 +646,108 @@
                     <div class="summary-price">${(item.price * item.quantity).toFixed(2).replace('.', ',')} €</div>
                 </div>
             `).join('');
-
             // Calculate totals
             let appliedDiscount = parseFloat(localStorage.getItem('appliedDiscount')) || 0;
             let appliedFreeShipping = localStorage.getItem('appliedFreeShipping') === 'true';
-            let currentShipping = 0;
             
+            // Calculate subtotal
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Automatic free standard shipping if subtotal >= 70
+            const isAutoFreeShipping = subtotal >= 70;
+            const standardShippingPrice = isAutoFreeShipping ? 0 : 4.90;
+            
+            // Update UI and radio values for standard shipping
+            const standardRadio = document.querySelector('input[name="shipping_choice"][value="4.90"]');
+            if (standardRadio) {
+                standardRadio.value = standardShippingPrice.toString();
+                const row = standardRadio.closest('.shipping-method-row');
+                if (row) {
+                    const priceLabel = row.querySelector('.shipping-method-price');
+                    if (priceLabel) {
+                        priceLabel.textContent = isAutoFreeShipping ? 'GRATUIT' : '4,90 €';
+                        if (isAutoFreeShipping) {
+                            priceLabel.style.fontWeight = '700'; // Make it bold
+                        }
+                    }
+                }
+            }
+
+            // Set default shipping based on subtotal
+            let currentShipping = standardShippingPrice;
+
+            // Set radio checked by default
+            if (standardRadio) {
+                standardRadio.checked = true;
+            }
+
+            const shippingPlaceholder = document.getElementById('shipping-placeholder');
+            const shippingOptions = document.getElementById('shipping-options');
+            const shippingSubtext = document.getElementById('shipping-subtext');
+
+            // Show shipping options immediately
+            if (shippingPlaceholder && shippingOptions) {
+                shippingPlaceholder.style.display = 'none';
+                shippingOptions.style.display = 'block';
+            }
+
+            // Show/hide multi-package shipping subtext based on subtotal >= 70
+            if (shippingSubtext) {
+                shippingSubtext.style.display = isAutoFreeShipping ? 'flex' : 'none';
+            }
+
+            // Setup collapsible shipping subtext details click handler
+            const subtextTrigger = document.getElementById('shipping-subtext-trigger');
+            const subtextDetails = document.getElementById('shipping-subtext-details');
+            const subtextChevron = document.getElementById('shipping-subtext-chevron');
+            if (subtextTrigger && subtextDetails && subtextChevron) {
+                subtextTrigger.addEventListener('click', () => {
+                    const isOpen = subtextDetails.style.display === 'block';
+                    subtextDetails.style.display = isOpen ? 'none' : 'block';
+                    subtextChevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                });
+            }
+
             const updateTotals = () => {
-                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const subtotalVal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const discount = subtotal * appliedDiscount;
+                let flatDiscount = parseFloat(localStorage.getItem('flatDiscount')) || 0;
+                const discount = (subtotalVal * appliedDiscount) + flatDiscount;
                 
-                // Shipping logic with free shipping promo
+                // Shipping logic with free shipping promo code (TOUTOU10)
                 let actualShipping = currentShipping;
                 let isFreeShippingActive = false;
-
-                if (appliedFreeShipping && subtotal >= 60) {
+                if (appliedFreeShipping && subtotalVal >= 60) {
                     actualShipping = 0;
                     isFreeShippingActive = true;
                 }
-
-                const finalTotal = subtotal - discount + actualShipping;
-
-                countEl.textContent = totalCount;
-                subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
-                totalEl.textContent = finalTotal.toFixed(2).replace('.', ',') + ' €';
                 
+                const finalTotal = subtotalVal - discount + actualShipping;
+                countEl.textContent = totalCount;
+                subtotalEl.textContent = subtotalVal.toFixed(2).replace('.', ',') + ' €';
+                totalEl.textContent = finalTotal.toFixed(2).replace('.', ',') + ' €';
                 document.getElementById('summary-discount').textContent = `- ${discount.toFixed(2).replace('.', ',')} €`;
                 
-                // Update Shipping summary
-                const shipSummaryEl = document.getElementById('summary-shipping-cost');
-                if (isFreeShippingActive) {
-                    shipSummaryEl.innerHTML = `<span style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 5px;">${currentShipping.toFixed(2).replace('.', ',')} €</span> <span style="color: var(--sage); font-weight: 700;">GRATUIT</span>`;
-                } else if (currentShipping === 0 && document.getElementById('shipping-options').style.display === 'block') {
-                    shipSummaryEl.textContent = 'GRATUIT'; // For standard free shipping methods if any
-                } else if (currentShipping > 0) {
-                    shipSummaryEl.textContent = currentShipping.toFixed(2).replace('.', ',') + ' €';
+                // Update mobile accordion total
+                const mobileTotalEl = document.getElementById('mobile-total-price');
+                if (mobileTotalEl) {
+                    mobileTotalEl.textContent = finalTotal.toFixed(2).replace('.', ',') + ' €';
                 }
 
+                // Update Shipping summary
+                const shipSummaryEl = document.getElementById('summary-shipping-cost');
+                if (isFreeShippingActive || (currentShipping === 0 && isAutoFreeShipping)) {
+                    if (isFreeShippingActive && currentShipping > 0) {
+                        shipSummaryEl.innerHTML = `<span style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 5px;">${currentShipping.toFixed(2).replace('.', ',')} €</span> <span style="color: var(--sage); font-weight: 700;">GRATUIT</span>`;
+                    } else {
+                        shipSummaryEl.textContent = 'GRATUIT';
+                    }
+                } else if (currentShipping > 0) {
+                    shipSummaryEl.textContent = currentShipping.toFixed(2).replace('.', ',') + ' €';
+                } else {
+                    shipSummaryEl.textContent = 'GRATUIT';
+                }
+                
                 if (discount > 0) {
                     savingsEl.style.display = 'block';
                     savingsEl.textContent = `ÉCONOMIES TOTALES ${discount.toFixed(2).replace('.', ',')} €`;
@@ -434,32 +758,22 @@
                     savingsEl.style.display = 'none';
                 }
             };
-
             updateTotals();
 
-            // Reveal Shipping Methods
+            // Reveal Shipping Methods (kept for safety if address triggers anything else)
             const addrInput = document.getElementById('ship-addr');
             const zipInput = document.getElementById('ship-zip');
             const cityInput = document.getElementById('ship-city');
-            const shippingPlaceholder = document.getElementById('shipping-placeholder');
-            const shippingOptions = document.getElementById('shipping-options');
-
             const checkReveal = () => {
-                if (addrInput.value.length > 5 && zipInput.value.length >= 4 && cityInput.value.length > 2) {
-                    shippingPlaceholder.style.display = 'none';
-                    shippingOptions.style.display = 'block'; // box uses flex internally usually but here block is fine
-                    updateTotals();
-                }
+                // Already shown, so just update totals
+                updateTotals();
             };
-
             [addrInput, zipInput, cityInput].forEach(input => {
-                input.addEventListener('input', checkReveal);
+                if (input) input.addEventListener('input', checkReveal);
             });
-
             // Shipping Method Selection
             const shipRadios = document.querySelectorAll('input[name="shipping_choice"]');
             const shipRows = document.querySelectorAll('.shipping-method-row');
-
             shipRadios.forEach((radio, idx) => {
                 radio.addEventListener('change', () => {
                     currentShipping = parseFloat(radio.value);
@@ -468,19 +782,22 @@
                     updateTotals();
                 });
             });
-
             // Promo Code Logic in Checkout
             const promoInput = document.querySelector('.summary-promo input');
             const promoBtn = document.querySelector('.btn-promo-valider');
-
             if (promoBtn && promoInput) {
                 promoBtn.addEventListener('click', () => {
                     const code = promoInput.value.trim().toUpperCase();
+                    let flatDiscount = 0;
                     if (code === 'TOUTOU10') {
                         appliedDiscount = 0;
                         appliedFreeShipping = true;
                     } else if (code === 'ELYSIUM20') {
                         appliedDiscount = 0.20;
+                        appliedFreeShipping = false;
+                    } else if (code === 'TOUTOU5') {
+                        appliedDiscount = 0;
+                        flatDiscount = 5.00;
                         appliedFreeShipping = false;
                     } else {
                         alert('Code invalide');
@@ -488,11 +805,11 @@
                     }
                     localStorage.setItem('appliedDiscount', appliedDiscount.toString());
                     localStorage.setItem('appliedFreeShipping', appliedFreeShipping.toString());
+                    localStorage.setItem('flatDiscount', flatDiscount.toString());
                     updateTotals();
                     promoInput.value = '';
                 });
             }
-
             // Payment method toggle logic
             const payMethods = document.querySelectorAll('.payment-method');
             payMethods.forEach(method => {
@@ -502,12 +819,10 @@
                     method.querySelector('input[type="radio"]').checked = true;
                 });
             });
-
             // Overlays
             const processingOverlay = document.getElementById('checkout-processing');
             const successOverlay = document.getElementById('checkout-success');
             const processingText = document.getElementById('processing-text');
-
             const showSuccessScreen = () => {
                 const orderId = `CT-${Math.floor(100000 + Math.random() * 900000)}`;
                 document.getElementById('final-order-id').textContent = `#${orderId}`;
@@ -516,7 +831,6 @@
                 localStorage.removeItem('cart');
                 localStorage.removeItem('appliedDiscount');
             };
-
             const simulatePayment = (methodName) => {
                 processingText.textContent = `Paiement via ${methodName} en cours...`;
                 processingOverlay.classList.add('active');
@@ -524,76 +838,63 @@
                     showSuccessScreen();
                 }, 3000);
             };
-
             // Express Overlays
             const shoppayLoginOverlay = document.getElementById('shoppay-login-overlay');
             const paypalLoginOverlay = document.getElementById('paypal-login-overlay');
             const gpayLoginOverlay = document.getElementById('gpay-login-overlay');
-            
             const shoppayLoginForm = document.getElementById('shoppay-login-form');
             const paypalLoginForm = document.getElementById('paypal-login-form');
             const gpayLoginForm = document.getElementById('gpay-login-form');
-
             // Button Triggers
             document.querySelector('.btn-shoppay').addEventListener('click', (e) => {
                 e.preventDefault();
                 shoppayLoginOverlay.classList.add('active');
             });
-
             document.querySelector('.btn-paypal').addEventListener('click', (e) => {
                 e.preventDefault();
                 paypalLoginOverlay.classList.add('active');
             });
-
             document.querySelector('.btn-gpay').addEventListener('click', (e) => {
                 e.preventDefault();
                 gpayLoginOverlay.classList.add('active');
             });
-
             // Submission Logic
             shoppayLoginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 shoppayLoginOverlay.classList.remove('active');
                 simulatePayment('Shop Pay');
             });
-
             paypalLoginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 paypalLoginOverlay.classList.remove('active');
                 simulatePayment('PayPal');
             });
-
             gpayLoginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 gpayLoginOverlay.classList.remove('active');
                 simulatePayment('Google Pay');
             });
-
             // Login Link
             document.querySelector('.login-link').addEventListener('click', (e) => {
                 e.preventDefault();
                 alert('La fonction de connexion sera bientôt disponible !');
             });
-
-            // Footer Links
-            document.querySelectorAll('footer a').forEach(a => {
+            // Footer Links in policy list
+            document.querySelectorAll('.checkout-footer-simple a').forEach(a => {
                 a.addEventListener('click', (e) => {
                     e.preventDefault();
                     alert(`Chargement de : ${a.textContent}...`);
                 });
             });
-
             // Standard Form Submission
             document.getElementById('checkout-form').addEventListener('submit', (e) => {
                 e.preventDefault();
-                
                 // Final validation check
                 const email = document.getElementById('contact-email').value;
                 if (!email.includes('@')) {
                     alert('Veuillez saisir une adresse e-mail valide.');
                     return;
                 }
-
                 simulatePayment('Carte de crédit');
             });
         });

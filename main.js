@@ -100,7 +100,43 @@ document.addEventListener('DOMContentLoaded', () => {
         megaMenuParents.forEach(item => item.classList.remove('active'));
     });
 
-    // Hero Section Logic: Static Grid (No JS Required)
+    // Hero Carousel Logic
+    const heroSlides = document.querySelectorAll('.carousel-slide');
+    const heroDots = document.querySelectorAll('.nav-dot');
+    const heroPrev = document.querySelector('.nav-arrow.prev');
+    const heroNext = document.querySelector('.nav-arrow.next');
+    let currentHeroSlide = 0;
+    let heroInterval;
+
+    const showHeroSlide = (index) => {
+        heroSlides.forEach(slide => slide.classList.remove('active'));
+        heroDots.forEach(dot => dot.classList.remove('active'));
+
+        currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+        heroSlides[currentHeroSlide].classList.add('active');
+        heroDots[currentHeroSlide].classList.add('active');
+        
+        // Reset timer
+        resetHeroTimer();
+    };
+
+    const nextHeroSlide = () => showHeroSlide(currentHeroSlide + 1);
+    const prevHeroSlide = () => showHeroSlide(currentHeroSlide - 1);
+
+    const resetHeroTimer = () => {
+        clearInterval(heroInterval);
+        heroInterval = setInterval(nextHeroSlide, 5000);
+    };
+
+    if (heroNext) heroNext.addEventListener('click', nextHeroSlide);
+    if (heroPrev) heroPrev.addEventListener('click', prevHeroSlide);
+    
+    heroDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => showHeroSlide(idx));
+    });
+
+    // Start auto-play
+    resetHeroTimer();
 
 
     // Cart Drawer Logic (Moved up for hoisting)
@@ -280,6 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartUI();
         openCart(); // Automatically open drawer
     };
+    window.addToCart = addToCart; // Expose globally for inline page scripts
+
 
     // Promo Code Handler
     if (promoBtn && promoInput) {
@@ -499,21 +537,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const getVisibleCards = () => {
                 if (window.innerWidth <= 600) return 2;
-                if (window.innerWidth <= 1024) return 2;
-                return 4;
+                if (window.innerWidth <= 1024) return 3;
+                return 5;
             };
 
             const updateTrackPosition = () => {
                 const cards = track.querySelectorAll('.carousel-card');
                 if (cards.length === 0) return;
 
-                const gap = 24;
                 const visibleCards = getVisibleCards();
-                const containerWidth = track.parentElement.offsetWidth;
-                const cardWidth = (containerWidth - (visibleCards - 1) * gap) / visibleCards;
+                const containerWidth = track.parentElement.clientWidth;
+                const computedStyle = window.getComputedStyle(track);
+                const gap = parseFloat(computedStyle.gap) || 24;
+                const cardWidth = Math.floor((containerWidth - (visibleCards - 1) * gap) / visibleCards) - 1;
 
                 cards.forEach(card => {
                     card.style.flex = `0 0 ${cardWidth}px`;
+                    card.style.width = `${cardWidth}px`;
                 });
 
                 const maxIdx = Math.max(0, cards.length - visibleCards);
@@ -627,17 +667,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
+        if (question) {
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
 
-            // Close all others for a cleaner accordion effect
-            faqItems.forEach(i => i.classList.remove('active'));
+                // Close all others
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
+                    const icon = i.querySelector('.faq-icon');
+                    if (icon) icon.textContent = '+';
+                });
 
-            // Toggle current if it wasn't active
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        });
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                    const icon = item.querySelector('.faq-icon');
+                    if (icon) icon.textContent = '−';
+                }
+            });
+        }
     });
 
     const viewMoreBtn = id('view-more-btn');
@@ -1040,32 +1088,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Recommendations Carousel Logic (Vous aimerez aussi)
-    const recCarousel = document.querySelector('.recommendations-section');
-    if (recCarousel) {
-        const grid = document.getElementById('rec-grid');
-        const prevBtn = document.getElementById('rec-prev');
-        const nextBtn = document.getElementById('rec-next');
+    // Generic Multi-Carousel Logic
+    const productCarousels = document.querySelectorAll('.product-carousel');
+    productCarousels.forEach((carousel, index) => {
+        const grid = carousel.querySelector('.carousel-track');
+        const prevBtn = carousel.querySelector('.prev-btn');
+        const nextBtn = carousel.querySelector('.next-btn');
+        const dotsContainer = carousel.querySelector('.carousel-dots');
         
         if (grid && prevBtn && nextBtn) {
-            const cards = grid.querySelectorAll('.rec-card');
-            const dotsContainer = document.getElementById('rec-dots');
+            const cards = grid.querySelectorAll('.product-card-item, .rec-card');
             let currentIdx = 0;
 
             const getVisibleCards = () => {
                 if (window.innerWidth <= 600) return 2;
                 if (window.innerWidth <= 1024) return 3;
-                return 4;
+                return 6;
             };
 
             const updateCarousel = () => {
                 const visibleCards = getVisibleCards();
-                const gap = 24; // Match CSS gap
-                const containerWidth = grid.parentElement.offsetWidth;
-                const cardWidth = (containerWidth - (visibleCards - 1) * gap) / visibleCards;
+                const containerWidth = grid.parentElement.clientWidth;
+                const computedStyle = window.getComputedStyle(grid);
+                const gap = parseFloat(computedStyle.gap) || 24;
+                const cardWidth = Math.floor((containerWidth - (visibleCards - 1) * gap) / visibleCards) - 1;
 
                 cards.forEach(card => {
                     card.style.flex = `0 0 ${cardWidth}px`;
+                    card.style.width = `${cardWidth}px`;
                 });
 
                 const maxIdx = Math.max(0, cards.length - visibleCards);
@@ -1074,7 +1124,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const moveX = currentIdx * (cardWidth + gap);
                 grid.style.transform = `translateX(-${moveX}px)`;
 
-                // Update dots
                 if (dotsContainer) {
                     const dots = dotsContainer.querySelectorAll('.gallery-dot');
                     dots.forEach((dot, idx) => {
@@ -1083,7 +1132,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Initialize dots
             const initDots = () => {
                 if (!dotsContainer) return;
                 dotsContainer.innerHTML = '';
@@ -1118,11 +1166,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCarousel();
             });
             
-            // Initial call
             initDots();
             setTimeout(updateCarousel, 100);
         }
-    }
+    });
 
     // Sidebar Filter Accordions
     const filterHeaders = document.querySelectorAll('.filter-group-header');
@@ -1187,10 +1234,14 @@ document.addEventListener('DOMContentLoaded', () => {
             document.addEventListener('touchend', endHandler);
         };
 
-        minHandle.addEventListener('mousedown', (e) => onStart(e, 'min'));
-        maxHandle.addEventListener('mousedown', (e) => onStart(e, 'max'));
-        minHandle.addEventListener('touchstart', (e) => onStart(e, 'min'), { passive: false });
-        maxHandle.addEventListener('touchstart', (e) => onStart(e, 'max'), { passive: false });
+        if (minHandle) {
+            minHandle.addEventListener('mousedown', (e) => onStart(e, 'min'));
+            minHandle.addEventListener('touchstart', (e) => onStart(e, 'min'), { passive: false });
+        }
+        if (maxHandle) {
+            maxHandle.addEventListener('mousedown', (e) => onStart(e, 'max'));
+            maxHandle.addEventListener('touchstart', (e) => onStart(e, 'max'), { passive: false });
+        }
 
         // Sync inputs back to slider if typed manually
         if (minField && maxField) {
@@ -1212,6 +1263,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Search Overlay Logic
     const searchOverlay = document.getElementById('search-overlay');
+    if (searchOverlay) {
+        // Dynamically inject the search-results element if it doesn't exist in the DOM
+        let searchResultsContainer = document.getElementById('search-results');
+        if (!searchResultsContainer) {
+            const container = searchOverlay.querySelector('.search-container');
+            if (container) {
+                searchResultsContainer = document.createElement('div');
+                searchResultsContainer.id = 'search-results';
+                searchResultsContainer.className = 'search-results';
+                container.appendChild(searchResultsContainer);
+            }
+        }
+    }
+
     const searchBtns = document.querySelectorAll('.search-btn');
     const closeSearch = document.getElementById('close-search');
     const searchInput = document.getElementById('search-input');
@@ -1230,6 +1295,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchOverlay) {
             searchOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            if (searchInput) searchInput.value = '';
+            if (searchResults) {
+                searchResults.innerHTML = '';
+                searchResults.classList.remove('has-content');
+            }
         }
     };
 
@@ -1247,6 +1317,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchOverlay) {
         searchOverlay.addEventListener('click', (e) => {
             if (e.target === searchOverlay) closeSearchOverlay();
+        });
+    }
+
+    // --- Search Functionality ---
+    const searchProducts = [
+        { name: "Harnais Anti-Traction SteadyWalk", price: "49,00 €", image: "harnais_anti_traction_main_1775840455761.png", url: "harnais-anti-traction-chien.html" },
+        { name: "Collier Cuir Heritage", price: "125,00 €", image: "collier_cuir_visual.png", url: "collier-cuir-chien.html" },
+        { name: "Laisse Cuir Elegance", price: "45,00 €", image: "dog_leash_elegant_1775487863541.png", url: "laisse-chien.html" },
+        { name: "Panier Orthopédique Velvet", price: "129,00 €", image: "panier_velvet_main.png", url: "panier-orthopedique-velvet.html" },
+        { name: "Imperméable StormGuard", price: "65,00 €", image: "impermeable_stormguard_main.png", url: "produit-impermeable.html" },
+        { name: "Manteau de Pluie Mist", price: "55,00 €", image: "dog_raincoat_mist_1775488107577.png", url: "produit-impermeable.html" },
+        { name: "Sac de Transport Nomade", price: "89,00 €", image: "sac_transport_chien_main.png", url: "sac-transport-chien.html" },
+        { name: "Coussin Anti-Stress Nuage", price: "59,00 €", image: "cat_coussin_antistress_visual.png", url: "coussin-anti-stress-chien.html" },
+        { name: "Tapis Rafraîchissant Chill", price: "39,00 €", image: "cat_tapis_rafraichissant_visual.png", url: "tapis-rafraichissant-chien.html" },
+        { name: "Pull en Laine Douce", price: "35,00 €", image: "pull_chien_main.png", url: "pull-sweat.html" }
+    ];
+
+    const searchResults = document.getElementById('search-results');
+
+    if (searchInput && searchResults) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                searchResults.classList.remove('has-content');
+                return;
+            }
+
+            const filtered = searchProducts.filter(p => 
+                p.name.toLowerCase().includes(query)
+            );
+
+            if (filtered.length > 0) {
+                searchResults.innerHTML = filtered.map(p => `
+                    <a href="${p.url}" class="search-result-item">
+                        <img src="${p.image}" alt="${p.name}" class="search-result-img">
+                        <div class="search-result-info">
+                            <h4>${p.name}</h4>
+                            <span class="price">${p.price}</span>
+                        </div>
+                    </a>
+                `).join('');
+                searchResults.classList.add('has-content');
+            } else {
+                searchResults.innerHTML = '<div class="search-no-results">Aucun produit trouvé pour "' + query + '"</div>';
+                searchResults.classList.add('has-content');
+            }
         });
     }
 
@@ -1294,4 +1412,1133 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     initCategoryCarousel();
+
+    // --- Premium Hero Logic ---
+    const voirPlusBtn = document.getElementById('voir-plus-toggle');
+    const heroDesc = document.getElementById('hero-desc');
+    if (voirPlusBtn && heroDesc) {
+        voirPlusBtn.addEventListener('click', () => {
+            const isExpanded = heroDesc.classList.toggle('expanded');
+            voirPlusBtn.textContent = isExpanded ? 'Voir moins' : 'Voir plus';
+        });
+    }
+
+    const visualTrack = document.getElementById('visual-track');
+    const visualPrev = document.getElementById('visual-prev');
+    const visualNext = document.getElementById('visual-next');
+
+    if (visualTrack && visualPrev && visualNext) {
+        const container = visualTrack.parentElement;
+        const getScrollAmount = () => {
+            const card = visualTrack.querySelector('.visual-card');
+            if (!card) return 320;
+            const cardWidth = card.getBoundingClientRect().width;
+            const gap = parseFloat(getComputedStyle(visualTrack).gap) || 32;
+            return cardWidth + gap;
+        };
+
+        visualNext.addEventListener('click', () => {
+            container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+        visualPrev.addEventListener('click', () => {
+            container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+    }
+
+    // Collection Sort Dropdown Logic
+    const sortBtn = document.getElementById('sort-dropdown-btn');
+    const sortMenu = document.getElementById('sort-menu');
+    const sortOptionsList = document.querySelectorAll('.sort-option');
+    const currentSortSpan = document.querySelector('.current-sort');
+
+    if (sortBtn && sortMenu) {
+        sortBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortBtn.parentElement.classList.toggle('active');
+        });
+
+        sortOptionsList.forEach(option => {
+            option.addEventListener('click', () => {
+                const sortText = option.textContent.trim();
+                
+                if (currentSortSpan) currentSortSpan.textContent = sortText;
+                
+                sortOptionsList.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+
+                sortBtn.parentElement.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            if (sortBtn.parentElement.classList.contains('active')) {
+                sortBtn.parentElement.classList.remove('active');
+            }
+        });
+    }
+
+    // --- Quick View System (Luxe Industrial) ---
+    
+    // 1. Inject Modal Structure
+    const qvModalHTML = `
+        <div class="qv-modal-overlay" id="qv-modal">
+            <div class="qv-modal-container">
+                <button class="qv-close-btn" id="qv-close" aria-label="Fermer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="qv-modal-left">
+                    <div class="qv-main-img-box">
+                        <button class="qv-main-nav prev" id="qv-main-prev">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <img src="" alt="" id="qv-main-img">
+                        <button class="qv-main-nav next" id="qv-main-next">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                    <div class="qv-thumb-wrapper">
+                        <div class="qv-thumbnails" id="qv-thumbs">
+                            <div class="qv-thumb active"><img src="" alt="" class="thumb-img-1"></div>
+                            <div class="qv-thumb"><img src="" alt="" class="thumb-img-2"></div>
+                            <div class="qv-thumb"><img src="" alt="" class="thumb-img-3"></div>
+                            <div class="qv-thumb"><img src="" alt="" class="thumb-img-4"></div>
+                            <div class="qv-thumb"><img src="" alt="" class="thumb-img-5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="qv-modal-right">
+                    <div class="qv-category">CHETOUTOU PREMIUM</div>
+                    <h2 class="qv-title" id="qv-title-el">Nom du Produit</h2>
+                    <div class="qv-rating">
+                        <div class="qv-stars">★★★★★</div>
+                        <div class="qv-reviews-count">4.9/5 (120 avis)</div>
+                    </div>
+                    <div class="qv-price" id="qv-price-el">0,00 €</div>
+                    <div class="qv-shipping">✓ Livraison gratuite</div>
+                    
+                    <div class="qv-selector-group">
+                        <span class="qv-label">Couleur: <span id="qv-color-val" style="font-weight: 500; color: #666;">Noir</span></span>
+                        <div class="qv-swatches">
+                            <div class="qv-swatch active" data-color="Noir"><img src="" alt="Noir" class="swatch-img-1"></div>
+                            <div class="qv-swatch" data-color="Marron"><img src="" alt="Marron" class="swatch-img-2"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="qv-label">Quantité</div>
+                    <div class="qv-qty-box">
+                        <button class="qv-qty-btn" id="qv-qty-minus" type="button">−</button>
+                        <input type="number" value="1" min="1" class="qv-qty-input" id="qv-qty-input">
+                        <button class="qv-qty-btn" id="qv-qty-plus" type="button">+</button>
+                    </div>
+                    
+                    <button class="qv-add-btn" type="button">Ajouter au panier</button>
+                    
+                    <div class="qv-full-details" id="qv-link">
+                        Afficher tous les détails 
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', qvModalHTML);
+
+    const qvModal = document.getElementById('qv-modal');
+    const qvClose = document.getElementById('qv-close');
+    const qvMainImg = document.getElementById('qv-main-img');
+    const qvMainPrev = document.getElementById('qv-main-prev');
+    const qvMainNext = document.getElementById('qv-main-next');
+    const qvThumb4 = document.querySelector('.thumb-img-4');
+    const qvThumb5 = document.querySelector('.thumb-img-5');
+    const qvTitle = document.getElementById('qv-title-el');
+    const qvPrice = document.getElementById('qv-price-el');
+    const qvQtyInput = document.getElementById('qv-qty-input');
+    const qvQtyPlus = document.getElementById('qv-qty-plus');
+    const qvQtyMinus = document.getElementById('qv-qty-minus');
+    const qvThumb1 = document.querySelector('.thumb-img-1');
+    const qvThumb2 = document.querySelector('.thumb-img-2');
+    const qvThumb3 = document.querySelector('.thumb-img-3');
+    const qvSwatch1 = document.querySelector('.swatch-img-1');
+    const qvSwatch2 = document.querySelector('.swatch-img-2');
+    const qvColorVal = document.getElementById('qv-color-val');
+    const qvSwatches = document.querySelectorAll('.qv-swatch');
+
+    let currentQvIdx = 0;
+    const qvImages = []; // We'll populate this on open
+
+    // 2. Inject Buttons into Products
+    function injectQuickViewButtons() {
+        const products = document.querySelectorAll('.product-item');
+        products.forEach(product => {
+            const wrapper = product.querySelector('.product-img-wrapper');
+            if (wrapper && !wrapper.querySelector('.quick-view-btn')) {
+                const btn = document.createElement('button');
+                btn.className = 'quick-view-btn';
+                btn.type = 'button';
+                btn.textContent = 'Aperçu rapide';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openQuickView(product);
+                });
+            }
+        });
+    }
+
+    function openQuickView(product) {
+        const title = product.querySelector('h3').textContent.trim();
+        const price = product.querySelector('.product-price').textContent.trim();
+        const img = product.querySelector('img').src;
+
+        // Pool of varied images for demo
+        const demoImages = [
+            img,
+            "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=400",
+            "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=400",
+            "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=400",
+            "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=400"
+        ];
+
+        qvTitle.textContent = title;
+        qvPrice.textContent = price;
+        qvMainImg.src = img;
+        
+        qvThumb1.src = demoImages[0];
+        qvThumb2.src = demoImages[1]; 
+        qvThumb3.src = demoImages[2];
+        qvThumb4.src = demoImages[3];
+        qvThumb5.src = demoImages[4];
+        
+        qvSwatch1.src = demoImages[0];
+        qvSwatch2.src = demoImages[1];
+        
+        qvQtyInput.value = 1;
+        qvColorVal.textContent = "Noir";
+        
+        currentQvIdx = 0;
+
+        // Function to update main image when clicking/navigating
+        const updateDisplay = (idx) => {
+            qvMainImg.style.opacity = '0';
+            setTimeout(() => {
+                qvMainImg.src = demoImages[idx];
+                qvMainImg.style.opacity = '1';
+                updateQvImage(idx);
+            }, 150);
+        };
+
+        qvModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Add specific listeners for this open session if needed or use global ones
+        // But the global ones need access to demoImages. Let's make demoImages global-ish or attach to window.
+        window.currentQvImages = demoImages;
+    }
+
+    const updateQvImage = (index) => {
+        const thumbs = document.querySelectorAll('.qv-thumb');
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === index));
+    };
+
+    if (qvMainPrev) qvMainPrev.addEventListener('click', () => {
+        currentQvIdx = (currentQvIdx > 0) ? currentQvIdx - 1 : 4;
+        if (window.currentQvImages) {
+            qvMainImg.src = window.currentQvImages[currentQvIdx];
+            updateQvImage(currentQvIdx);
+        }
+    });
+
+    if (qvMainNext) qvMainNext.addEventListener('click', () => {
+        currentQvIdx = (currentQvIdx < 4) ? currentQvIdx + 1 : 0;
+        if (window.currentQvImages) {
+            qvMainImg.src = window.currentQvImages[currentQvIdx];
+            updateQvImage(currentQvIdx);
+        }
+    });
+
+    // Thumbnail Click Interaction
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.qv-thumb')) {
+            const thumb = e.target.closest('.qv-thumb');
+            const thumbs = Array.from(document.querySelectorAll('.qv-thumb'));
+            const idx = thumbs.indexOf(thumb);
+            if (idx !== -1 && window.currentQvImages) {
+                currentQvIdx = idx;
+                qvMainImg.src = window.currentQvImages[idx];
+                updateQvImage(idx);
+            }
+        }
+    });
+
+    // Swatch Interaction
+    qvSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            qvSwatches.forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+            const color = swatch.getAttribute('data-color');
+            qvColorVal.textContent = color;
+            // Optionally swap main image here if we had different images
+        });
+    });
+
+    function closeQuickView() {
+        qvModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (qvClose) qvClose.addEventListener('click', closeQuickView);
+    qvModal.addEventListener('click', (e) => { if (e.target === qvModal) closeQuickView(); });
+
+    if (qvQtyPlus) qvQtyPlus.addEventListener('click', () => { qvQtyInput.value = parseInt(qvQtyInput.value) + 1; });
+    if (qvQtyMinus) qvQtyMinus.addEventListener('click', () => { if (parseInt(qvQtyInput.value) > 1) qvQtyInput.value = parseInt(qvQtyInput.value) - 1; });
+
+    injectQuickViewButtons();
+
+    // Re-inject on dynamic content updates
+    const qvObserver = new MutationObserver(injectQuickViewButtons);
+    qvObserver.observe(document.body, { childList: true, subtree: true });
+
+    // --- MAIN GALLERY CAROUSEL LOGIC ---
+    const galleryCarousel = document.getElementById('main-gallery-carousel');
+    if (galleryCarousel) {
+        const images = Array.from(galleryCarousel.querySelectorAll('.variant-img'));
+        const prevBtn = document.getElementById('variant-prev');
+        const nextBtn = document.getElementById('variant-next');
+        const swatchButtons = document.querySelectorAll('.color-previews .preview-btn');
+        let currentIndex = 0;
+
+        const updateSlide = (index) => {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+            currentIndex = index;
+
+            // Sync with swatches ONLY if the current slide is a variant (index 0, 1, 2)
+            if (index < 3 && swatchButtons.length > index) {
+                swatchButtons.forEach(b => b.classList.remove('active'));
+                swatchButtons[index].classList.add('active');
+                
+                // Update text label
+                const selectedVal = document.querySelector('.variant-selector-v2 .selected-val');
+                if (selectedVal && swatchButtons[index].title) {
+                    selectedVal.textContent = swatchButtons[index].title;
+                }
+            }
+        };
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Restrict arrows to cycle only through grid images (indices 3 to 8)
+                let newIndex = currentIndex - 1;
+                if (newIndex < 3 || newIndex >= 9) newIndex = 8; // Loop within [3...8]
+                updateSlide(newIndex);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Restrict arrows to cycle only through grid images (indices 3 to 8)
+                let newIndex = currentIndex + 1;
+                if (newIndex >= 9 || newIndex < 3) newIndex = 3; // Loop within [3...8]
+                updateSlide(newIndex);
+            });
+        }
+
+        // Sync from swatches to carousel
+        swatchButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                updateSlide(index);
+            });
+        });
+
+        // --- NEW: Sync from Grid Images to Main Carousel ---
+        const gridImages = document.querySelectorAll('.gallery-stacked-row .gallery-stacked-item img');
+        gridImages.forEach((gridImg) => {
+            gridImg.style.cursor = 'pointer';
+            gridImg.addEventListener('click', () => {
+                const src = gridImg.getAttribute('src');
+                const targetIndex = images.findIndex(img => img.getAttribute('src') === src);
+                
+                if (targetIndex !== -1) {
+                    updateSlide(targetIndex);
+                    // Smooth scroll back to top carousel
+                    galleryCarousel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+
+        // --- NEW: Interactive Zoom on Main Carousel ---
+        galleryCarousel.addEventListener('mousemove', (e) => {
+            const activeImg = galleryCarousel.querySelector('.variant-img.active');
+            if (!activeImg) return;
+
+            const rect = galleryCarousel.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            activeImg.style.transformOrigin = `${x}% ${y}%`;
+            activeImg.style.transform = 'scale(2)';
+            activeImg.style.cursor = 'zoom-in';
+        });
+
+        galleryCarousel.addEventListener('mouseleave', () => {
+            const activeImg = galleryCarousel.querySelector('.variant-img.active');
+            if (!activeImg) return;
+            
+            activeImg.style.transformOrigin = 'center center';
+            activeImg.style.transform = 'scale(1)';
+        });
+    }
+    // --- BLOG FILTERING LOGIC (V7) ---
+    const blogFilters = document.querySelectorAll('.filter-item-v7');
+    const blogArticles = document.querySelectorAll('.grid-card-v7, .featured-card-v7');
+
+    if (blogFilters.length > 0 && blogArticles.length > 0) {
+        blogFilters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const category = filter.getAttribute('data-category');
+                
+                // Update active state
+                blogFilters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                
+                // Filter articles
+                blogArticles.forEach(article => {
+                    const articleCat = article.getAttribute('data-category');
+                    
+                    if (category === 'all' || articleCat === category) {
+                        article.style.display = 'grid'; // Grid cards are flex/grid, featured is grid
+                        if (article.classList.contains('grid-card-v7')) {
+                            article.style.display = 'flex'; // Restore flex for grid cards
+                        }
+                        // Use a small timeout for animation if needed, or just show/hide
+                        article.style.opacity = '0';
+                        setTimeout(() => {
+                            article.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+
+                // Update section titles visibility
+                const featuredSection = document.querySelector('.featured-section-v7');
+                const featuredTitle = featuredSection?.querySelector('.blog-section-title');
+                const visibleFeatured = Array.from(blogArticles).filter(a => a.classList.contains('featured-card-v7') && a.style.display !== 'none');
+                
+                if (featuredSection) {
+                    featuredSection.style.display = (visibleFeatured.length > 0) ? 'block' : 'none';
+                }
+            });
+        });
+    }
+
+    // --- PRODUCT V4 SPECIFIC LOGIC ---
+    
+    // Accordion V4 Toggle
+    const accHeadersV4 = document.querySelectorAll('.acc-header-v4');
+    accHeadersV4.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const content = item.querySelector('.pdp-acc-content');
+            const isActive = item.classList.contains('active');
+            
+            // Close all others in the same group
+            const group = item.parentElement;
+            group.querySelectorAll('.acc-item-v4').forEach(other => {
+                other.classList.remove('active');
+                const otherContent = other.querySelector('.pdp-acc-content');
+                if (otherContent) {
+                    otherContent.style.maxHeight = '0';
+                    otherContent.style.paddingBottom = '0';
+                }
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = '500px';
+                content.style.paddingBottom = '1.5rem';
+            }
+        });
+    });
+
+    // Swatch V4 Selection
+    const swatchesV4 = document.querySelectorAll('.swatch-v4');
+    swatchesV4.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            swatchesV4.forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+        });
+    });
+
+    // Quantity V4 Control
+    const qtyBtnMinusV4 = document.querySelector('.qty-btn-v4.minus');
+    const qtyBtnPlusV4 = document.querySelector('.qty-btn-v4.plus');
+    const qtyInputV4 = document.getElementById('qty-input-v4');
+
+    if (qtyBtnMinusV4 && qtyBtnPlusV4 && qtyInputV4) {
+        qtyBtnMinusV4.addEventListener('click', () => {
+            let val = parseInt(qtyInputV4.value) || 1;
+            if (val > 1) qtyInputV4.value = val - 1;
+        });
+        qtyBtnPlusV4.addEventListener('click', () => {
+            let val = parseInt(qtyInputV4.value) || 1;
+            qtyInputV4.value = val + 1;
+        });
+    }
+
+    // Injected Floating Assistance Widget
+    const injectAssistanceWidget = () => {
+        // Create style tag
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #assistance-floating-btn {
+                position: fixed;
+                bottom: 24px;
+                left: 24px;
+                background-color: #e69c1a;
+                color: #fff;
+                border: none;
+                border-radius: 50px;
+                padding: 12px 20px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                z-index: 9999;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            }
+            #assistance-floating-btn:hover {
+                background-color: #d18712;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+            }
+            #assistance-floating-btn.active {
+                width: 50px;
+                height: 50px;
+                padding: 0;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: #e69c1a;
+            }
+            #assistance-widget {
+                position: fixed;
+                bottom: 150px;
+                left: 24px;
+                width: 360px;
+                max-width: calc(100vw - 48px);
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+                z-index: 9998;
+                overflow: hidden;
+                display: none;
+                flex-direction: column;
+                font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+                border: 1px solid #e1e1e1;
+                transform-origin: bottom left;
+                animation: assistanceScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            }
+            @keyframes assistanceScaleUp {
+                from {
+                    opacity: 0;
+                    transform: scale(0.85) translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+            .assistance-header {
+                background-color: #e69c1a;
+                color: #fff;
+                padding: 1.5rem;
+                position: relative;
+            }
+            .assistance-header h3 {
+                margin: 0 0 6px 0;
+                font-size: 1.2rem;
+                font-weight: 700;
+                letter-spacing: -0.2px;
+            }
+            .assistance-header p {
+                margin: 0;
+                font-size: 0.85rem;
+                line-height: 1.4;
+                opacity: 0.95;
+            }
+            .assistance-body {
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+            }
+            .assistance-input-container {
+                padding: 1.25rem;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .assistance-input-wrapper {
+                border: 1px solid #d9d9d9;
+                border-radius: 8px;
+                padding: 10px 40px 10px 12px;
+                background: #fff;
+                position: relative;
+                transition: border-color 0.2s;
+            }
+            .assistance-input-wrapper:focus-within {
+                border-color: #e69c1a;
+            }
+            .assistance-textarea {
+                width: 100%;
+                border: none;
+                outline: none;
+                resize: none;
+                font-family: inherit;
+                font-size: 0.9rem;
+                color: #333;
+                height: 48px;
+                box-sizing: border-box;
+                display: block;
+            }
+            .assistance-textarea::placeholder {
+                color: #aaa;
+            }
+            .assistance-send-btn {
+                position: absolute;
+                bottom: 10px;
+                right: 12px;
+                background: none;
+                border: none;
+                color: #e69c1a;
+                cursor: pointer;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: color 0.2s;
+            }
+            .assistance-send-btn:hover {
+                color: #d18712;
+            }
+            .assistance-instant-title {
+                text-align: center;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #111;
+                margin: 1.25rem 0 0.75rem 0;
+            }
+            .assistance-instant-btn {
+                width: calc(100% - 2.5rem);
+                margin: 0 auto 1.5rem auto;
+                padding: 12px 16px;
+                background: #fff;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: #333;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-align: left;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            }
+            .assistance-instant-btn:hover {
+                background: #fafafa;
+                border-color: #ccc;
+                transform: translateY(-1px);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create floating button
+        const btn = document.createElement('button');
+        btn.id = 'assistance-floating-btn';
+        btn.setAttribute('aria-label', 'Ouvrir l\'assistance');
+        btn.innerHTML = `
+            <svg id="assistance-chat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                <circle cx="8" cy="10" r="1" fill="currentColor"></circle>
+                <circle cx="12" cy="10" r="1" fill="currentColor"></circle>
+                <circle cx="16" cy="10" r="1" fill="currentColor"></circle>
+            </svg>
+            <span id="assistance-btn-text">Assistance</span>
+        `;
+        document.body.appendChild(btn);
+
+        // Create widget
+        const widget = document.createElement('div');
+        widget.id = 'assistance-widget';
+        widget.innerHTML = `
+            <div class="assistance-header">
+                <h3>Chattez avec nous</h3>
+                <p>👋 Bonjour, envoyez-nous un message si vous avez des questions. Nous serons ravis de vous aider !</p>
+            </div>
+            <div class="assistance-body">
+                <div class="assistance-input-container">
+                    <div class="assistance-input-wrapper">
+                        <textarea class="assistance-textarea" placeholder="Écrire un message" aria-label="Écrire un message"></textarea>
+                        <button class="assistance-send-btn" aria-label="Envoyer le message">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="assistance-instant-title">Réponses instantanées</div>
+                <button class="assistance-instant-btn" id="assistance-track-order-btn">
+                    <span>Suivre ma commande</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(widget);
+
+        // Event listener for floating button
+        let isOpen = false;
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isOpen = !isOpen;
+            if (isOpen) {
+                widget.style.display = 'flex';
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                `;
+            } else {
+                widget.style.display = 'none';
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg id="assistance-chat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        <circle cx="8" cy="10" r="1" fill="currentColor"></circle>
+                        <circle cx="12" cy="10" r="1" fill="currentColor"></circle>
+                        <circle cx="16" cy="10" r="1" fill="currentColor"></circle>
+                    </svg>
+                    <span id="assistance-btn-text">Assistance</span>
+                `;
+            }
+        });
+
+        // Close when clicking outside the widget
+        document.addEventListener('click', (e) => {
+            if (isOpen && !widget.contains(e.target) && e.target !== btn) {
+                isOpen = false;
+                widget.style.display = 'none';
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg id="assistance-chat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        <circle cx="8" cy="10" r="1" fill="currentColor"></circle>
+                        <circle cx="12" cy="10" r="1" fill="currentColor"></circle>
+                        <circle cx="16" cy="10" r="1" fill="currentColor"></circle>
+                    </svg>
+                    <span id="assistance-btn-text">Assistance</span>
+                `;
+            }
+        });
+
+        // Prevent closing when clicking inside
+        widget.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Redirect to suivre-commande.html when "Suivre ma commande" is clicked
+        const trackBtn = document.getElementById('assistance-track-order-btn');
+        if (trackBtn) {
+            trackBtn.addEventListener('click', () => {
+                window.location.href = 'suivre-commande.html';
+            });
+        }
+
+        // Mock send message interaction
+        const sendBtn = widget.querySelector('.assistance-send-btn');
+        const textarea = widget.querySelector('.assistance-textarea');
+        if (sendBtn && textarea) {
+            const sendMessage = () => {
+                const text = textarea.value.trim();
+                if (text.length > 0) {
+                    alert('Votre message a bien été envoyé ! Notre équipe vous répondra dans les plus brefs délais.');
+                    textarea.value = '';
+                }
+            };
+            sendBtn.addEventListener('click', sendMessage);
+            textarea.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+    };
+
+    injectAssistanceWidget();
+
+    // Injected Floating Promo Widget (5€ Voucher)
+    const injectPromoWidget = () => {
+        // Create style tag
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #promo-floating-btn {
+                position: fixed;
+                bottom: 88px;
+                left: 24px;
+                width: 50px;
+                height: 50px;
+                background-color: #000;
+                color: #fff;
+                border: 3px solid #e69c1a;
+                border-radius: 50%;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                outline: 2px solid #fff;
+                outline-offset: -5px;
+            }
+            #promo-floating-btn:hover {
+                transform: scale(1.08);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+                border-color: #e69c1a;
+            }
+            #promo-modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.45);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            }
+            .promo-modal-card {
+                background: #fff;
+                width: 380px;
+                max-width: calc(100vw - 32px);
+                border-radius: 16px;
+                padding: 2.25rem 2rem;
+                box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+                position: relative;
+                text-align: center;
+                font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+                border: 1px solid #e1e1e1;
+                transform-origin: center;
+                animation: promoScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            }
+            @keyframes promoScaleUp {
+                from {
+                    opacity: 0;
+                    transform: scale(0.85) translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+            .promo-modal-close {
+                position: absolute;
+                top: -12px;
+                right: -12px;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: #333;
+                color: #fff;
+                border: 2px solid #fff;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                transition: background 0.2s, transform 0.2s;
+            }
+            .promo-modal-close:hover {
+                background: #000;
+                transform: scale(1.05);
+            }
+            .promo-image {
+                width: 140px;
+                height: 140px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin: 0 auto 1.25rem auto;
+                display: block;
+                border: 3px solid #fdf6ec;
+                box-shadow: 0 4px 12px rgba(230,156,26,0.15);
+            }
+            .promo-eyebrow {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #888;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+            .promo-title {
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.3;
+                color: #111;
+                margin: 0 0 8px 0;
+            }
+            .promo-subtitle {
+                font-size: 0.88rem;
+                color: #666;
+                margin: 0 0 1.5rem 0;
+                line-height: 1.4;
+            }
+            .promo-form {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+            .promo-input {
+                width: 100%;
+                border: 1px solid #d9d9d9;
+                border-radius: 8px;
+                padding: 12px;
+                font-size: 0.9rem;
+                color: #333;
+                background-color: #fcfdfe;
+                box-sizing: border-box;
+                font-family: inherit;
+                transition: border-color 0.2s;
+            }
+            .promo-input:focus {
+                border-color: #e69c1a;
+                outline: none;
+                background-color: #fff;
+            }
+            .promo-btn {
+                width: 100%;
+                background: #e69c1a;
+                color: #000;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 0;
+                font-size: 0.95rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: background 0.2s, transform 0.1s;
+                font-family: inherit;
+            }
+            .promo-btn:hover {
+                background: #d18712;
+            }
+            .promo-btn:active {
+                transform: scale(0.98);
+            }
+            .promo-decline {
+                color: #777;
+                font-size: 0.85rem;
+                font-weight: 500;
+                text-decoration: none;
+                margin-top: 1rem;
+                display: inline-block;
+                cursor: pointer;
+                transition: color 0.2s;
+            }
+            .promo-decline:hover {
+                color: #333;
+                text-decoration: underline;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create floating button
+        const btn = document.createElement('button');
+        btn.id = 'promo-floating-btn';
+        btn.setAttribute('aria-label', 'Voir l\'offre spéciale');
+        btn.innerHTML = `
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e69c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+        `;
+        document.body.appendChild(btn);
+
+        // Create overlay and modal
+        const overlay = document.createElement('div');
+        overlay.id = 'promo-modal-overlay';
+        overlay.innerHTML = `
+            <div class="promo-modal-card">
+                <button class="promo-modal-close" aria-label="Fermer la fenêtre">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div id="promo-modal-content-wrapper">
+                    <img class="promo-image" src="gift_promo_popup.png" alt="Cadeau Chetoutou">
+                    <div class="promo-eyebrow">Offre spéciale bon d'achat</div>
+                    <h3 class="promo-title">Rejoignez-nous et bénéficiez de -10% sur votre première commande.</h3>
+                    <p class="promo-subtitle">Inscrivez-vous pour bénéficier de l'offre !</p>
+                    <form class="promo-form" id="promo-subscription-form">
+                        <input type="email" class="promo-input" placeholder="votre@email.com" required>
+                        <button type="submit" class="promo-btn">Recevoir mon code</button>
+                    </form>
+                    <a class="promo-decline">Non, merci</a>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Open modal
+        btn.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+        });
+
+        // Close functions
+        const closeModal = () => {
+            overlay.style.display = 'none';
+        };
+
+        overlay.querySelector('.promo-modal-close').addEventListener('click', closeModal);
+        overlay.querySelector('.promo-decline').addEventListener('click', closeModal);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeModal();
+            }
+        });
+
+        const card = overlay.querySelector('.promo-modal-card');
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Form submission
+        const form = overlay.querySelector('#promo-subscription-form');
+        const contentWrapper = overlay.querySelector('#promo-modal-content-wrapper');
+        if (form && contentWrapper) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = form.querySelector('.promo-input');
+                if (emailInput && emailInput.value.includes('@')) {
+                    // Inject success screen
+                    contentWrapper.innerHTML = `
+                        <div class="promo-success-state" style="text-align: center; padding: 1rem 0;">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background: #e69c1a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.25rem auto; box-shadow: 0 4px 12px rgba(230, 156, 26, 0.3);">✓</div>
+                            <h3 style="font-size: 1.3rem; font-weight: 700; color: #111; margin-bottom: 0.5rem;">Félicitations !</h3>
+                            <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; line-height: 1.4;">Votre code promo de -10% est actif. Copiez le code ci-dessous et insérez-le lors de votre paiement :</p>
+                            <div id="promo-code-text" style="background: #fdf6ec; border: 1px dashed #e69c1a; border-radius: 6px; padding: 12px; font-size: 1.2rem; font-weight: 700; color: #e69c1a; letter-spacing: 2px; margin-bottom: 1.5rem; user-select: all;">TOUTOU10</div>
+                            <button class="promo-btn" id="promo-copy-btn" style="width: 100%; margin: 0 auto; padding: 12px; background: #e69c1a; color: #000; border: none; font-weight: 700; border-radius: 8px; cursor: pointer;">Copier le code</button>
+                        </div>
+                    `;
+                    
+                    // Copy button logic
+                    const copyBtn = contentWrapper.querySelector('#promo-copy-btn');
+                    if (copyBtn) {
+                        copyBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText('TOUTOU10').then(() => {
+                                copyBtn.textContent = 'Code copié !';
+                                copyBtn.style.background = '#27ae60';
+                                copyBtn.style.color = '#fff';
+                                setTimeout(() => {
+                                    closeModal();
+                                    // Reset content for next open
+                                    setTimeout(() => {
+                                        injectPromoWidgetReset();
+                                    }, 400);
+                                }, 1200);
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
+        // Helper to reset the form content on close
+        const injectPromoWidgetReset = () => {
+            contentWrapper.innerHTML = `
+                <img class="promo-image" src="gift_promo_popup.png" alt="Cadeau Chetoutou">
+                <div class="promo-eyebrow">Offre spéciale bon d'achat</div>
+                <h3 class="promo-title">Rejoignez-nous et bénéficiez de -10% sur votre première commande.</h3>
+                <p class="promo-subtitle">Inscrivez-vous pour bénéficier de l'offre !</p>
+                <form class="promo-form" id="promo-subscription-form">
+                    <input type="email" class="promo-input" placeholder="votre@email.com" required>
+                    <button type="submit" class="promo-btn">Recevoir mon code</button>
+                </form>
+                <a class="promo-decline">Non, merci</a>
+            `;
+            // Reattach close/decline listeners
+            contentWrapper.querySelector('.promo-decline').addEventListener('click', closeModal);
+            const newForm = contentWrapper.querySelector('#promo-subscription-form');
+            if (newForm) {
+                newForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const emailInput = newForm.querySelector('.promo-input');
+                    if (emailInput && emailInput.value.includes('@')) {
+                        contentWrapper.innerHTML = `
+                            <div class="promo-success-state" style="text-align: center; padding: 1rem 0;">
+                                <div style="width: 60px; height: 60px; border-radius: 50%; background: #e69c1a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.25rem auto; box-shadow: 0 4px 12px rgba(230, 156, 26, 0.3);">✓</div>
+                                <h3 style="font-size: 1.3rem; font-weight: 700; color: #111; margin-bottom: 0.5rem;">Félicitations !</h3>
+                                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; line-height: 1.4;">Votre code promo de -10% est actif. Copiez le code ci-dessous et insérez-le lors de votre paiement :</p>
+                                <div id="promo-code-text" style="background: #fdf6ec; border: 1px dashed #e69c1a; border-radius: 6px; padding: 12px; font-size: 1.2rem; font-weight: 700; color: #e69c1a; letter-spacing: 2px; margin-bottom: 1.5rem; user-select: all;">TOUTOU10</div>
+                                <button class="promo-btn" id="promo-copy-btn" style="width: 100%; margin: 0 auto; padding: 12px; background: #e69c1a; color: #000; border: none; font-weight: 700; border-radius: 8px; cursor: pointer;">Copier le code</button>
+                            </div>
+                        `;
+                        const newCopyBtn = contentWrapper.querySelector('#promo-copy-btn');
+                        if (newCopyBtn) {
+                            newCopyBtn.addEventListener('click', () => {
+                                navigator.clipboard.writeText('TOUTOU10').then(() => {
+                                    newCopyBtn.textContent = 'Code copié !';
+                                    newCopyBtn.style.background = '#27ae60';
+                                    newCopyBtn.style.color = '#fff';
+                                    setTimeout(() => {
+                                        closeModal();
+                                        setTimeout(() => {
+                                            injectPromoWidgetReset();
+                                        }, 400);
+                                    }, 1200);
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        };
+    };
+
+    injectPromoWidget();
+
+    // Dynamically redirect account menu buttons (.profile-btn) to the new connexion page
+    const profileBtns = document.querySelectorAll('.profile-btn');
+    profileBtns.forEach(btn => {
+        btn.setAttribute('href', 'connexion.html');
+    });
 });
+

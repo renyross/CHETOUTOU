@@ -20,12 +20,14 @@ Le site adopte une esthétique **Luxe Minimaliste** inspirée des magazines de m
 - `index.html` : Page d'accueil (Source de vérité pour le layout).
 - `styles.css` : Système de design complet et tokens CSS.
 - `main.js` : Logique d'interactivité (Menu, Panier, Recherche).
-- `/scratch/sync_layout.py` : Outil de maintenance pour la cohérence du site.
+- `sync_layout.py` : Outil de maintenance pour la cohérence du site.
+- `.gemini/skills/` : Instructions de comportement pour l'assistant IA.
 
-## 🚀 Installation Locale
-Pour visualiser le projet localement :
-1. Clonez ce dépôt.
-2. Ouvrez `index.html` dans votre navigateur ou utilisez une extension comme *Live Server*.
+## 🛡️ Politique de Modification (Assistant IA)
+Pour garantir la stabilité du site, l'assistant suit une politique de **Modifications Sélectives** :
+- **Pas de synchro automatique** : Les changements sur `index.html` ne sont pas propagés aux sous-pages sans demande explicite.
+- **Précision chirurgicale** : Seules les lignes concernées sont modifiées pour éviter les régressions visuelles.
+- **Confirmation requise** : L'utilisation des scripts de synchronisation doit être validée par l'utilisateur.
 
 ---
 *L'excellence pour votre compagnon.*

@@ -1,0 +1,152 @@
+14615-    width: 40px;
+14616-    height: 50px;
+14617-    border: none;
+14618-    background: none;
+14619-    cursor: pointer;
+14620-    font-size: 1.2rem;
+14621-}
+14622-
+14623-.qty-input-v4 {
+14624-    width: 40px;
+14625-    border: none;
+14626-    text-align: center;
+14627-    font-weight: 700;
+14628-}
+14629-
+14630-.add-btn-v4 {
+14631-    flex: 1;
+14632-    height: 50px;
+14633-    background: #000;
+14634-    color: #fff;
+14635-    border: none;
+14636-    border-radius: 4px;
+14637-    font-weight: 700;
+14638-    cursor: pointer;
+14639-    display: flex;
+14640-    align-items: center;
+14641-    justify-content: center;
+14642-    gap: 1rem;
+14643-}
+14644-
+14645-/* Accordions V4 */
+14646-.accordion-v4 {
+14647-    border-top: 1px solid #eee;
+14648-}
+14649-
+14650-.acc-item-v4 {
+14651-    border-bottom: 1px solid #eee;
+14652-}
+14653-
+14654-.acc-header-v4 {
+14655-    padding: 1.2rem 0;
+14656-    display: flex;
+14657-    justify-content: space-between;
+14658-    align-items: center;
+14659-    cursor: pointer;
+14660-    font-size: 0.9rem;
+14661-    font-weight: 600;
+14662-}
+14663-
+14664-/* Feature Stack Section */
+14665:.feature-stack-v4 {
+14666-    padding: 6rem 0;
+14667-    display: grid;
+14668-    grid-template-columns: 1fr 1fr;
+14669-    gap: 5rem;
+14670-    align-items: center;
+14671-}
+14672-
+14673:.feature-stack-v4.reverse {
+14674-    direction: rtl;
+14675-}
+14676-
+14677:.feature-stack-v4.reverse .feature-text-v4 {
+14678-    direction: ltr;
+14679-}
+14680-
+14681-.feature-img-v4 {
+14682-    border-radius: 20px;
+14683-    overflow: hidden;
+14684-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+14685-}
+14686-
+14687-.feature-img-v4 img {
+14688-    width: 100%;
+14689-    height: 100%;
+14690-    object-fit: cover;
+14691-    transition: transform 1s ease;
+14692-}
+14693-
+14694:.feature-stack-v4:hover .feature-img-v4 img {
+14695-    transform: scale(1.03);
+14696-}
+14697-
+14698-.feature-text-v4 h2 {
+14699-    font-size: 2.8rem;
+14700-    font-weight: 800;
+14701-    margin-bottom: 1.5rem;
+14702-    line-height: 1.1;
+14703-}
+14704-
+14705-.feature-text-v4 p {
+14706-    font-size: 1.1rem;
+14707-    color: #666;
+14708-    line-height: 1.6;
+14709-}
+14710-
+14711-@media (max-width: 1024px) {
+14712:    .product-v4-grid, .feature-stack-v4 {
+14713-        grid-template-columns: 1fr;
+14714-        gap: 3rem;
+14715-    }
+14716:    .feature-stack-v4.reverse {
+14717-        direction: ltr;
+14718-    }
+14719-    .gallery-v4 {
+14720-        grid-template-columns: 1fr;
+14721-    }
+14722-}
+14723-
+14724-/* --- FORCE LUXURY LAYOUT V4 --- */
+14725-.product-v4-container {
+14726-    max-width: 1400px;
+14727-    margin: 0 auto;
+14728-    padding: 4rem 2rem;
+14729-}
+14730-
+14731-.product-v4-grid {
+14732-    display: flex !important;
+14733-    gap: 4rem;
+14734-    align-items: flex-start;
+14735-}
+14736-
+14737-.gallery-v4 {
+14738-    flex: 0 0 60%; /* Prend 60% de la largeur */
+14739-    display: grid !important;
+14740-    grid-template-columns: 1fr 1fr !important;
+14741-    gap: 15px !important;
+14742-}
+14743-
+14744-.gallery-v4 .main-img-box {
+14745-    grid-column: span 2 !important;
+14746-    width: 100%;
+14747-}
+14748-
+14749-.gallery-v4 .thumb-v4 {
+14750-    width: 100%;
+14751-    aspect-ratio: 1 / 1;
+14752-    overflow: hidden;
+14753-    background: #f7f7f7;
+14754-}
+14755-
+14756-.gallery-v4 img {
+14757-    width: 100% !important;
+14758-    height: 100% !important;
+14759-    object-fit: cover !important;
+14760-    display: block;
+14761-}
+14762-
+14763-.info-v4 {
+14764-    flex: 0 0 35%; /* Prend 35% de la largeur */
+14765-    position: sticky;
+14766-    top: 120px;

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter | Chetoutou</title>
+    <meta name="description" content="Connectez-vous à votre compte Chetoutou pour suivre vos commandes et gérer vos adresses.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body.login-page-body {
+            background-color: #fafafa;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 440px;
+            padding: 2.5rem 2rem;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .brand-logo-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-container svg {
+            background: #000;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo-container:hover svg {
+            transform: scale(1.05) rotate(-5deg);
+        }
+
+        .brand-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #000;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem 2.25rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+        }
+
+        .login-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #111;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.5px;
+        }
+
+        .login-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0 0 2rem 0;
+            font-weight: 400;
+        }
+
+        .shop-pay-btn {
+            width: 100%;
+            background-color: #5A31F4;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(90, 49, 244, 0.18);
+        }
+
+        .shop-pay-btn:hover {
+            background-color: #4823d6;
+            box-shadow: 0 6px 18px rgba(90, 49, 244, 0.26);
+            transform: translateY(-1px);
+        }
+
+        .shop-pay-btn:active {
+            transform: scale(0.98);
+        }
+
+        .shop-brand {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -1.2px;
+            font-style: italic;
+            position: relative;
+            top: -1px;
+        }
+
+        .or-separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #888;
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin: 1.75rem 0;
+        }
+
+        .or-separator::before,
+        .or-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .or-separator:not(:empty)::before {
+            margin-right: 1.25rem;
+        }
+
+        .or-separator:not(:empty)::after {
+            margin-left: 1.25rem;
+        }
+
+        .input-group-v2 {
+            position: relative;
+            width: 100%;
+        }
+
+        .email-input-v2 {
+            width: 100%;
+            border: 1.5px solid #e2e2e2;
+            border-radius: 12px;
+            padding: 15px 52px 15px 16px;
+            font-size: 0.95rem;
+            color: #111;
+            background-color: #f7f7f7;
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .email-input-v2:focus {
+            border-color: #e69c1a;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(230, 156, 26, 0.1);
+        }
+
+        .submit-btn-v2 {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #222;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 50%;
+        }
+
+        .submit-btn-v2:hover {
+            color: #e69c1a;
+            transform: translateY(-50%) translateX(2px);
+        }
+
+        .opt-in-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            margin-top: 1.25rem;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.4;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .opt-in-container input[type="checkbox"] {
+            margin-top: 3px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: #5A31F4;
+        }
+
+        .terms-notice {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 2rem;
+            line-height: 1.4;
+        }
+
+        .terms-notice a {
+            color: #444;
+            text-decoration: underline;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .terms-notice a:hover {
+            color: #000;
+        }
+
+        .privacy-footer {
+            margin-top: 4.5rem;
+        }
+
+        .privacy-link-v2 {
+            font-size: 0.85rem;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .privacy-link-v2:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+
+        /* Success screen animations */
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            margin: 0 3px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dotFlashing 1s infinite alternate;
+        }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotFlashing {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .success-checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #27ae60;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 1rem auto 1.5rem auto;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="login-page-body">
+
+    <div class="login-wrapper">
+        <!-- Brand Header -->
+        <a href="index.html" class="brand-logo-container">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e69c1a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 14c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z" fill="#e69c1a"/>
+                <path d="M7 9.5c.83 0 1.5-.67 1.5-1.5S7.83 6.5 7 6.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5z" fill="#e69c1a"/>
+                <path d="M17 9.5c.83 0 1.5-.67 1.5-1.5S17.83 6.5 17 6.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5z" fill="#e69c1a"/>
+                <path d="M12 6c.83 0 1.5-.67 1.5-1.5S12.83 3 12 3s-1.5.67-1.5 1.5c0 .83.67 1.5 1.5 1.5z" fill="#e69c1a"/>
+            </svg>
+            <span class="brand-name">Chetoutou</span>
+        </a>
+
+        <!-- Main Login Card -->
+        <div class="login-card" id="login-card-node">
+            <h1 class="login-title">Se connecter</h1>
+            <p class="login-subtitle">Se connecter ou créer un compte</p>
+
+            <!-- Shop Pay Integration Button -->
+            <button class="shop-pay-btn" id="shop-pay-trigger">
+                Continuer avec&nbsp;<img src="shoppay-logo.svg" alt="Shop Pay" style="height: 18px; vertical-align: middle; filter: brightness(0) invert(1); display: inline-block; position: relative; top: -1px;">
+            </button>
+
+            <!-- Separator -->
+            <div class="or-separator">ou</div>
+
+            <!-- Email Login Form -->
+            <form id="email-login-form">
+                <div class="input-group-v2">
+                    <input type="email" class="email-input-v2" placeholder="Adresse e-mail" required id="email-field">
+                    <button type="submit" class="submit-btn-v2" aria-label="Continuer">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Marketing Opt-in -->
+                <label class="opt-in-container" for="newsletter-checkbox">
+                    <input type="checkbox" id="newsletter-checkbox" checked>
+                    <span>Envoyez-moi des nouvelles et des offres par e-mail</span>
+                </label>
+            </form>
+
+            <!-- Terms notice -->
+            <p class="terms-notice">
+                En continuant, vous acceptez nos <a href="conditions-utilisation.html">Conditions d'utilisation</a>
+            </p>
+        </div>
+
+        <!-- Sticky footer links -->
+        <div class="privacy-footer">
+            <a href="politique-confidentialite.html" class="privacy-link-v2">Politique de confidentialité</a>
+        </div>
+    </div>
+
+    <!-- Client side interactive logic for mock Shop login -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shopBtn = document.getElementById('shop-pay-trigger');
+            const emailForm = document.getElementById('email-login-form');
+            const cardNode = document.getElementById('login-card-node');
+            const emailField = document.getElementById('email-field');
+
+            // Handle successful mock connection
+            const triggerSuccessState = (loginMethod) => {
+                const emailVal = emailField.value || 'votre compte';
+                
+                // Show loading animation on card first
+                cardNode.style.opacity = '0.7';
+                cardNode.style.transform = 'scale(0.98)';
+                
+                setTimeout(() => {
+                    cardNode.style.opacity = '1';
+                    cardNode.style.transform = 'scale(1)';
+                    
+                    // Replace card contents with beautiful success state
+                    cardNode.innerHTML = `
+                        <div class="success-checkmark">✓</div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800; color: #111; margin-bottom: 0.5rem;">Connexion réussie</h2>
+                        <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem; line-height: 1.5;">
+                            Bienvenue sur Chetoutou ! Vous êtes connecté avec succès via <strong>${loginMethod}</strong>.
+                        </p>
+                        <div style="font-size: 0.85rem; color: #888; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 1rem;">
+                            <span>Redirection en cours</span>
+                            <span class="loading-dots" style="position: relative; top: -2px;">
+                                <span style="background-color: #e69c1a; width: 6px; height: 6px;"></span>
+                                <span style="background-color: #e69c1a; width: 6px; height: 6px;"></span>
+                                <span style="background-color: #e69c1a; width: 6px; height: 6px;"></span>
+                            </span>
+                        </div>
+                    `;
+                    
+                    // Redirect to home page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                }, 800);
+            };
+
+            // 1. Shop Pay click handler
+            shopBtn.addEventListener('click', () => {
+                shopBtn.innerHTML = `
+                    Connexion en cours
+                    <span class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                `;
+                shopBtn.disabled = true;
+                shopBtn.style.opacity = '0.85';
+                
+                setTimeout(() => {
+                    triggerSuccessState('Shop Pay');
+                }, 1000);
+            });
+
+            // 2. Email form submit handler
+            emailForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const submitBtn = emailForm.querySelector('.submit-btn-v2');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e69c1a" stroke-width="2.5" style="animation: spin 1s linear infinite;">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-dasharray="31.4" stroke-dashoffset="10" fill="none"></circle>
+                    </svg>
+                `;
+                
+                setTimeout(() => {
+                    triggerSuccessState(emailField.value);
+                }, 1000);
+            });
+        });
+    </script>
+
+    <!-- Simple CSS animation for spinner inside the script tag context -->
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

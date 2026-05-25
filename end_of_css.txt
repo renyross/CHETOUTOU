@@ -1,0 +1,200 @@
+
+.upsell-info {
+    flex: 1;
+}
+
+.upsell-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: block;
+}
+
+.upsell-price {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.upsell-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Add to Cart V4 */
+.cart-row-v4 {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.qty-box-v4 {
+    display: flex;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.qty-btn-v4 {
+    width: 40px;
+    height: 50px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.qty-input-v4 {
+    width: 40px;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+}
+
+.add-btn-v4 {
+    flex: 1;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Accordions V4 */
+.accordion-v4 {
+    border-top: 1px solid #eee;
+}
+
+.acc-item-v4 {
+    border-bottom: 1px solid #eee;
+}
+
+.acc-header-v4 {
+    padding: 1.2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Feature Stack Section */
+.feature-stack-v4 {
+    padding: 6rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.feature-stack-v4.reverse {
+    direction: rtl;
+}
+
+.feature-stack-v4.reverse .feature-text-v4 {
+    direction: ltr;
+}
+
+.feature-img-v4 {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.feature-img-v4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease;
+}
+
+.feature-stack-v4:hover .feature-img-v4 img {
+    transform: scale(1.03);
+}
+
+.feature-text-v4 h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.feature-text-v4 p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .product-v4-grid, .feature-stack-v4 {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .feature-stack-v4.reverse {
+        direction: ltr;
+    }
+    .gallery-v4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- FORCE LUXURY LAYOUT V4 --- */
+.product-v4-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.product-v4-grid {
+    display: flex !important;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.gallery-v4 {
+    flex: 0 0 60%; /* Prend 60% de la largeur */
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px !important;
+}
+
+.gallery-v4 .main-img-box {
+    grid-column: span 2 !important;
+    width: 100%;
+}
+
+.gallery-v4 .thumb-v4 {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f7f7f7;
+}
+
+.gallery-v4 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
+}
+
+.info-v4 {
+    flex: 0 0 35%; /* Prend 35% de la largeur */
+    position: sticky;
+    top: 120px;
+}
+
+/* Fix mobile view */
+@media (max-width: 1024px) {
+    .product-v4-grid {
+        flex-direction: column !important;
+    }
+    .gallery-v4, .info-v4 {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,263 @@
+<nav class="nav-links" id="nav-menu">
+                <div class="mobile-menu-header">
+                        <button class="menu-close-btn" id="menu-close-btn" aria-label="Fermer le menu">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Promenade -->
+                    <div class="nav-item has-megamenu">
+                        <a href="promenade.html" class="nav-link">Promenade <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Colliers</h3>
+                                        <ul>
+                                            <li><a href="collier-chien.html">Collier Chien</a></li>
+                                            <li><a href="collier-personnalise-chien.html">Collier Personnalisé</a></li>
+                                            <li><a href="collier-cuir-chien.html">Collier en Cuir</a></li>
+                                            <li><a href="collier-gps-chien.html">Collier GPS Chien</a></li>
+                                            <li><a href="collier-anti-fugue-chien.html">Collier Anti-Fugue</a></li>
+                                            <li><a href="collier-dressage-chien.html">Collier de Dressage</a></li>
+                                            <li><a href="collier-electrique-chien.html">Collier Électrique</a></li>
+                                            <li><a href="collier-anti-aboiement-chien.html">Collier Anti-Aboiement</a></li>
+                                            <li><a href="collier-anti-puce-chien.html">Collier Anti-Puce</a></li>
+                                            <li><a href="collier-etrangleur-chien.html">Collier Étrangleur</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Harnais</h3>
+                                        <ul>
+                                            <li><a href="harnais-chien.html">Harnais Chien</a></li>
+                                            <li><a href="harnais-anti-traction-chien.html">Harnais Anti-Traction</a></li>
+                                            <li><a href="harnais-petit-chien.html">Harnais Petit Chien</a></li>
+                                            <li><a href="harnais-chien-voiture.html">Harnais Voiture</a></li>
+                                            <li><a href="harnais-chien-course.html">Harnais de Course</a></li>
+                                            <li><a href="harnais-traction-chien.html">Harnais Traction</a></li>
+                                            <li><a href="harnais-chien-y.html">Harnais en Y</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Laisse & longe</h3>
+                                        <ul>
+                                            <li><a href="laisse-chien.html">Laisse Chien</a></li>
+                                            <li><a href="double-laisse-chien.html">Double Laisse</a></li>
+                                            <li><a href="laisse-enrouleur-chien.html">Laisse Enrouleur</a></li>
+                                            <li><a href="laisse-main-libre-chien.html">Laisse Mains Libres</a></li>
+                                            <li><a href="laisse-corde-chien.html">Laisse en Corde</a></li>
+                                            <li><a href="laisse-lasso-chien.html">Laisse Lasso</a></li>
+                                            <li><a href="laisse-longe-chien.html">Longe</a></li>
+                                            <li><a href="laisse-chien-velo.html">Laisse Vélo</a></li>
+                                            <li><a href="laisse-chien-course.html">Laisse de Course</a></li>
+                                            <li><a href="longue-laisse-chien.html">Longue Laisse</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Sac</h3>
+                                        <ul>
+                                            <li><a href="sac-chien.html">Sac Chien</a></li>
+                                            <li><a href="sac-transport-chien.html">Sac de Transport</a></li>
+                                            <li><a href="sac-a-dos-chien.html">Sac à Dos</a></li>
+                                            <li><a href="sac-chien-randonnee.html">Sac Chien Randonnée</a></li>
+                                            <li><a href="sac-chien-bandouliere.html">Sac Chien Bandoulière</a></li>
+                                            <li><a href="sac-chien-moto.html">Sac Chien Moto</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Couchage -->
+                    <div class="nav-item has-megamenu">
+                        <a href="couchage.html" class="nav-link">Couchage <svg width="10" height="6" viewBox="0 0 10 6"
+                                fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Paniers</h3>
+                                        <ul>
+                                            <li><a href="panier-chien.html">Panier Chien</a></li>
+                                            <li><a href="panier-orthopedique-chien.html">Panier Orthopédique Chien</a></li>
+                                            <li><a href="panier-dehoussable-chien.html">Panier Déhoussable Chien</a></li>
+                                            <li><a href="panier-plastique-chien.html">Panier Plastique Chien</a></li>
+                                            <li><a href="panier-osier-chien.html">Panier Osier Chien</a></li>
+                                            <li><a href="panier-petit-chien.html">Panier Petit Chien</a></li>
+                                            <li><a href="panier-grand-chien.html">Panier Grand Chien</a></li>
+                                            <li><a href="panier-xxl-chien.html">Panier XXL</a></li>
+                                            <li><a href="panier-voiture-chien.html">Panier Voiture</a></li>
+                                            <li><a href="panier-velo-chien.html">Panier Vélo</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Lits & Canapés</h3>
+                                        <ul>
+                                            <li><a href="lit-chien.html">Lit Chien</a></li>
+                                            <li><a href="lit-xxl-chien.html">Lit XXL</a></li>
+                                            <li><a href="lit-sureleve-chien.html">Lit Surélevé</a></li>
+                                            <li><a href="canape-chien.html">Canapé Luxe Chien</a></li>
+                                            <li><a href="couverture-chien.html">Couvertures Chien</a></li>
+                                            <li><a href="protection-canape-chien.html">Protection canapé chien</a></li>
+                                        </ul>
+                                    </div>
+                                                                        <div class="megamenu-column">
+                                        <h3>Coussins</h3>
+                                        <ul>
+                                            <li><a href="coussin-chien.html">Coussin Chien</a></li>
+                                            <li><a href="coussin-xxl-chien.html">Coussin Chien XXL</a></li>
+                                            <li><a href="coussin-dehoussable-chien.html">Coussin Chien Déhoussable</a></li>
+                                            <li><a href="coussin-anti-stress-chien.html">Coussin Anti-Stress Chien</a></li>
+                                            <li><a href="coussin-indestructible-chien.html">Coussin Chien Indestructible</a></li>
+                                            <li><a href="coussin-orthopedique-chien.html">Coussin Chien Orthopédique</a></li>
+                                            <li><a href="grand-coussin-chien.html">Grand Coussin Chien</a></li>
+                                            <li><a href="panier-coussin-chien.html">Panier Coussin Chien</a></li>
+                                            <li><a href="coussin-voiture-chien.html">Coussin Chien Voiture</a></li>
+                                            <li><a href="coussin-lavable-chien.html">Coussin Chien Lavable</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Tapis</h3>
+                                        <ul>
+                                            <li><a href="tapis-chien.html">Tapis pour Chien</a></li>
+                                            <li><a href="tapis-rafraichissant-chien.html">Tapis Rafraîchissant</a></li>
+                                            <li><a href="tapis-fouille.html">Tapis de Fouille</a></li>
+                                            <li><a href="tapis-lechage.html">Tapis de Léchage</a></li>
+                                            <li><a href="tapis-absorbant-chien.html">Tapis Absorbant</a></li>
+                                            <li><a href="tapis-xxl-chien.html">Tapis Chien XXL</a></li>
+                                            <li><a href="tapis-gamelle-chien.html">Tapis Gamelle Chien</a></li>
+                                            <li><a href="tapis-fraicheur-chien.html">Tapis Fraîcheur</a></li>
+                                            <li><a href="tapis-refrigerant-chien.html">Tapis Réfrigérant</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jouets -->
+                    <div class="nav-item has-megamenu">
+                        <a href="jouets.html" class="nav-link">Jouets <svg width="10" height="6" viewBox="0 0 10 6"
+                                fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Occupation</h3>
+                                        <ul>
+                                            <li><a href="jouet-interactif-chien.html">Jouet interactif Chien</a></li>
+                                            <li><a href="tapis-fouille.html">Tapis de fouille Chien</a></li>
+                                            <li><a href="jouets-indestructibles.html">Jouets indestructibles Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Peluches</h3>
+                                        <ul>
+                                            <li><a href="peluches-chien.html">Peluches pour chien</a></li>
+                                            <li><a href="doudou-chien.html">Doudou chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Balles & Lancer</h3>
+                                        <ul>
+                                            <li><a href="balles-chien.html">Balles pour chien</a></li>
+                                            <li><a href="frisbee-chien.html">Frisbee chien</a></li>
+                                            <li><a href="lanceur-balle-chien.html">Lanceur de balle Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hygiène -->
+                    <div class="nav-item has-megamenu">
+                        <a href="hygiene.html" class="nav-link">Hygiène <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Gamelles</h3>
+                                        <ul>
+                                            <li><a href="hygiene.html">Gamelle Chien</a></li>
+                                            <li><a href="gamelle-anti-glouton.html">Gamelle Anti-Glouton Chien</a></li>
+                                            <li><a href="gamelle-surelevee-chien.html">Gamelle Surélevée Chien</a></li>
+                                            <li><a href="gamelle-ceramique-chien.html">Gamelle Céramique Chien</a></li>
+                                            <li><a href="gamelle-personnalisee-chien.html">Gamelle Personnalisée Chien</a></li>
+                                            <li><a href="tapis-gamelle-chien.html">Tapis de Gamelle Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Alimentation</h3>
+                                        <ul>
+                                            <li><a href="tapis-lechage.html">Tapis de Léchage Chien</a></li>
+                                            <li><a href="boite-croquettes.html">Boîte à Croquettes Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Soin & Hygiène</h3>
+                                        <ul>
+                                            <li><a href="brosses.html">Brosses & Peignes Chien</a></li>
+                                            <li><a href="sac-a-crottes.html">Sac à Crottes Chien</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accessoires -->
+                    <div class="nav-item has-megamenu">
+                        <a href="accessoires.html" class="nav-link">Accessoires <svg width="10" height="6"
+                                viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></a>
+                        <div class="megamenu">
+                            <div class="container">
+                                <div class="megamenu-grid">
+                                    <div class="megamenu-column">
+                                        <h3>Vêtements</h3>
+                                        <ul>
+                                            <li><a href="impermeables.html">Imperméable Chien</a></li>
+                                            <li><a href="manteaux.html">Manteaux Chien</a></li>
+                                            <li><a href="bottine-chien.html">Bottines Chien</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-column">
+                                        <h3>Sécurité</h3>
+                                        <ul>
+                                            <li><a href="museliere.html">Muselière</a></li>
+                                            <li><a href="accessoires.html">Médailles & Sécurité</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog (Mobile Only) -->
+                    <div class="nav-item mobile-only-nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </div>
+                </nav>
