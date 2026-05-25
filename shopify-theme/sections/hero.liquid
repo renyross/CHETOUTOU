@@ -1,0 +1,196 @@
+<section class="hero-single-section" id="home-{{ section.id }}">
+  <style>
+    .hero-single-section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 850px;
+        margin-top: -6.5rem;
+        overflow: hidden;
+        background: #000;
+    }
+    .hero-single-section img.hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .hero-single-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: {{ section.settings.overlay_color }};
+        opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+        z-index: 1;
+    }
+    .hero-single-container {
+        max-width: 1500px;
+        padding: 0 10rem;
+        padding-bottom: 8rem;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        z-index: 2;
+        box-sizing: border-box;
+    }
+    .hero-single-content {
+        max-width: 480px;
+        color: #fff;
+    }
+    .hero-single-content h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 1.2rem;
+        letter-spacing: -1px;
+        color: #fff !important;
+        text-transform: none;
+    }
+    .hero-single-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.95;
+        margin-bottom: 2.5rem;
+        font-weight: 400;
+        color: #eee;
+    }
+    .hero-single-cta {
+        display: inline-block;
+        background: #fff;
+        color: #000;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        padding: 1rem 2.2rem;
+        border-radius: 30px;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .hero-single-cta:hover {
+        background: #e69c1a;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(230, 156, 26, 0.4);
+    }
+    @media (max-width: 992px) {
+        .hero-single-section {
+            height: 95vh;
+            min-height: 700px;
+            margin-top: -6.5rem;
+        }
+        .hero-single-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            opacity: 1;
+        }
+        .hero-single-container {
+            padding: 0 2rem;
+            align-items: flex-end;
+            padding-bottom: 5rem;
+        }
+        .hero-single-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero-single-content p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            max-width: 100%;
+        }
+        .hero-single-cta {
+            padding: 0.9rem 1.8rem;
+            font-size: 0.8rem;
+            width: 100%;
+            text-align: center;
+        }
+    }
+  </style>
+
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 2000 }}" alt="{{ section.settings.title | escape }}" class="hero-bg">
+  {%- else -%}
+    <div class="hero-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background: #222;"></div>
+  {%- endif -%}
+
+  <div class="hero-single-overlay"></div>
+  <div class="hero-single-container">
+    <div class="hero-single-content">
+      <h1>
+        {{ section.settings.title }}
+      </h1>
+      <p>
+        {{ section.settings.text }}
+      </p>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="hero-single-cta">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bannière Hero Plein Écran",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image de fond"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre principal",
+      "default": "L'Élégance. Sans Compromis."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Des accessoires haut de gamme conçus pour durer, alliant excellence canine et style intemporel au quotidien."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Label du bouton",
+      "default": "Découvrir la collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Couleur de superposition",
+      "default": "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacité de la superposition",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bannière Hero Plein Écran"
+    }
+  ]
+}
+{% endschema %}

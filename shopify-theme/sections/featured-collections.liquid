@@ -1,0 +1,106 @@
+<section class="incontournables" style="padding: 6rem 0;">
+  <div class="collections-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; max-width: 1500px; margin-left: auto; margin-right: auto; padding: 0 20px;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: #111;">{{ section.settings.title }}</h2>
+    <a href="{{ section.settings.link | default: '/collections/all' }}" class="view-collections-link" style="color: #111; font-weight: 600; font-size: 0.9rem; text-decoration: underline;">{{ section.settings.link_text }}</a>
+  </div>
+
+  <div class="collections-grid-wrapper" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1500px; margin: 0 auto; padding: 0 20px;">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'collection' -%}
+        {%- assign collection_item = collections[block.settings.collection] -%}
+        <a href="{{ collection_item.url | default: '#' }}" class="collection-card" style="text-decoration: none; color: inherit; display: block;" {{ block.shopify_attributes }}>
+          <div class="collection-img-box" style="aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; border-radius: 8px; margin-bottom: 1rem;">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ collection_item.title | escape }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+            {%- elsif collection_item.featured_image != blank -%}
+              <img src="{{ collection_item.featured_image | image_url: width: 500 }}" alt="{{ collection_item.title | escape }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+            {%- else -%}
+              <div style="background: #eee; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #aaa;">Collection</div>
+            {%- endif -%}
+          </div>
+          <div class="collection-info" style="text-align: center;">
+            <h3 style="font-size: 1.1rem; font-weight: 600; color: #111; margin-bottom: 0.4rem;">
+              {{ block.settings.title | default: collection_item.title | default: "Nom de la Collection" }}
+            </h3>
+            <p style="font-size: 0.85rem; color: #666;">
+              {{ block.settings.subtitle | default: "Découvrir la gamme" }}
+            </p>
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections à la Une",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre de la Section",
+      "default": "Produits phares"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Texte du lien de catalogue",
+      "default": "Découvrir tous nos produits"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Lien de catalogue"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre personnalisé"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sous-titre personnalisé",
+          "default": "Découvrir la gamme"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image personnalisée (Optionnelle)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections à la Une",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
