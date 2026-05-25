@@ -1,0 +1,145 @@
+<footer class="footer">
+  <button aria-label="Retour en haut" class="back-to-top" id="back-to-top">
+    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24" width="24">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+  <div class="container footer-grid">
+    <!-- Brand Info Column -->
+    <div class="footer-col brand-col">
+      <a class="footer-logo" href="{{ routes.root_url }}">
+        {{ section.settings.brand_name }}
+      </a>
+      <div class="brand-desc">
+        <p>{{ section.settings.brand_description }}</p>
+      </div>
+      <div class="brand-contact">
+        <p>{{ section.settings.brand_email }}</p>
+        <p>{{ section.settings.brand_phone }}</p>
+      </div>
+    </div>
+
+    <!-- Menu 1 -->
+    <div class="footer-col">
+      <h4>{{ section.settings.menu_1_title }}</h4>
+      <ul class="footer-links">
+        {%- for link in section.settings.menu_1.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <!-- Menu 2 -->
+    <div class="footer-col">
+      <h4>{{ section.settings.menu_2_title }}</h4>
+      <ul class="footer-links">
+        {%- for link in section.settings.menu_2.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <!-- Newsletter Column -->
+    <div class="footer-col">
+      <h4>{{ section.settings.newsletter_title }}</h4>
+      <p class="footer-newsletter-text">{{ section.settings.newsletter_text }}</p>
+      
+      <div class="footer-newsletter">
+        {%- form 'customer', class: 'footer-newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="input-group">
+            <input aria-label="Votre adresse email" placeholder="Adresse email" type="email" name="contact[email]" required />
+            <button class="submit-btn" type="submit">
+              <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar: Payments & Copyright -->
+  <div class="footer-bottom">
+    <div class="container bottom-flex">
+      <div class="payment-icons">
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'pm-card' }}
+        {%- endfor -%}
+      </div>
+      <div class="copyright">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Nom de la marque",
+      "default": "Chetoutou"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Description",
+      "default": "Chetoutou, c'est le rendez-vous des passionnés de leurs compagnons à quatre pattes : un vaste catalogue de modèles intemporels, élégants et reconnus, sélectionnés avec soin."
+    },
+    {
+      "type": "text",
+      "id": "brand_email",
+      "label": "E-mail de contact",
+      "default": "contact@cheztoutou.com"
+    },
+    {
+      "type": "text",
+      "id": "brand_phone",
+      "label": "Téléphone de contact",
+      "default": "0783066021"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Titre du Menu 1",
+      "default": "Service clients"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Menu 1",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "Titre du Menu 2",
+      "default": "Informations"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu 2",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Titre Newsletter",
+      "default": "Cercle Privé"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Texte Newsletter",
+      "default": "Rejoignez-nous et bénéficiez de -10% sur votre première commande."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Chetoutou Premium",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity",
+    "theme_documentation_url": "https://github.com/renyross/CHETOUTOU",
+    "theme_support_url": "https://github.com/renyross/CHETOUTOU"
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "color",
+        "id": "colors_solid_button_background",
+        "label": "Bouton principal - Arrière-plan",
+        "default": "#e69c1a"
+      },
+      {
+        "type": "color",
+        "id": "colors_solid_button_text",
+        "label": "Bouton principal - Texte",
+        "default": "#ffffff"
+      }
+    ]
+  }
+]

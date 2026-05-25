@@ -1,0 +1,437 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+<section class="product-v4-container" data-section-id="{{ section.id }}">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-container-v4" style="padding: 0 0 2rem 0;">
+      <nav class="breadcrumb-v4" style="font-size: 0.85rem; color: #555;">
+        <a href="{{ routes.root_url }}" style="color: #555; text-decoration: none;">Accueil</a> / 
+        {%- if collection -%}
+          <a href="{{ collection.url }}" style="color: #555; text-decoration: none;">{{ collection.title }}</a> / 
+        {%- else -%}
+          <a href="/collections/all" style="color: #555; text-decoration: none;">Boutique</a> /
+        {%- endif -%}
+        <span style="color: #111;">{{ product.title }}</span>
+      </nav>
+    </div>
+
+    <div class="product-v4-grid" id="product-v4-grid">
+      <!-- Left: Gallery -->
+      <div class="gallery-v4">
+        <div class="main-img-box" style="grid-column: span 2; background: #f7f7f7; margin-bottom: 12px; position: relative; overflow: hidden;">
+          <button id="gallery-prev" class="gallery-arrow" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); background:#fff; border:none; width:44px; height:44px; border-radius:50%; box-shadow:0 4px 15px rgba(0,0,0,0.15); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <img src="{{ featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}" id="main-product-img" class="main-product-img" style="width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 1/1;">
+          
+          <button id="gallery-next" class="gallery-arrow" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); background:#fff; border:none; width:44px; height:44px; border-radius:50%; box-shadow:0 4px 15px rgba(0,0,0,0.15); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        {%- for image in product.images -%}
+          <div class="sub-img-box">
+            <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title | escape }}" data-large-url="{{ image | image_url: width: 800 }}" style="width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 1/1; background: #f7f7f7; cursor: pointer;">
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Right: Info -->
+      <div class="info-v4" style="padding-top: 15px; position: sticky; top: 120px;">
+        <h1 class="product-title-v4" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #111; margin-bottom: 0.8rem;">{{ product.title }}</h1>
+
+        <!-- Star Rating -->
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem;">
+          <span style="color: #f39c12; font-size: 1.1rem;">★★★★★</span>
+          <span style="color: #111; font-size: 0.85rem; font-weight: 600;">Noté 4.9/5 basé sur 15 avis</span>
+        </div>
+
+        <!-- Price -->
+        <div style="margin-bottom: 1.5rem;">
+          <div id="product-price-display" style="font-size: 1.8rem; font-weight: 800; color: #111; margin-bottom: 0.4rem;">
+            {{ current_variant.price | money }}
+          </div>
+          <div style="font-size: 0.8rem; color: #555;">Livraison gratuite</div>
+        </div>
+
+        <!-- Top Description Accordion -->
+        <div class="accordion-v4" style="border-top:1px solid #eee; margin-bottom: 1.5rem;">
+          <div class="acc-item-v4" style="border-bottom:1px solid #eee;">
+            <div class="acc-header-new" style="padding:15px 0; display:flex; justify-content:space-between; cursor:pointer; font-size:0.9rem; font-weight:600; color: #111;">
+              Description
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.3s ease;"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="pdp-acc-content" style="display:none; padding-bottom: 1.5rem; font-size:0.9rem; color:#555; line-height:1.6;">
+              {{ product.description }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Availability badge -->
+        <div id="variant-availability" style="display:flex; align-items:center; gap:8px; margin-bottom:1.5rem; font-size:0.9rem; font-weight:600; color: {% if current_variant.available %}#2ecc71{% else %}#e74c3c{% endif %};">
+          <div style="width:6px; height:6px; background:{% if current_variant.available %}#2ecc71{% else %}#e74c3c{% endif %}; border-radius:50%;"></div>
+          <span id="availability-text">{% if current_variant.available %}En stock{% else %}Rupture de stock{% endif %}</span>
+        </div>
+
+        <div style="border-top: 2px solid #2ecc71; margin-bottom: 1.5rem;"></div>
+
+        <!-- Shopify Product Form -->
+        {%- form 'product', product, id: 'product-form', class: 'product-form' -%}
+          <input type="hidden" name="id" id="selected-variant-id" value="{{ current_variant.id }}">
+          
+          <!-- Variant Swatches -->
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              {%- assign is_color = false -%}
+              {%- if option.name == 'Couleur' or option.name == 'Color' or option.name == 'couleur' -%}
+                {%- assign is_color = true -%}
+              {%- endif -%}
+
+              {%- if is_color -%}
+                <label id="color-label" style="display:block; font-size:0.85rem; font-weight: 600; margin-bottom:0.8rem; color: #111;">
+                  {{ option.name }}: <span id="color-value">{{ option.selected_value }}</span>
+                </label>
+                <div style="display:flex; gap:10px; margin-bottom:1.5rem;">
+                  {%- for value in option.values -%}
+                    <!-- Find matching variant image -->
+                    {%- assign variant_image = blank -%}
+                    {%- for variant in product.variants -%}
+                      {%- if variant.title contains value and variant.image != blank -%}
+                        {%- assign variant_image = variant.image | image_url: width: 100, height: 100 -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+
+                    <div class="color-swatch{% if option.selected_value == value %} active-swatch{% endif %}" 
+                         data-color="{{ value | escape }}" 
+                         style="width:50px; height:50px; border:{% if option.selected_value == value %}1px solid #111{% else %}1px solid #eee{% endif %}; border-radius:4px; padding:2px; cursor:pointer; opacity: {% if option.selected_value == value %}1{% else %}0.6{% endif %}; transition: all 0.2s;">
+                      {%- if variant_image != blank -%}
+                        <img src="{{ variant_image }}" style="width:100%; height:100%; object-fit:cover; border-radius:2px;" alt="{{ value | escape }}">
+                      {%- else -%}
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#eee; font-size:0.7rem; border-radius:2px;">{{ value }}</div>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <!-- Other options (like size) -->
+                <label style="display:block; font-size:0.85rem; font-weight: 600; margin-bottom:0.8rem; color: #111;">{{ option.name }}</label>
+                <select class="option-selector" data-option-index="{{ forloop.index0 }}" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; margin-bottom:1.5rem; background:#fff; font-family:inherit;">
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <!-- Quantity -->
+          <label style="display:block; font-size:0.85rem; font-weight: 600; margin-bottom:0.8rem; color: #111;">Quantité</label>
+          <div style="display:flex; border:1px solid #ddd; border-radius:4px; overflow:hidden; width:120px; margin-bottom:1.5rem;">
+            <button type="button" id="qty-minus" style="background:none; border:none; padding:12px 15px; cursor:pointer; font-size:1.2rem; color: #555; transition: background 0.2s;">-</button>
+            <input type="text" name="quantity" id="qty-input" value="1" style="width:100%; text-align:center; border:none; background:none; font-family:inherit; font-size:0.9rem; font-weight:600;">
+            <button type="button" id="qty-plus" style="background:none; border:none; padding:12px 15px; cursor:pointer; font-size:1.2rem; color: #555; transition: background 0.2s;">+</button>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button type="submit" name="add" id="add-to-cart-btn" 
+                  style="width: 100%; background: #e69c1a; color: #fff; border: none; border-radius: 4px; padding: 18px 0; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-bottom: 1.5rem; transition: background 0.3s, transform 0.15s;"
+                  {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+            {%- if current_variant.available -%}
+              Ajouter au panier
+            {%- else -%}
+              Rupture de stock
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        <!-- Klarna Widget -->
+        <div style="background: #f9f9f9; border: 1px solid #e8e8e8; border-radius: 6px; padding: 0.9rem 1.2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+          <span style="font-size: 0.85rem; color: #333; font-weight: 500;">Paiement en 3x sans frais disponible</span>
+          <svg width="56" height="22" viewBox="0 0 56 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Klarna">
+            <rect width="56" height="22" rx="4" fill="#FFB3C7"/>
+            <text x="50%" y="15" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#17120E" letter-spacing="-0.3">klarna</text>
+          </svg>
+        </div>
+
+        <!-- USPs / Trust badges -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 1.5rem 0;">
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <div style="color: #111; padding-top: 2px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #111; margin-bottom: 2px;">Paiement Sécurisé</div>
+              <div style="font-size: 0.75rem; color: #666;">Technologie SSL</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <div style="color: #111; padding-top: 2px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #111; margin-bottom: 2px;">Expédition sous 24h/48h</div>
+              <div style="font-size: 0.75rem; color: #666;">Livraison 8 à 15j ouvrés</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <div style="color: #111; padding-top: 2px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 2v6h-6"></path><path d="M21 13a9 9 0 1 1-3-7.7L21 8"></path></svg></div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #111; margin-bottom: 2px;">Satisfait ou remboursé</div>
+              <div style="font-size: 0.75rem; color: #666;">Retour sous 30 jours</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <div style="color: #111; padding-top: 2px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #111; margin-bottom: 2px;">Service client</div>
+              <div style="font-size: 0.75rem; color: #666;">Dédié et réactif</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Accordions -->
+        <div class="accordion-v4">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'accordion' -%}
+              <div class="acc-item-v4" style="border-bottom:1px solid #eee;">
+                <div class="acc-header-new" style="padding:15px 0; display:flex; justify-content:space-between; cursor:pointer; font-size:0.9rem; font-weight:600; color: #111;">
+                  {{ block.settings.title }}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.3s ease;"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="pdp-acc-content" style="display:none; padding-bottom: 1.5rem; font-size:0.9rem; color:#555; line-height: 1.6;">
+                  {{ block.settings.content }}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <!-- Social Share Icons -->
+        <div style="display: flex; align-items: center; gap: 15px; margin-top: 1.5rem;">
+          <span style="font-size: 0.8rem; font-weight: 600;">Partager sur les réseaux:</span>
+          <div style="display: flex; gap: 12px; color: #111;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url }}" target="_blank" style="color: inherit;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="https://twitter.com/intent/tweet?text={{ product.title | escape }}&url={{ shop.url | append: product.url }}" target="_blank" style="color: inherit;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+            <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url }}&media={{ featured_image | image_url: width: 800 }}&description={{ product.title | escape }}" target="_blank" style="color: inherit;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JSON variants data for JavaScript selection -->
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product.variants | json }}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionId = '{{ section.id }}';
+  const productContainer = document.querySelector('[data-section-id="' + sectionId + '"]');
+  if (!productContainer) return;
+
+  // --- Gallery Carousel Logic ---
+  const mainImg = productContainer.querySelector('#main-product-img');
+  const thumbnails = productContainer.querySelectorAll('.sub-img-box img');
+  const prevBtn = productContainer.querySelector('#gallery-prev');
+  const nextBtn = productContainer.querySelector('#gallery-next');
+
+  if (mainImg && thumbnails.length > 0) {
+    let images = [mainImg.src];
+    thumbnails.forEach(img => {
+      const largeUrl = img.getAttribute('data-large-url') || img.src;
+      if (!images.includes(largeUrl)) {
+        images.push(largeUrl);
+      }
+    });
+
+    let currentIndex = 0;
+
+    function updateMainImage(index) {
+      mainImg.style.opacity = 0.6;
+      setTimeout(() => {
+        mainImg.src = images[index];
+        mainImg.style.opacity = 1;
+      }, 150);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        const largeUrl = thumb.getAttribute('data-large-url') || thumb.src;
+        currentIndex = images.indexOf(largeUrl);
+        if (currentIndex === -1) currentIndex = 0;
+        updateMainImage(currentIndex);
+      });
+    });
+    
+    mainImg.style.transition = 'opacity 0.2s ease-in-out';
+  }
+
+  // --- Accordion Logic ---
+  productContainer.querySelectorAll('.acc-header-new').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const content = item.querySelector('.pdp-acc-content');
+      const svg = header.querySelector('svg');
+      
+      if (!content) return;
+      item.classList.toggle('active');
+      
+      if (item.classList.contains('active')) {
+        content.style.display = 'block';
+        if(svg) svg.style.transform = 'rotate(180deg)';
+      } else {
+        content.style.display = 'none';
+        if(svg) svg.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+
+  // --- Quantity Logic ---
+  const qtyMinus = productContainer.querySelector('#qty-minus');
+  const qtyPlus = productContainer.querySelector('#qty-plus');
+  const qtyInput = productContainer.querySelector('#qty-input');
+
+  if(qtyMinus && qtyPlus && qtyInput) {
+    qtyMinus.addEventListener('click', (e) => {
+      e.preventDefault();
+      let val = parseInt(qtyInput.value) || 1;
+      if(val > 1) qtyInput.value = val - 1;
+    });
+    qtyPlus.addEventListener('click', (e) => {
+      e.preventDefault();
+      let val = parseInt(qtyInput.value) || 1;
+      qtyInput.value = val + 1;
+    });
+  }
+
+  // --- Variant Selector Logic ---
+  const swatches = productContainer.querySelectorAll('.color-swatch');
+  const colorLabel = productContainer.querySelector('#color-value');
+  const variantJsonElement = document.getElementById('ProductJson-' + sectionId);
+  const selectedVariantIdInput = productContainer.querySelector('#selected-variant-id');
+  const priceDisplay = productContainer.querySelector('#product-price-display');
+  const availabilityDisplay = productContainer.querySelector('#variant-availability');
+  const availabilityText = productContainer.querySelector('#availability-text');
+  const addToCartBtn = productContainer.querySelector('#add-to-cart-btn');
+
+  if (variantJsonElement && swatches.length > 0) {
+    const variants = JSON.parse(variantJsonElement.textContent);
+    
+    swatches.forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        // Remove active state
+        swatches.forEach(s => {
+          s.style.border = '1px solid #eee';
+          s.style.opacity = '0.6';
+          s.classList.remove('active-swatch');
+        });
+        
+        // Add active state to selected
+        swatch.style.border = '1px solid #111';
+        swatch.style.opacity = '1';
+        swatch.classList.add('active-swatch');
+
+        const colorName = swatch.getAttribute('data-color');
+        if (colorLabel) colorLabel.textContent = colorName;
+
+        // Find the variant with this color
+        const matchingVariant = variants.find(variant => {
+          return variant.options.includes(colorName) || variant.title.includes(colorName);
+        });
+
+        if (matchingVariant) {
+          // Update selected variant input
+          if (selectedVariantIdInput) selectedVariantIdInput.value = matchingVariant.id;
+
+          // Update price (format using standard currency fallback)
+          if (priceDisplay) {
+            const formattedPrice = (matchingVariant.price / 100).toFixed(2).replace('.', ',') + ' €';
+            priceDisplay.textContent = formattedPrice;
+          }
+
+          // Update stock status
+          if (matchingVariant.available) {
+            if (availabilityDisplay) availabilityDisplay.style.color = '#2ecc71';
+            const dot = availabilityDisplay ? availabilityDisplay.querySelector('div') : null;
+            if (dot) dot.style.background = '#2ecc71';
+            if (availabilityText) availabilityText.textContent = 'En stock';
+            if (addToCartBtn) {
+              addToCartBtn.removeAttribute('disabled');
+              addToCartBtn.textContent = 'Ajouter au panier';
+              addToCartBtn.style.background = '#e69c1a';
+            }
+          } else {
+            if (availabilityDisplay) availabilityDisplay.style.color = '#e74c3c';
+            const dot = availabilityDisplay ? availabilityDisplay.querySelector('div') : null;
+            if (dot) dot.style.background = '#e74c3c';
+            if (availabilityText) availabilityText.textContent = 'Rupture de stock';
+            if (addToCartBtn) {
+              addToCartBtn.setAttribute('disabled', 'disabled');
+              addToCartBtn.textContent = 'Rupture de stock';
+              addToCartBtn.style.background = '#888';
+            }
+          }
+
+          // Update gallery image if variant has featured image
+          if (matchingVariant.featured_image && mainImg) {
+            mainImg.src = matchingVariant.featured_image.src;
+            // Also focus in list
+            const matchedThumb = Array.from(thumbnails).find(thumb => {
+              return thumb.src.includes(matchingVariant.featured_image.src) || thumb.getAttribute('data-large-url').includes(matchingVariant.featured_image.src);
+            });
+            if (matchedThumb) {
+              matchedThumb.click();
+            }
+          }
+        }
+      });
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Fiche Produit Principale",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordéon (FAQ / Détails)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Caractéristiques"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Contenu",
+          "default": "<p>Contenu détaillé de l'accordéon.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+<section style="background-color: #000; padding: 5rem 0; color: #fff;">
+  <div class="container" style="max-width: 1500px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4rem; align-items: start;">
+        
+      <!-- Left: Support Box -->
+      <div style="background-color: #f7f7f7; padding: 3rem 2rem; border-radius: 16px; text-align: center; color: #111;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600;">{{ section.settings.support_title }}</h3>
+        <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 2rem;">{{ section.settings.support_content }}</p>
+        <a href="{{ section.settings.support_button_link | default: '#' }}" style="display: inline-block; background-color: #000; color: #fff; text-decoration: none; padding: 1rem 2rem; border-radius: 30px; font-weight: 600; font-size: 0.9rem; transition: background 0.3s;">{{ section.settings.support_button_label }}</a>
+      </div>
+
+      <!-- Right: FAQ Accordions -->
+      <div>
+        <h2 style="font-family:'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem; color: #fff;">{{ section.settings.faq_title }}</h2>
+        
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq_item' -%}
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.2);" {{ block.shopify_attributes }}>
+              <div class="faq-header-v4" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 1.05rem; font-weight: 500;">
+                {{ block.settings.question }}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #888; transition: transform 0.3s ease;"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-content-v4" style="display: none; padding-bottom: 1.5rem; font-size: 0.95rem; color: #ccc; line-height: 1.6;">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-header-v4').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const content = item.querySelector('.faq-content-v4');
+      const svg = header.querySelector('svg');
+      
+      if (!content) return;
+
+      item.classList.toggle('active');
+      
+      if (item.classList.contains('active')) {
+        content.style.display = 'block';
+        if(svg) svg.style.transform = 'rotate(180deg)';
+      } else {
+        content.style.display = 'none';
+        if(svg) svg.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "FAQ & Support",
+  "settings": [
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Titre FAQ",
+      "default": "Questions fréquentes"
+    },
+    {
+      "type": "text",
+      "id": "support_title",
+      "label": "Titre du Bloc Support",
+      "default": "Besoin d'aide ?"
+    },
+    {
+      "type": "text",
+      "id": "support_content",
+      "label": "Contenu du Bloc Support",
+      "default": "Notre équipe est là pour vous répondre du Lundi au Vendredi de 8h30 à 19h. Samedi de 10h à 17h."
+    },
+    {
+      "type": "text",
+      "id": "support_button_label",
+      "label": "Label du Bouton",
+      "default": "Contactez notre support"
+    },
+    {
+      "type": "url",
+      "id": "support_button_link",
+      "label": "Lien du Bouton"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question / Réponse",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Comment entretenir le produit ?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p>Réponse détaillée à la question fréquente.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ & Support",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Comment entretenir le cuir pleine fleur ?",
+            "answer": "<p>Le cuir pleine fleur est une matière naturelle noble qui se patine avec le temps. Pour l'entretenir, nettoyez-le simplement avec un chiffon doux légèrement humide, puis appliquez un baume nourrissant spécial cuir (1 à 2 fois par an) pour conserver sa souplesse et sa brillance d'origine.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Le collier résiste-t-il à l'eau et aux baignades ?",
+            "answer": "<p>Nos colliers sont traités pour résister aux éclaboussures et à l'humidité du quotidien. Cependant, pour préserver la longévité et l'éclat du cuir naturel, nous vous recommandons d'éviter les baignades prolongées (mer ou piscine).</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Puis-je l'échanger si la taille ne convient pas ?",
+            "answer": "<p>Absolument. Nous voulons que votre chien soit parfaitement à l'aise. Vous disposez de 30 jours après réception pour demander un échange gratuit de taille (sous réserve de stock) ou un retour pour remboursement.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

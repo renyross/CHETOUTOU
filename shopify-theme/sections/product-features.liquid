@@ -1,0 +1,111 @@
+<section class="product-features-section">
+  {%- for block in section.blocks -%}
+    <section class="feature-focus-v4{% if block.settings.bg_gray %} alt-bg-v4{% endif %}" style="padding: 6rem 0; {% if block.settings.bg_gray %}background-color: #f7f7f7;{% else %}background-color: #fff;{% endif %}" {{ block.shopify_attributes }}>
+      <div class="container" style="max-width: 1500px; margin: 0 auto;">
+        <div class="feature-focus-grid-v4{% if block.settings.layout == 'right' %} reversed-v4{% endif %}" style="display:grid; grid-template-columns:{% if block.settings.layout == 'right' %}1.2fr 0.8fr{% else %}0.8fr 1.2fr{% endif %}; gap:6rem; align-items:center;">
+          
+          <div class="feature-focus-img-box-v4" style="{% if block.settings.layout == 'right' %}order: 2;{% else %}order: 1;{% endif %}">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" style="width:100%; height:auto; max-height:450px; object-fit:cover; border-radius:8px;">
+            {%- else -%}
+              <div style="background:#eee; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; border-radius:8px; color:#aaa; font-weight:600;">Image de la caractéristique</div>
+            {%- endif -%}
+          </div>
+
+          <div class="feature-focus-text-v4" style="{% if block.settings.layout == 'right' %}order: 1;{% else %}order: 2;{% endif %}">
+            <h2 style="font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1.5rem; color:#111;">{{ block.settings.title }}</h2>
+            <div style="color:#555; line-height:1.8; font-size:1.1rem;">
+              {{ block.settings.content }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Histoires / Caractéristiques",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature_story",
+      "name": "Histoire / Caractéristique",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Design intemporel et élégant"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Description",
+          "default": "<p>Description de la caractéristique ou de l'histoire du produit.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Position de l'image",
+          "options": [
+            {
+              "value": "left",
+              "label": "Gauche"
+            },
+            {
+              "value": "right",
+              "label": "Droite"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "bg_gray",
+          "label": "Fond gris clair",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Histoires / Caractéristiques",
+      "blocks": [
+        {
+          "type": "feature_story",
+          "settings": {
+            "title": "Design intemporel et élégant",
+            "layout": "left",
+            "bg_gray": false
+          }
+        },
+        {
+          "type": "feature_story",
+          "settings": {
+            "title": "Cuir pleine fleur d'exception",
+            "layout": "right",
+            "bg_gray": true
+          }
+        },
+        {
+          "type": "feature_story",
+          "settings": {
+            "title": "Le cadeau parfait, prêt à offrir",
+            "layout": "left",
+            "bg_gray": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

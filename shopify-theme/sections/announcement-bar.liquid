@@ -1,0 +1,54 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement-bar">
+    <div class="announcement-slider">
+      {%- for block in section.blocks -%}
+        <div class="announcement-item" {{ block.shopify_attributes }}>
+          {{ block.settings.text }}
+        </div>
+      {%- endfor -%}
+      <!-- Seamless Loop repeat first block -->
+      {%- if section.blocks.size > 1 -%}
+        <div class="announcement-item">
+          {{ section.blocks.first.settings.text }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barre d'annonces",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Annonce",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte de l'annonce",
+          "default": "Livraison standard gratuite à partir de 70€ 🚚"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement",
+        "settings": {
+          "text": "Livraison standard gratuite à partir de 70€ 🚚"
+        }
+      },
+      {
+        "type": "announcement",
+        "settings": {
+          "text": "-10% sur votre première commande ✉️"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

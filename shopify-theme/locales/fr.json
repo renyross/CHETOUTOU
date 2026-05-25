@@ -1,0 +1,18 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Recherche...",
+      "submit": "Rechercher"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Rupture de stock",
+      "unavailable": "Non disponible",
+      "quantity": "Quantité",
+      "in_stock": "En stock",
+      "out_of_stock": "En rupture de stock"
+    }
+  }
+}

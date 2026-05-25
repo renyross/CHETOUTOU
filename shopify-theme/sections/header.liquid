@@ -1,0 +1,111 @@
+<header class="navbar scrolled">
+  <div class="container navbar-content">
+    <div class="nav-left">
+      <a href="{{ routes.root_url }}" class="logo">
+        {{ section.settings.logo_text }}<br>
+        <span class="logo-sub">{{ section.settings.logo_subtext }}</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <nav class="nav-links" id="nav-menu">
+      <div class="mobile-menu-header">
+        <button class="menu-close-btn" id="menu-close-btn" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      {%- for link in section.settings.menu.links -%}
+        <div class="nav-item {% if link.links != blank %}has-megamenu{% endif %}">
+          <a href="{{ link.url }}" class="nav-link">
+            {{ link.title }}
+            {% if link.links != blank %}
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            {% endif %}
+          </a>
+
+          {% if link.links != blank %}
+            <div class="megamenu">
+              <div class="container">
+                <div class="megamenu-grid">
+                  {%- for childlink in link.links -%}
+                    <div class="megamenu-column">
+                      <h3>{{ childlink.title }}</h3>
+                      <ul>
+                        {%- for grandchildlink in childlink.links -%}
+                          <li><a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a></li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {%- endfor -%}
+    </nav>
+
+    <div class="nav-right">
+      <div class="nav-actions">
+        <button class="icon-btn search-btn" id="search-toggle-btn" aria-label="Recherche">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </button>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="icon-btn profile-btn" aria-label="Compte">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </a>
+        {%- endif -%}
+        <button id="cart-btn" class="icon-btn cart-toggle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="cart-count">{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Texte du logo",
+      "default": "Chetoutou"
+    },
+    {
+      "type": "text",
+      "id": "logo_subtext",
+      "label": "Sous-titre du logo",
+      "default": "Passionné depuis 2020"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu principal",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

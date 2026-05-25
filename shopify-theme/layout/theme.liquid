@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+        <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <!-- Global CSS -->
+    {{ 'styles.css' | asset_url | stylesheet_tag }}
+
+    <!-- Shopify Core Scripts -->
+    {{ content_for_header }}
+
+    <style>
+        .logo {
+            display: inline-block !important;
+            text-align: center !important;
+            line-height: 1.05 !important;
+            vertical-align: middle !important;
+        }
+        .logo-sub {
+            font-size: 0.45rem !important;
+            font-weight: 500 !important;
+            text-transform: none !important;
+            letter-spacing: 0.02em !important;
+            color: #666 !important;
+            margin-top: 4px !important;
+            display: block !important;
+            white-space: nowrap !important;
+        }
+        .gallery-arrow {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.2s ease, visibility 0.3s;
+        }
+        .main-img-box:hover .gallery-arrow {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-product-img {
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="template-{{ template.name }} shop-page">
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main role="main" id="MainContent" class="content-for-layout focus-none" tabindex="-1">
+        {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <!-- Global Scripts -->
+    <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+{%- paginate collection.products by 12 -%}
+
+<!-- Premium Category Header Banner -->
+<section class="premium-category-header">
+  <div class="container">
+    <div class="breadcrumb" style="font-size: 0.85rem; color: #555; margin-bottom: 1rem;">
+      <a href="{{ routes.root_url }}" style="color: #555; text-decoration: none;">Accueil</a> / 
+      <span>{{ collection.title }}</span>
+    </div>
+    <div class="product-count" style="font-size: 0.9rem; color: #777; margin-bottom: 0.5rem;">
+      {{ collection.products_count }} Produits
+    </div>
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #111; margin-bottom: 1.5rem;">
+      {{ collection.title }}
+    </h1>
+    
+    {%- if collection.description != blank -%}
+      <div class="hero-description-wrapper">
+        <p class="hero-description" id="hero-desc" style="max-width: 800px; color: #555; line-height: 1.6; font-size: 1rem;">
+          {{ collection.description | strip_html | truncatewords: 25 }}
+          <span class="hero-description-extra" style="display: none;">
+            {{ collection.description | strip_html }}
+          </span>
+          <button class="voir-plus-btn" id="voir-plus-toggle" style="background: none; border: none; color: #111; font-weight: 600; cursor: pointer; text-decoration: underline; margin-left: 5px;">Voir plus</button>
+        </p>
+      </div>
+    {%- endif -%}
+
+    <!-- Visual Carousel for Subcategories -->
+    {%- if section.blocks.size > 0 -%}
+      <div class="visual-carousel-wrapper" style="margin-top: 3rem; position: relative;">
+        <div class="visual-carousel-nav" style="position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); pointer-events: none; z-index: 10;">
+          <button class="nav-btn-circular prev" id="visual-prev" aria-label="Précédent" style="pointer-events: auto; background: #fff; border: 1px solid #eee; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="nav-btn-circular next" id="visual-next" aria-label="Suivant" style="pointer-events: auto; background: #fff; border: 1px solid #eee; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        <div class="visual-carousel-track-container" style="overflow: hidden; padding: 0 20px;">
+          <div class="visual-carousel-track" id="visual-track" style="display: flex; gap: 1.5rem; transition: transform 0.4s ease; scroll-behavior: smooth;">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'subcategory' -%}
+                <a href="{{ block.settings.link | default: '#' }}" class="visual-card" style="flex: 0 0 150px; text-align: center; text-decoration: none; color: inherit;" {{ block.shopify_attributes }}>
+                  <div class="visual-card-img-box" style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 0.8rem; background: #f9f9f9; border: 1px solid #eee;">
+                    {%- if block.settings.image != blank -%}
+                      <img src="{{ block.settings.image | image_url: width: 200 }}" alt="{{ block.settings.label | escape }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    {%- else -%}
+                      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc;">Sujet</div>
+                    {%- endif -%}
+                  </div>
+                  <span class="visual-card-label" style="font-size: 0.85rem; font-weight: 600; color: #111; display: block; line-height: 1.2;">
+                    {{ block.settings.label }}
+                  </span>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<!-- Collection Main Flex Grid and Filters -->
+<section class="collection-section" style="padding: 4rem 0;">
+  <div class="container collection-flex" style="display: flex; gap: 3rem; align-items: flex-start; max-width: 1500px; margin: 0 auto;">
+    
+    <!-- Sidebar Filters (Online Store 2.0 Dynamic Navigation Filters) -->
+    <aside class="sidebar" id="collection-sidebar" style="width: 280px; flex-shrink: 0;">
+      <div class="sidebar-header-mobile" style="display: none; padding: 15px 0;">
+        <button aria-label="Fermer les filtres" id="close-filters" style="background: none; border: none; cursor: pointer;">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24">
+            <line x1="18" x2="6" y1="6" y2="18"></line>
+            <line x1="6" x2="18" y1="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Loops over native active filters -->
+      {%- for filter in collection.filters -%}
+        <div class="filter-group active" style="border-bottom: 1px solid #eee; padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+          <button class="filter-group-header" style="width: 100%; background: none; border: none; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: 600; color: #111; cursor: pointer; padding: 10px 0;">
+            {{ filter.label }}
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="filter-group-content" style="padding-top: 10px;">
+            {%- case filter.type -%}
+              {%- when 'list' -%}
+                {%- if filter.label == 'Couleur' or filter.label == 'Color' or filter.label == 'couleur' -%}
+                  <div class="color-swatch-list" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    {%- for filter_value in filter.values -%}
+                      {%- assign swatch_color = '#ffffff' -%}
+                      {%- case filter_value.label -%}
+                        {%- when 'Beige' -%}{%- assign swatch_color = '#f5f5dc' -%}
+                        {%- when 'Blanc' -%}{%- assign swatch_color = '#ffffff' -%}
+                        {%- when 'Bleu' -%}{%- assign swatch_color = '#0000ff' -%}
+                        {%- when 'Bleu ciel' -%}{%- assign swatch_color = '#add8e6' -%}
+                        {%- when 'Bordeaux' -%}{%- assign swatch_color = '#800000' -%}
+                        {%- when 'Marron' -%}{%- assign swatch_color = '#a52a2a' -%}
+                        {%- when 'Vert d\'eau' -%}{%- assign swatch_color = '#5d6d5d' -%}
+                        {%- when 'Gris' -%}{%- assign swatch_color = '#808080' -%}
+                        {%- when 'Or' -%}{%- assign swatch_color = '#ffd700' -%}
+                        {%- when 'Jaune' -%}{%- assign swatch_color = '#ffff00' -%}
+                        {%- when 'Noir' -%}{%- assign swatch_color = '#111111' -%}
+                        {%- when 'Orange' -%}{%- assign swatch_color = '#ff4500' -%}
+                        {%- when 'Rose' -%}{%- assign swatch_color = '#ffc0cb' -%}
+                        {%- when 'Rouge' -%}{%- assign swatch_color = '#ff0000' -%}
+                        {%- when 'Vert' -%}{%- assign swatch_color = '#00ff00' -%}
+                        {%- when 'Violet' -%}{%- assign swatch_color = '#ee82ee' -%}
+                      {%- endcase -%}
+                      
+                      <a href="{% if filter_value.active %}{{ filter_value.url_to_remove }}{% else %}{{ filter_value.url_to_add }}{% endif %}" 
+                         class="color-swatch{% if filter_value.active %} active{% endif %}{% if filter_value.label == 'Blanc' %} white{% endif %}" 
+                         style="background: {{ swatch_color }}; display: inline-block; width: 24px; height: 24px; border-radius: 50%; border: {% if filter_value.active %}2px solid #111{% else %}1px solid #eee{% endif %};" 
+                         title="{{ filter_value.label }}">
+                      </a>
+                    {%- endfor -%}
+                  </div>
+                {%- else -%}
+                  <div class="checkbox-list">
+                    {%- for filter_value in filter.values -%}
+                      <label class="checkbox-item" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem; color: #555;">
+                        <input type="checkbox" 
+                               name="{{ filter_value.param_name }}" 
+                               value="{{ filter_value.value }}" 
+                               {% if filter_value.active %}checked{% endif %}
+                               style="accent-color: #111;"
+                               onclick="window.location.href='{% if filter_value.active %}{{ filter_value.url_to_remove }}{% else %}{{ filter_value.url_to_add }}{% endif %}'" />
+                        {{ filter_value.label }}
+                        <span style="color: #999; font-size: 0.8rem;">({{ filter_value.count }})</span>
+                      </label>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                
+              {%- when 'price_range' -%}
+                <div class="filter-group-content">
+                  <p class="price-max-text" style="font-size: 0.85rem; color: #777; margin-bottom: 10px;">
+                    Le prix max est {{ filter.range_max | money }}
+                  </p>
+                  
+                  <!-- Static slide placeholders for style matches -->
+                  <div class="price-slider-container" id="price-slider-root" style="margin-bottom: 1.5rem;">
+                    <div class="price-track"></div>
+                    <div class="price-range-active" id="price-range-active"></div>
+                    <div class="slider-handle handle-left" id="price-min-handle" style="left: 0%;"></div>
+                    <div class="slider-handle handle-right" id="price-max-handle" style="left: 100%;"></div>
+                  </div>
+
+                  <div class="price-range-inputs" style="display: flex; gap: 10px;">
+                    <div class="price-input-wrapper" style="flex: 1; display: flex; align-items: center; border: 1px solid #ddd; padding: 6px 10px; border-radius: 4px;">
+                      <span class="price-currency" style="color: #888; font-size: 0.9rem;">€</span>
+                      <input class="price-field" 
+                             id="price-min-field" 
+                             placeholder="Min" 
+                             type="text" 
+                             value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}" 
+                             style="border: none; width: 100%; margin-left: 5px; outline: none;"
+                             onchange="updatePriceFilter(this, 'min', '{{ filter.min_value.param_name }}')" />
+                    </div>
+                    <div class="price-input-wrapper" style="flex: 1; display: flex; align-items: center; border: 1px solid #ddd; padding: 6px 10px; border-radius: 4px;">
+                      <span class="price-currency" style="color: #888; font-size: 0.9rem;">€</span>
+                      <input class="price-field" 
+                             id="price-max-field" 
+                             placeholder="Max" 
+                             type="text" 
+                             value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}" 
+                             style="border: none; width: 100%; margin-left: 5px; outline: none;"
+                             onchange="updatePriceFilter(this, 'max', '{{ filter.max_value.param_name }}')" />
+                    </div>
+                  </div>
+                </div>
+            {%- endcase -%}
+          </div>
+        </div>
+      {%- endfor -%}
+
+      <!-- Standard Categories list -->
+      <div class="filter-group active" style="border-bottom: 1px solid #eee; padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+        <button class="filter-group-header" style="width: 100%; background: none; border: none; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: 600; color: #111; cursor: pointer; padding: 10px 0;">
+          Catégories
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-group-content" style="padding-top: 10px;">
+          <ul class="category-filter-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+            {%- for c in collections -%}
+              <li style="margin-bottom: 8px;">
+                <a href="{{ c.url }}" style="color: {% if collection.handle == c.handle %}#111{% else %}#555{% endif %}; text-decoration: none; font-weight: {% if collection.handle == c.handle %}700{% else %}400{% endif %};">{{ c.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main products grid area -->
+    <div class="collection-main" style="flex: 1;">
+      
+      <!-- Sort & Filter Bar -->
+      <div class="filter-sort-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+        <div class="product-count" style="font-size: 0.95rem; font-weight: 600; color: #111;">
+          {{ collection.products.size }} sur {{ collection.products_count }} produits
+        </div>
+        
+        <!-- Custom styled sorting dropdown -->
+        <div class="sort-dropdown-container" style="position: relative;">
+          {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+          <button class="sort-btn" id="sort-dropdown-btn" style="background: none; border: 1px solid #eee; padding: 8px 15px; border-radius: 4px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+            <span class="current-sort">
+              {%- case current_sort -%}
+                {%- when 'manual' -%}En vedette
+                {%- when 'best-selling' -%}Meilleures ventes
+                {%- when 'title-ascending' -%}A à Z
+                {%- when 'title-descending' -%}Z à A
+                {%- when 'price-ascending' -%}Prix croissant
+                {%- when 'price-descending' -%}Prix décroissant
+                {%- when 'created-ascending' -%}Ancien au nouveau
+                {%- when 'created-descending' -%}Nouveau à l'ancien
+              {%- endcase -%}
+            </span>
+            <svg class="sort-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 14px; height: 14px; transition: transform 0.2s;">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          
+          <div class="sort-menu" id="sort-menu" style="display: none; position: absolute; right: 0; top: 100%; background: #fff; border: 1px solid #eee; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 220px; z-index: 100;">
+            <div class="sort-option{% if current_sort == 'manual' %} active{% endif %}" data-sort="manual" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">En vedette</div>
+            <div class="sort-option{% if current_sort == 'best-selling' %} active{% endif %}" data-sort="best-selling" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Meilleures ventes</div>
+            <div class="sort-option{% if current_sort == 'title-ascending' %} active{% endif %}" data-sort="title-ascending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Alphabétique, de A à Z</div>
+            <div class="sort-option{% if current_sort == 'title-descending' %} active{% endif %}" data-sort="title-descending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Alphabétique, de Z à A</div>
+            <div class="sort-option{% if current_sort == 'price-ascending' %} active{% endif %}" data-sort="price-ascending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Prix: faible à élevé</div>
+            <div class="sort-option{% if current_sort == 'price-descending' %} active{% endif %}" data-sort="price-descending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Prix: élevé à faible</div>
+            <div class="sort-option{% if current_sort == 'created-ascending' %} active{% endif %}" data-sort="created-ascending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Date, de la plus ancienne à la plus récente</div>
+            <div class="sort-option{% if current_sort == 'created-descending' %} active{% endif %}" data-sort="created-descending" style="padding: 10px 15px; cursor: pointer; font-size: 0.85rem;">Date, de la plus récente à la plus ancienne</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Loop -->
+      <div class="collection-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        {%- for product in collection.products -%}
+          <div class="product-item" data-product-id="{{ product.id }}">
+            <a class="product-link-wrapper" href="{{ product.url | within: collection }}" style="text-decoration: none; color: inherit; display: block;">
+              <div class="product-img-wrapper" style="aspect-ratio: 1/1; overflow: hidden; background: #f9f9f9; border-radius: 8px; margin-bottom: 1rem; position: relative;">
+                {%- if product.featured_image != blank -%}
+                  <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {%- else -%}
+                  <div style="background: #eee; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #aaa;">Aucune image</div>
+                {%- endif -%}
+              </div>
+              <div class="product-info" style="text-align: center;">
+                <h3 style="font-size: 0.95rem; font-weight: 600; color: #111; margin-bottom: 0.5rem; line-height: 1.4;">
+                  {{ product.title }}
+                </h3>
+                <p class="product-price" style="font-size: 0.9rem; font-weight: 700; color: #666; margin-bottom: 0.8rem;">
+                  {{ product.price | money }}
+                </p>
+                
+                <!-- Swatch loops -->
+                {%- for option in product.options_with_values -%}
+                  {%- if option.name == 'Couleur' or option.name == 'Color' or option.name == 'couleur' -%}
+                    <div class="swatch-group" style="display: flex; justify-content: center; gap: 6px;">
+                      {%- for value in option.values | limit: 3 -%}
+                        <!-- Find matching swatch color -->
+                        {%- assign swatch_color = '#ffffff' -%}
+                        {%- case value -%}
+                          {%- when 'Beige' -%}{%- assign swatch_color = '#f5f5dc' -%}
+                          {%- when 'Blanc' -%}{%- assign swatch_color = '#ffffff' -%}
+                          {%- when 'Bleu' -%}{%- assign swatch_color = '#0000ff' -%}
+                          {%- when 'Bleu ciel' -%}{%- assign swatch_color = '#add8e6' -%}
+                          {%- when 'Bordeaux' -%}{%- assign swatch_color = '#800000' -%}
+                          {%- when 'Marron' -%}{%- assign swatch_color = '#a52a2a' -%}
+                          {%- when 'Vert d\'eau' -%}{%- assign swatch_color = '#5d6d5d' -%}
+                          {%- when 'Gris' -%}{%- assign swatch_color = '#808080' -%}
+                          {%- when 'Or' -%}{%- assign swatch_color = '#ffd700' -%}
+                          {%- when 'Jaune' -%}{%- assign swatch_color = '#ffff00' -%}
+                          {%- when 'Noir' -%}{%- assign swatch_color = '#111111' -%}
+                          {%- when 'Orange' -%}{%- assign swatch_color = '#ff4500' -%}
+                          {%- when 'Rose' -%}{%- assign swatch_color = '#ffc0cb' -%}
+                          {%- when 'Rouge' -%}{%- assign swatch_color = '#ff0000' -%}
+                          {%- when 'Vert' -%}{%- assign swatch_color = '#00ff00' -%}
+                          {%- when 'Violet' -%}{%- assign swatch_color = '#ee82ee' -%}
+                        {%- endcase -%}
+                        <div class="swatch-small" style="background: {{ swatch_color }}; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ddd;"></div>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </a>
+          </div>
+        {%- else -%}
+          <div style="grid-column: span 3; text-align: center; padding: 4rem 0; color: #999;">
+            Aucun produit trouvé dans cette collection.
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Pagination -->
+      {%- if paginate.pages > 1 -%}
+        <div class="collection-footer-elements" style="margin-top: 4rem; display: flex; justify-content: center;">
+          <nav aria-label="Pagination" class="collection-pagination">
+            <ul style="display: flex; gap: 8px; list-style: none; padding: 0;">
+              {%- if paginate.previous -%}
+                <li>
+                  <a href="{{ paginate.previous.url }}" style="padding: 8px 16px; border: 1px solid #eee; text-decoration: none; color: #111; border-radius: 4px;">Précédent</a>
+                </li>
+              {%- endif -%}
+              
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <li>
+                    <a href="{{ part.url }}" style="padding: 8px 16px; border: 1px solid #eee; text-decoration: none; color: #111; border-radius: 4px;">{{ part.title }}</a>
+                  </li>
+                {%- else -%}
+                  <li>
+                    <span style="padding: 8px 16px; background: #111; border: 1px solid #111; color: #fff; border-radius: 4px;">{{ part.title }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+              
+              {%- if paginate.next -%}
+                <li>
+                  <a href="{{ paginate.next.url }}" style="padding: 8px 16px; border: 1px solid #eee; text-decoration: none; color: #111; border-radius: 4px;">Suivant</a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </nav>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+<script>
+// Price range URL update handler
+function updatePriceFilter(el, type, paramName) {
+  let val = parseFloat(el.value) || 0;
+  // Convert value to cents if needed, but standard is price * 100 or raw based on setting
+  // We can just build query string
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  if (val > 0) {
+    urlParams.set(paramName, val);
+  } else {
+    urlParams.delete(paramName);
+  }
+  
+  window.location.search = urlParams.toString();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Sort actions redirect
+  const sortOptions = document.querySelectorAll('.sort-option');
+  sortOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const sortValue = option.getAttribute('data-sort');
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set('sort_by', sortValue);
+      window.location.search = urlParams.toString();
+    });
+  });
+
+  // visual track slider
+  const track = document.getElementById('visual-track');
+  const prevBtn = document.getElementById('visual-prev');
+  const nextBtn = document.getElementById('visual-next');
+  if (track && prevBtn && nextBtn) {
+    const card = track.querySelector('.visual-card');
+    const scrollAmount = card ? card.offsetWidth + 24 : 174;
+    
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+    
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  // Voir plus/moins description collection
+  const toggleBtn = document.getElementById('voir-plus-toggle');
+  const extraText = document.querySelector('.hero-description-extra');
+  if (toggleBtn && extraText) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isVisible = extraText.style.display === 'inline';
+      extraText.style.display = isVisible ? 'none' : 'inline';
+      toggleBtn.textContent = isVisible ? 'Voir plus' : 'Voir moins';
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Catalogue de Collection",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "subcategory",
+      "name": "Sous-catégorie visuelle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé",
+          "default": "Collier en Cuir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Lien"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
